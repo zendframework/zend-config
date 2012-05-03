@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use \Zend\Config\Reader\Xml;
+use \Zend\Config\Reader\Json;
 
 /**
  * @category   Zend
@@ -31,11 +31,11 @@ use \Zend\Config\Reader\Xml;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class XmlTest extends AbstractReaderTestCase
+class JsonTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-        $this->reader = new Xml();
+        $this->reader = new Json();
     }
     
     /**
@@ -46,44 +46,38 @@ class XmlTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Xml/' . $name . '.xml';
+        return __DIR__ . '/TestAssets/Json/' . $name . '.json';
     }
     
-    public function testInvalidXmlFile()
+    public function testInvalidJsonFile()
     {
-        $this->reader = new Xml();
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayXml = $this->reader->fromFile($this->getTestAssetPath('invalid'));
+        $arrayJson = $this->reader->fromFile($this->getTestAssetPath('invalid'));
+    }
+    
+    public function testIncludeAsElement()
+    {
+        $arrayJson = $this->reader->fromFile($this->getTestAssetPath('include-base_nested'));
+        $this->assertEquals($arrayJson['bar']['foo'], 'foo');
     }
     
     public function testFromString()
     {
-        $xml = <<<ECS
-<?xml version="1.0" encoding="UTF-8"?>
-<zend-config>
-    <test>foo</test>
-    <bar>baz</bar>
-    <bar>foo</bar>
-</zend-config>
-
-ECS;
+        $json = '{ "test" : "foo", "bar" : [ "baz", "foo" ] }';
         
-        $arrayXml= $this->reader->fromString($xml);
-        $this->assertEquals($arrayXml['test'], 'foo');
-        $this->assertEquals($arrayXml['bar'][0], 'baz');
-        $this->assertEquals($arrayXml['bar'][1], 'foo');
+        $arrayJson = $this->reader->fromString($json);
+        
+        $this->assertEquals($arrayJson['test'], 'foo');
+        $this->assertEquals($arrayJson['bar'][0], 'baz');
+        $this->assertEquals($arrayJson['bar'][1], 'foo');
     }
     
     public function testInvalidString()
     {
-        $xml = <<<ECS
-<?xml version="1.0" encoding="UTF-8"?>
-<zend-config>
-    <bar>baz</baz>
-</zend-config>
-
-ECS;
+        $json = '{"foo":"bar"';
+        
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayXml = $this->reader->fromString($xml);
+        $arrayIni = $this->reader->fromString($json);
     }
+    
 }
