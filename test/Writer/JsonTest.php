@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use \Zend\Config\Writer\PhpArray,
+use \Zend\Config\Writer\Json as JsonWriter,
     \Zend\Config\Config,
-    ZendTest\Config\Writer\files\PhpReader;
+    \Zend\Config\Reader\Json as JsonReader;
 
 /**
  * @category   Zend
@@ -33,36 +33,38 @@ use \Zend\Config\Writer\PhpArray,
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class PhpArrayTest extends AbstractWriterTestCase
+class JsonTest extends AbstractWriterTestCase
 {
-    protected $_tempName;
 
     public function setUp()
     {
-        $this->writer = new PhpArray();
-        $this->reader = new PhpReader();
+        $this->reader = new JsonReader();
+        $this->writer = new JsonWriter();
     }
 
-    /**
-     * @group ZF-8234
-     */
-    public function testRender()
-    {
-        $config = new Config(array('test' => 'foo', 'bar' => array(0 => 'baz', 1 => 'foo')));
-        
-        $configString = $this->writer->toString($config);
+   
 
-        // build string line by line as we are trailing-whitespace sensitive.
-        $expected = "<?php\n";
-        $expected .= "return array (\n";
-        $expected .= "  'test' => 'foo',\n";
-        $expected .= "  'bar' => \n";
-        $expected .= "  array (\n";
-        $expected .= "    0 => 'baz',\n";
-        $expected .= "    1 => 'foo',\n";
-        $expected .= "  ),\n";
-        $expected .= ");\n";
-        
-        $this->assertEquals($expected, $configString);
+    public function testNoSection()
+    {
+        $config = new Config(array('test' => 'foo', 'test2' => array('test3' => 'bar')));
+
+        $this->writer->toFile($this->getTestAssetFileName(), $config);
+
+        $config = $this->reader->fromFile($this->getTestAssetFileName());
+
+        $this->assertEquals('foo', $config['test']);
+        $this->assertEquals('bar', $config['test2']['test3']);
+    }
+
+    public function testWriteAndReadOriginalFile()
+    {
+        $config = $this->reader->fromFile(__DIR__ . '/files/allsections.json');
+
+        $this->writer->toFile($this->getTestAssetFileName(), $config);
+
+        $config = $this->reader->fromFile($this->getTestAssetFileName());
+
+        $this->assertEquals('multi', $config['all']['one']['two']['three']);
+
     }
 }

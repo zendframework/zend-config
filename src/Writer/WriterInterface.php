@@ -18,29 +18,31 @@
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Config;
+namespace Zend\Config\Writer;
 
 /**
  * @category  Zend
  * @package   Zend_Config
- * @copyright Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Reader
+interface WriterInterface
 {
     /**
-     * Read from a file and create an array
+     * Write a config object to a file.
      *
-     * @param  string $filename
-     * @return array
+     * @param  string  $filename
+     * @param  mixed   $config
+     * @param  boolean $exclusiveLock
+     * @return void
      */
-    public function fromFile($filename);
+    public function toFile($filename, $config, $exclusiveLock = true);
 
     /**
-     * Read from a string and create an array
+     * Write a config object to a string.
      *
-     * @param  string $string
-     * @return array|boolean
+     * @param  mixed $config
+     * @return string
      */
-    public function fromString($string);
+    public function toString($config);
 }

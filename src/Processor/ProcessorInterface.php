@@ -18,7 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Config;
+namespace Zend\Config\Processor;
+
+use Zend\Config\Config;
 
 /**
  * @category   Zend
@@ -26,5 +28,21 @@ namespace Zend\Config;
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Exception
-{}
+interface ProcessorInterface
+{
+    /**
+     * Process the whole Config structure and recursively parse all its values.
+     *
+     * @param Config $value
+     * @return Config
+     */
+    public function process(Config $value);
+
+    /**
+     * Process a single value
+     *
+     * @param $value
+     * @return mixed
+     */
+    public function processValue($value);
+}
