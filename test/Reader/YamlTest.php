@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use Zend\Config\Reader\Ini;
+use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
  * @category   Zend
@@ -31,11 +31,25 @@ use Zend\Config\Reader\Ini;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class IniTest extends AbstractReaderTestCase
+class YamlTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-        $this->reader = new Ini();
+        
+        if (!constant('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
+            $this->markTestSkipped('Yaml test for Zend\Config skipped');
+        }
+        
+        if (constant('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE')) {
+            require_once constant('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE');
+        }
+        
+        $yamlReader = explode('::', constant('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK'));
+        if (isset($yamlReader[1])) {
+            $this->reader = new YamlReader(array($yamlReader[0], $yamlReader[1]));
+        } else {
+            $this->reader = new YamlReader(array($yamlReader[0]));
+        }
     }
     
     /**
@@ -46,54 +60,45 @@ class IniTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Ini/' . $name . '.ini';
+        return __DIR__ . '/TestAssets/Yaml/' . $name . '.yaml';
     }
     
     public function testInvalidIniFile()
     {
-        $this->reader = new Ini();
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
         $arrayIni = $this->reader->fromFile($this->getTestAssetPath('invalid'));
     }
     
     public function testFromString()
     {
-        $ini = <<<ECS
-test= "foo"
-bar[]= "baz"
-bar[]= "foo"
+        $yaml = <<<ECS
+test: foo
+bar:
+    baz
+    foo
 
 ECS;
         
-        $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['test'], 'foo');
-        $this->assertEquals($arrayIni['bar'][0], 'baz');
-        $this->assertEquals($arrayIni['bar'][1], 'foo');
+        $arrayYaml = $this->reader->fromString($yaml);
+        $this->assertEquals($arrayYaml['test'], 'foo');
+        $this->assertEquals($arrayYaml['bar'][0], 'baz');
+        $this->assertEquals($arrayYaml['bar'][1], 'foo');
     }
-    
-    public function testInvalidString()
-    {
-        $ini = <<<ECS
-test== "foo"
-
-ECS;
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayIni = $this->reader->fromString($ini);
-    }
-    
+        
     public function testFromStringWithSection()
     {
-        $ini = <<<ECS
-[all]
-test= "foo"
-bar[]= "baz"
-bar[]= "foo"
+        $yaml = <<<ECS
+all:
+    test: foo
+    bar:
+        baz
+        foo
 
 ECS;
-        
-        $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['all']['test'], 'foo');
-        $this->assertEquals($arrayIni['all']['bar'][0], 'baz');
-        $this->assertEquals($arrayIni['all']['bar'][1], 'foo');
+
+        $arrayYaml = $this->reader->fromString($yaml);
+        $this->assertEquals($arrayYaml['all']['test'], 'foo');
+        $this->assertEquals($arrayYaml['all']['bar'][0], 'baz');
+        $this->assertEquals($arrayYaml['all']['bar'][1], 'foo');
     }
 }

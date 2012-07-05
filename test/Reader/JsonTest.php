@@ -21,7 +21,7 @@
 
 namespace ZendTest\Config\Reader;
 
-use Zend\Config\Reader\Ini;
+use Zend\Config\Reader\Json;
 
 /**
  * @category   Zend
@@ -31,11 +31,11 @@ use Zend\Config\Reader\Ini;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class IniTest extends AbstractReaderTestCase
+class JsonTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-        $this->reader = new Ini();
+        $this->reader = new Json();
     }
     
     /**
@@ -46,54 +46,38 @@ class IniTest extends AbstractReaderTestCase
      */
     protected function getTestAssetPath($name)
     {
-        return __DIR__ . '/TestAssets/Ini/' . $name . '.ini';
+        return __DIR__ . '/TestAssets/Json/' . $name . '.json';
     }
     
-    public function testInvalidIniFile()
+    public function testInvalidJsonFile()
     {
-        $this->reader = new Ini();
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayIni = $this->reader->fromFile($this->getTestAssetPath('invalid'));
+        $arrayJson = $this->reader->fromFile($this->getTestAssetPath('invalid'));
+    }
+    
+    public function testIncludeAsElement()
+    {
+        $arrayJson = $this->reader->fromFile($this->getTestAssetPath('include-base_nested'));
+        $this->assertEquals($arrayJson['bar']['foo'], 'foo');
     }
     
     public function testFromString()
     {
-        $ini = <<<ECS
-test= "foo"
-bar[]= "baz"
-bar[]= "foo"
-
-ECS;
+        $json = '{ "test" : "foo", "bar" : [ "baz", "foo" ] }';
         
-        $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['test'], 'foo');
-        $this->assertEquals($arrayIni['bar'][0], 'baz');
-        $this->assertEquals($arrayIni['bar'][1], 'foo');
+        $arrayJson = $this->reader->fromString($json);
+        
+        $this->assertEquals($arrayJson['test'], 'foo');
+        $this->assertEquals($arrayJson['bar'][0], 'baz');
+        $this->assertEquals($arrayJson['bar'][1], 'foo');
     }
     
     public function testInvalidString()
     {
-        $ini = <<<ECS
-test== "foo"
-
-ECS;
+        $json = '{"foo":"bar"';
+        
         $this->setExpectedException('Zend\Config\Exception\RuntimeException');
-        $arrayIni = $this->reader->fromString($ini);
+        $arrayIni = $this->reader->fromString($json);
     }
     
-    public function testFromStringWithSection()
-    {
-        $ini = <<<ECS
-[all]
-test= "foo"
-bar[]= "baz"
-bar[]= "foo"
-
-ECS;
-        
-        $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['all']['test'], 'foo');
-        $this->assertEquals($arrayIni['all']['bar'][0], 'baz');
-        $this->assertEquals($arrayIni['all']['bar'][1], 'foo');
-    }
 }

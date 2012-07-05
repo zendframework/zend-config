@@ -15,5 +15,5 @@ namespace Zend\Config\Exception;
  * @package    Zend_Config
  * @subpackage Exception
  */
-class RuntimeException extends \RuntimeException implements ExceptionInterface
+interface ExceptionInterface
 {}

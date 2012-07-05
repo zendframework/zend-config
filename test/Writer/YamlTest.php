@@ -21,9 +21,9 @@
 
 namespace ZendTest\Config\Writer;
 
-use Zend\Config\Writer\Ini as IniWriter;
+use Zend\Config\Writer\Yaml as YamlWriter;
 use Zend\Config\Config;
-use Zend\Config\Reader\Ini as IniReader;
+use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
  * @category   Zend
@@ -33,12 +33,31 @@ use Zend\Config\Reader\Ini as IniReader;
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @group      Zend_Config
  */
-class IniTest extends AbstractWriterTestCase
+class YamlTest extends AbstractWriterTestCase
 {
     public function setUp()
     {
-        $this->reader = new IniReader();
-        $this->writer = new IniWriter();
+        if (!constant('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
+            $this->markTestSkipped('Yaml test for Zend\Config skipped');
+        }
+        
+        if (constant('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE')) {
+            require_once constant('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE');
+        }
+        
+        $yamlReader = explode('::', constant('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK'));
+        if (isset($yamlReader[1])) {
+            $this->reader = new YamlReader(array($yamlReader[0], $yamlReader[1]));
+        } else {
+            $this->reader = new YamlReader(array($yamlReader[0]));
+        }
+        
+        $yamlWriter = explode('::', constant('TESTS_ZEND_CONFIG_WRITER_YAML_CALLBACK'));
+        if (isset($yamlWriter[1])) {
+            $this->writer = new YamlWriter(array($yamlWriter[0], $yamlWriter[1]));
+        } else {
+            $this->writer = new YamlWriter(array($yamlWriter[0]));
+        }
     }
 
     public function testNoSection()
@@ -55,12 +74,13 @@ class IniTest extends AbstractWriterTestCase
 
     public function testWriteAndReadOriginalFile()
     {
-        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.ini');
+        $config = $this->reader->fromFile(__DIR__ . '/_files/allsections.yaml');
 
         $this->writer->toFile($this->getTestAssetFileName(), $config);
 
         $config = $this->reader->fromFile($this->getTestAssetFileName());
 
         $this->assertEquals('multi', $config['all']['one']['two']['three']);
+
     }
 }

@@ -15,19 +15,23 @@ namespace Zend\Config\Writer;
  * @package    Zend_Config
  * @subpackage Writer
  */
-class PhpArray extends AbstractWriter
+interface WriterInterface
 {
     /**
-     * processConfig(): defined by AbstractWriter.
+     * Write a config object to a file.
      *
-     * @param  array $config
+     * @param  string  $filename
+     * @param  mixed   $config
+     * @param  boolean $exclusiveLock
+     * @return void
+     */
+    public function toFile($filename, $config, $exclusiveLock = true);
+
+    /**
+     * Write a config object to a string.
+     *
+     * @param  mixed $config
      * @return string
      */
-    public function processConfig(array $config)
-    {
-        $arrayString = "<?php\n"
-                     . "return " . var_export($config, true) . ";\n";
-
-        return $arrayString;
-    }
+    public function toString($config);
 }

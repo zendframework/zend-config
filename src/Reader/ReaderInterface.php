@@ -8,26 +8,28 @@
  * @package   Zend_Config
  */
 
-namespace Zend\Config\Writer;
+namespace Zend\Config\Reader;
 
 /**
  * @category   Zend
  * @package    Zend_Config
- * @subpackage Writer
+ * @subpackage Reader
  */
-class PhpArray extends AbstractWriter
+interface ReaderInterface
 {
     /**
-     * processConfig(): defined by AbstractWriter.
+     * Read from a file and create an array
      *
-     * @param  array $config
-     * @return string
+     * @param  string $filename
+     * @return array
      */
-    public function processConfig(array $config)
-    {
-        $arrayString = "<?php\n"
-                     . "return " . var_export($config, true) . ";\n";
+    public function fromFile($filename);
 
-        return $arrayString;
-    }
+    /**
+     * Read from a string and create an array
+     *
+     * @param  string $string
+     * @return array|boolean
+     */
+    public function fromString($string);
 }

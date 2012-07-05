@@ -8,12 +8,25 @@
  * @package   Zend_Config
  */
 
-namespace Zend\Config\Exception;
+namespace Zend\Config\Writer;
+
+use Zend\Json\Json as JsonFormat;
 
 /**
  * @category   Zend
  * @package    Zend_Config
- * @subpackage Exception
+ * @subpackage Writer
  */
-class RuntimeException extends \RuntimeException implements ExceptionInterface
-{}
+class Json extends AbstractWriter
+{
+    /**
+     * processConfig(): defined by AbstractWriter.
+     *
+     * @param  array $config
+     * @return string
+     */
+    public function processConfig(array $config)
+    {
+        return JsonFormat::encode($config);
+    }
+}
