@@ -10,10 +10,13 @@
 
 namespace ZendTest\Config\Writer\TestAssets;
 
-class PhpReader
+use Zend\Config\Writer\AbstractWriter;
+use Zend\Config\Exception;
+
+class DummyWriter extends AbstractWriter
 {
-    public function fromFile($filename)
+    public function processConfig(array $config)
     {
-        return include $filename;
+        return serialize($config);
     }
 }

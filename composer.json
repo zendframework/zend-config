@@ -9,7 +9,7 @@
     "homepage": "https://github.com/zendframework/zend-config",
     "autoload": {
         "psr-4": {
-            "Zend\\Config": "src/"
+            "Zend\\Config\\": "src/"
         }
     },
     "require": {
