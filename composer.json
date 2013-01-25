@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-config",
-    "description": "Zend\\Config component",
+    "description": "provides a nested object property based user interface for accessing this configuration data within application code",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "php": ">=5.3.23",
+        "php": ">=5.3.3",
         "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {

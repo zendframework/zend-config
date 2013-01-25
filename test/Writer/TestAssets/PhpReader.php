@@ -8,12 +8,12 @@
  * @package   Zend_Config
  */
 
-namespace Zend\Config\Exception;
+namespace ZendTest\Config\Writer\TestAssets;
 
-/**
- * @category   Zend
- * @package    Zend_Config
- * @subpackage Exception
- */
-class RuntimeException extends \RuntimeException implements ExceptionInterface
-{}
+class PhpReader
+{
+    public function fromFile($filename)
+    {
+        return include $filename;
+    }
+}
