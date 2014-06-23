@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -176,30 +176,17 @@ class Token implements ProcessorInterface
 
     /**
      * Build replacement map
-     *
-     * @return array
      */
     protected function buildMap()
     {
-        if (null === $this->map) {
-            if (!$this->suffix && !$this->prefix) {
-                $this->map = $this->tokens;
-            } else {
-                $this->map = array();
-
-                foreach ($this->tokens as $token => $value) {
-                    $this->map[$this->prefix . $token . $this->suffix] = $value;
-                }
-            }
-
-            foreach (array_keys($this->map) as $key) {
-                if (empty($key)) {
-                    unset($this->map[$key]);
-                }
+        if (!$this->suffix && !$this->prefix) {
+            $this->map = $this->tokens;
+        } else {
+            $this->map = array();
+            foreach ($this->tokens as $token => $value) {
+                $this->map[$this->prefix . $token . $this->suffix] = $value;
             }
         }
-
-        return $this->map;
     }
 
     /**
@@ -211,7 +198,28 @@ class Token implements ProcessorInterface
      */
     public function process(Config $config)
     {
-        return $this->doProcess($config, $this->buildMap());
+        if ($config->isReadOnly()) {
+            throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
+        }
+
+        if ($this->map === null) {
+            $this->buildMap();
+        }
+
+        /**
+         * Walk through config and replace values
+         */
+        $keys = array_keys($this->map);
+        $values = array_values($this->map);
+        foreach ($config as $key => $val) {
+            if ($val instanceof Config) {
+                $this->process($val);
+            } else {
+                $config->$key = str_replace($keys, $values, $val);
+            }
+        }
+
+        return $config;
     }
 
     /**
@@ -222,53 +230,12 @@ class Token implements ProcessorInterface
      */
     public function processValue($value)
     {
-        return $this->doProcess($value, $this->buildMap());
-    }
-
-    /**
-     * Applies replacement map to the given value by modifying the value itself
-     *
-     * @param mixed $value
-     * @param array $replacements
-     *
-     * @return mixed
-     *
-     * @throws Exception\InvalidArgumentException if the provided value is a read-only {@see Config}
-     */
-    private function doProcess($value, array $replacements)
-    {
-        if ($value instanceof Config) {
-            if ($value->isReadOnly()) {
-                throw new Exception\InvalidArgumentException('Cannot process config because it is read-only');
-            }
-
-            foreach ($value as $key => $val) {
-                $value->$key = $this->doProcess($val, $replacements);
-            }
-
-            return $value;
+        if ($this->map === null) {
+            $this->buildMap();
         }
+        $keys = array_keys($this->map);
+        $values = array_values($this->map);
 
-        if ($value instanceof Traversable || is_array($value)) {
-            foreach ($value as & $val) {
-                $val = $this->doProcess($val, $replacements);
-            }
-
-            return $value;
-        }
-
-        if (!is_string($value) && (is_bool($value) || is_numeric($value))) {
-            $stringVal  = (string) $value;
-            $changedVal = strtr($value, $this->map);
-
-            // replace the value only if a string replacement occurred
-            if ($changedVal !== $stringVal) {
-                return $changedVal;
-            }
-
-            return $value;
-        }
-
-        return strtr((string) $value, $this->map);
+        return str_replace($keys, $values, $value);
     }
 }
