@@ -3,7 +3,7 @@
  * Zend Framework (http://framework.zend.com/)
  *
  * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
@@ -34,11 +34,10 @@ class Factory
      * @var array
      */
     protected static $extensions = array(
-        'ini'         => 'ini',
-        'json'        => 'json',
-        'xml'         => 'xml',
-        'yaml'        => 'yaml',
-        'properties'  => 'javaproperties',
+        'ini'  => 'ini',
+        'json' => 'json',
+        'xml'  => 'xml',
+        'yaml' => 'yaml',
     );
 
     /**
@@ -60,34 +59,13 @@ class Factory
      *
      * @param  string  $filename
      * @param  bool $returnConfigObject
-     * @param  bool $useIncludePath
      * @return array|Config
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function fromFile($filename, $returnConfigObject = false, $useIncludePath = false)
+    public static function fromFile($filename, $returnConfigObject = false)
     {
-        $filepath = $filename;
-        if (!file_exists($filename)) {
-            if (!$useIncludePath) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Filename "%s" cannot be found relative to the working directory',
-                    $filename
-                ));
-            }
-
-            $fromIncludePath = stream_resolve_include_path($filename);
-            if (!$fromIncludePath) {
-                throw new Exception\RuntimeException(sprintf(
-                    'Filename "%s" cannot be found relative to the working directory or the include_path ("%s")',
-                    $filename,
-                    get_include_path()
-                ));
-            }
-            $filepath = $fromIncludePath;
-        }
-
-        $pathinfo = pathinfo($filepath);
+        $pathinfo = pathinfo($filename);
 
         if (!isset($pathinfo['extension'])) {
             throw new Exception\RuntimeException(sprintf(
@@ -99,14 +77,14 @@ class Factory
         $extension = strtolower($pathinfo['extension']);
 
         if ($extension === 'php') {
-            if (!is_file($filepath) || !is_readable($filepath)) {
+            if (!is_file($filename) || !is_readable($filename)) {
                 throw new Exception\RuntimeException(sprintf(
                     "File '%s' doesn't exist or not readable",
                     $filename
                 ));
             }
 
-            $config = include $filepath;
+            $config = include $filename;
         } elseif (isset(static::$extensions[$extension])) {
             $reader = static::$extensions[$extension];
             if (!$reader instanceof Reader\ReaderInterface) {
@@ -115,7 +93,7 @@ class Factory
             }
 
             /** @var Reader\ReaderInterface $reader  */
-            $config = $reader->fromFile($filepath);
+            $config = $reader->fromFile($filename);
         } else {
             throw new Exception\RuntimeException(sprintf(
                 'Unsupported config file extension: .%s',
@@ -131,15 +109,14 @@ class Factory
      *
      * @param  array   $files
      * @param  bool $returnConfigObject
-     * @param  bool $useIncludePath
      * @return array|Config
      */
-    public static function fromFiles(array $files, $returnConfigObject = false, $useIncludePath = false)
+    public static function fromFiles(array $files, $returnConfigObject = false)
     {
         $config = array();
 
         foreach ($files as $file) {
-            $config = ArrayUtils::merge($config, static::fromFile($file, false, $useIncludePath));
+            $config = ArrayUtils::merge($config, static::fromFile($file));
         }
 
         return ($returnConfigObject) ? new Config($config) : $config;
@@ -157,7 +134,7 @@ class Factory
     public static function toFile($filename, $config)
     {
         if (
-            (is_object($config) && !($config instanceof Config)) ||
+            (is_object($config) && !($config instanceOf Config)) ||
             (!is_object($config) && !is_array($config))
         ) {
             throw new Exception\InvalidArgumentException(
@@ -187,7 +164,7 @@ class Factory
         }
 
         $writer = static::$writerExtensions[$extension];
-        if (($writer instanceof Writer\AbstractWriter) === false) {
+        if (($writer instanceOf Writer\AbstractWriter) === false) {
             $writer = self::getWriterPluginManager()->get($writer);
             static::$writerExtensions[$extension] = $writer;
         }
