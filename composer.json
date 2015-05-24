@@ -31,6 +31,8 @@
         "zendframework/zend-json": "Zend\\Json to use the Json reader or writer classes",
         "zendframework/zend-servicemanager": "Zend\\ServiceManager for use with the Config Factory to retrieve reader and writer instances"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "2.4-dev",
