@@ -20,6 +20,7 @@
         "zendframework/zend-filter": "~2.4",
         "zendframework/zend-i18n": "~2.4",
         "zendframework/zend-json": "~2.4",
+        "zendframework/zend-mvc": "~2.4",
         "zendframework/zend-servicemanager": "~2.4",
         "fabpot/php-cs-fixer": "1.7.*",
         "satooshi/php-coveralls": "dev-master",
