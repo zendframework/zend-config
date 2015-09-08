@@ -156,6 +156,15 @@ ECS;
         $this->assertSame($expected, $result);
     }
 
+    public function testUseClassNameScalarsIsFalseByDefault()
+    {
+        $reflection = new \ReflectionClass(PhpArray::class);
+        $property = $reflection->getProperty('useClassNameScalars');
+        $property->setAccessible(true);
+
+        $this->assertFalse($property->getValue($this->writer), 'useClassNameScalars should be false by default');
+    }
+
     public function testSetUseBracketArraySyntaxReturnsFluentInterface()
     {
         $this->assertSame($this->writer, $this->writer->setUseBracketArraySyntax(true));
