@@ -71,6 +71,14 @@ class PhpArray extends AbstractWriter
     }
 
     /**
+     * @return boolean
+     */
+    public function getUseClassNameScalars()
+    {
+        return $this->useClassNameScalars;
+    }
+
+    /**
      * toFile(): defined by Writer interface.
      *
      * @see    WriterInterface::toFile()
