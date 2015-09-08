@@ -139,16 +139,18 @@ class PhpArrayTest extends AbstractWriterTestCase
             ]
         ]);
 
-        $expected = "<?php\n";
-        $expected .= "return array(\n";
-        $expected .= "    'PhpArrayTest' => 'PhpArrayTest',\n";
-        $expected .= "    '' => 'emptyString',\n";
-        $expected .= "    'TestAssets\\\\DummyClass' => 'foo',\n";
-        $expected .= "    $dummyFqnA::class => array(\n";
-        $expected .= "        'fqnValue' => $dummyFqnB::class,\n";
-        $expected .= "    ),\n";
-        $expected .= ");\n";
+        $expected = <<< ECS
+<?php
+return array(
+    'PhpArrayTest' => 'PhpArrayTest',
+    '' => 'emptyString',
+    'TestAssets\\\\DummyClass' => 'foo',
+    $dummyFqnA::class => array(
+        'fqnValue' => $dummyFqnB::class,
+    ),
+);
 
+ECS;
         $result = $this->writer->toString($config);
 
         $this->assertSame($expected, $result);
