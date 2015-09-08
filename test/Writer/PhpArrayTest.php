@@ -11,6 +11,8 @@ namespace ZendTest\Config\Writer;
 
 use Zend\Config\Writer\PhpArray;
 use Zend\Config\Config;
+use ZendTest\Config\Writer\TestAssets\DummyClassA;
+use ZendTest\Config\Writer\TestAssets\DummyClassB;
 use ZendTest\Config\Writer\TestAssets\PhpReader;
 
 /**
@@ -120,8 +122,8 @@ class PhpArrayTest extends AbstractWriterTestCase
     {
         $this->writer->setUseClassNameScalars(true);
 
-        $dummyFqnA = 'ZendTest\Config\Writer\TestAssets\DummyClassA';
-        $dummyFqnB = 'ZendTest\Config\Writer\TestAssets\DummyClassB';
+        $dummyFqnA = DummyClassA::class;
+        $dummyFqnB = DummyClassB::class;
 
         // Dummy classes should not be loaded prior this test
         $message = sprintf('class %s should not be loaded prior test', $dummyFqnA);
