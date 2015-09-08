@@ -124,8 +124,11 @@ class PhpArrayTest extends AbstractWriterTestCase
         $dummyFqnB = 'ZendTest\Config\Writer\TestAssets\DummyClassB';
 
         // Dummy classes should not be loaded prior this test
-        $this->assertFalse(class_exists($dummyFqnA, false));
-        $this->assertFalse(class_exists($dummyFqnB, false));
+        $message = sprintf('class %s should not be loaded prior test', $dummyFqnA);
+        $this->assertFalse(class_exists($dummyFqnA, false), $message);
+
+        $message = sprintf('class %s should not be loaded prior test', $dummyFqnB);
+        $this->assertFalse(class_exists($dummyFqnB, false), $message);
 
         $config = new Config([
             'PhpArrayTest' => 'PhpArrayTest',
