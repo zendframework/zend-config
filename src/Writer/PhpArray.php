@@ -175,8 +175,8 @@ class PhpArray extends AbstractWriter
      */
     protected function processStringValue($value)
     {
-        if ($this->useClassNameScalars && $this->checkStringIsFqn($value)) {
-            return $value . '::class';
+        if ($this->useClassNameScalars && false !== ($fqnValue = $this->fqnStringToClassNameScalar($value))) {
+            return $fqnValue;
         }
 
         return var_export($value, true);
@@ -190,11 +190,32 @@ class PhpArray extends AbstractWriter
      */
     protected function processStringKey($key)
     {
-        if ($this->useClassNameScalars && $this->checkStringIsFqn($key)) {
-            return $key . '::class';
+        if ($this->useClassNameScalars && false !== ($fqnKey = $this->fqnStringToClassNameScalar($key))) {
+            return $fqnKey;
         }
 
         return "'" . addslashes($key) . "'";
+    }
+
+    /**
+     * Attempts to convert a FQN string to class name scalar.
+     * Returns false if string is not a valid FQN or can not be resolved to an existing name.
+     *
+     * @param string $string
+     * @return bool|string
+     */
+    protected function fqnStringToClassNameScalar($string)
+    {
+        // We actually don't know yet, whether it's a FQN, but we assume.
+        if (false === ($fqnString = $this->ensureFqn($string))) {
+            return false;
+        }
+
+        if ($this->checkStringIsFqn($fqnString)) {
+            return $fqnString . '::class';
+        }
+
+        return false;
     }
 
     /**
@@ -205,15 +226,30 @@ class PhpArray extends AbstractWriter
      */
     protected function checkStringIsFqn($string)
     {
+        if (!preg_match('/^(?:\x5c[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)+$/', $string)) {
+            return false;
+        }
+
+        return class_exists($string) || interface_exists($string) || trait_exists($string);
+    }
+
+    /**
+     * Ensures an assumed fqn string has a trailing backslash.
+     * Returns false if string is empty.
+     *
+     * @param string $string
+     * @return string|bool
+     */
+    protected function ensureFqn($string)
+    {
         if (strlen($string) < 1) {
             return false;
         }
 
-        if ($string[0] !== "\x5C") {
-            // Prepend a backslash, ensuring we check against a FQN.
-            $string = "\x5C" . $string;
+        if ($string[0] !== '\\') {
+            return '\\' . $string;
         }
 
-        return class_exists($string) || interface_exists($string);
+        return $string;
     }
 }

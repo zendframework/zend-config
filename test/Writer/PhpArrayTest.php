@@ -133,23 +133,27 @@ class PhpArrayTest extends AbstractWriterTestCase
         $this->assertFalse(class_exists($dummyFqnB, false), $message);
 
         $config = new Config([
+            "\\~" => 'bar',
             'PhpArrayTest' => 'PhpArrayTest',
             '' => 'emptyString',
             'TestAssets\DummyClass' => 'foo',
             $dummyFqnA => [
                 'fqnValue' => $dummyFqnB
-            ]
+            ],
+            '\\' . $dummyFqnA => ''
         ]);
 
         $expected = <<< ECS
 <?php
 return array(
+    '\\\~' => 'bar',
     'PhpArrayTest' => 'PhpArrayTest',
     '' => 'emptyString',
     'TestAssets\\\\DummyClass' => 'foo',
-    $dummyFqnA::class => array(
-        'fqnValue' => $dummyFqnB::class,
+    \\$dummyFqnA::class => array(
+        'fqnValue' => \\$dummyFqnB::class,
     ),
+    \\$dummyFqnA::class => '',
 );
 
 ECS;
