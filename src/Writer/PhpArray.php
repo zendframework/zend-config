@@ -42,8 +42,8 @@ class PhpArray extends AbstractWriter
         ];
 
         return "<?php\n" .
-               "return " . $arraySyntax['open'] . "\n" . $this->processIndented($config, $arraySyntax) .
-               $arraySyntax['close'] . ";\n";
+        "return " . $arraySyntax['open'] . "\n" . $this->processIndented($config, $arraySyntax) .
+        $arraySyntax['close'] . ";\n";
     }
 
     /**
@@ -148,8 +148,8 @@ class PhpArray extends AbstractWriter
                 } else {
                     $indentLevel++;
                     $arrayString .= $arraySyntax['open'] . "\n"
-                                  . $this->processIndented($value, $arraySyntax, $indentLevel)
-                                  . str_repeat(self::INDENT_STRING, --$indentLevel) . $arraySyntax['close'] . ",\n";
+                        . $this->processIndented($value, $arraySyntax, $indentLevel)
+                        . str_repeat(self::INDENT_STRING, --$indentLevel) . $arraySyntax['close'] . ",\n";
                 }
             } elseif (is_object($value)) {
                 $arrayString .= var_export($value, true) . ",\n";
@@ -206,13 +206,16 @@ class PhpArray extends AbstractWriter
      */
     protected function fqnStringToClassNameScalar($string)
     {
-        // We actually don't know yet, whether it's a FQN, but we assume.
-        if (false === ($fqnString = $this->ensureFqn($string))) {
+        if (strlen($string) < 1) {
             return false;
         }
 
-        if ($this->checkStringIsFqn($fqnString)) {
-            return $fqnString . '::class';
+        if ($string[0] !== '\\') {
+            $string = '\\' . $string;
+        }
+
+        if ($this->checkStringIsFqn($string)) {
+            return $string . '::class';
         }
 
         return false;
@@ -231,25 +234,5 @@ class PhpArray extends AbstractWriter
         }
 
         return class_exists($string) || interface_exists($string) || trait_exists($string);
-    }
-
-    /**
-     * Ensures an assumed fqn string has a trailing backslash.
-     * Returns false if string is empty.
-     *
-     * @param string $string
-     * @return string|bool
-     */
-    protected function ensureFqn($string)
-    {
-        if (strlen($string) < 1) {
-            return false;
-        }
-
-        if ($string[0] !== '\\') {
-            return '\\' . $string;
-        }
-
-        return $string;
     }
 }
