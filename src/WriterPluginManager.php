@@ -9,10 +9,13 @@
 
 namespace Zend\Config;
 
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 
 class WriterPluginManager extends AbstractPluginManager
 {
+    protected $instanceof = Writer\AbstractWriter::class;
+
     protected $invokableClasses = [
         'ini'  => 'Zend\Config\Writer\Ini',
         'json' => 'Zend\Config\Writer\Json',
@@ -21,16 +24,9 @@ class WriterPluginManager extends AbstractPluginManager
         'xml'  => 'Zend\Config\Writer\Xml',
     ];
 
-    public function validatePlugin($plugin)
+    public function __construct(ContainerInterface $container, array $config = [])
     {
-        if ($plugin instanceof Writer\AbstractWriter) {
-            return;
-        }
-
-        $type = is_object($plugin) ? get_class($plugin) : gettype($plugin);
-
-        throw new Exception\InvalidArgumentException(
-            "Plugin of type {$type} is invalid. Plugin must extend ".  __NAMESPACE__ . '\Writer\AbstractWriter'
-        );
+        $config = array_merge_recursive(['invokables' => $this->invokableClasses], $config);
+        parent::__construct($container, $config);
     }
 }
