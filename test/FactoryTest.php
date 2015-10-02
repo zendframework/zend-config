@@ -9,7 +9,10 @@
 
 namespace ZendTest\Config;
 
+use Interop\Container\ContainerInterface;
 use Zend\Config\Factory;
+use Zend\Config\ReaderPluginManager;
+use Zend\Config\WriterPluginManager;
 
 /**
  * @group      Zend_Config
@@ -168,9 +171,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryCanRegisterCustomReaderPlugin()
     {
-        $dummyReader = new Reader\TestAssets\DummyReader();
-        Factory::getReaderPluginManager()->setService('DummyReader', $dummyReader);
-
+        $services      = $this->prophesize(ContainerInterface::class);
+        $pluginManager = new ReaderPluginManager($services->reveal(), ['services' => [
+            'DummyReader' => new Reader\TestAssets\DummyReader(),
+        ]]);
+        Factory::setReaderPluginManager($pluginManager);
         Factory::registerReader('dum', 'DummyReader');
 
         $configObject = Factory::fromFile(__DIR__ . '/TestAssets/dummy.dum', true);
@@ -237,9 +242,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryCanRegisterCustomWriterPlugin()
     {
-        $dummyWriter = new Writer\TestAssets\DummyWriter();
-        Factory::getWriterPluginManager()->setService('DummyWriter', $dummyWriter);
-
+        $services = $this->prophesize(ContainerInterface::class);
+        $pluginManager = new WriterPluginManager($services->reveal(), ['services' => [
+            'DummyWriter' => new Writer\TestAssets\DummyWriter(),
+        ]]);
+        Factory::setWriterPluginManager($pluginManager);
         Factory::registerWriter('dum', 'DummyWriter');
 
         $file = $this->getTestAssetFileName('dum');

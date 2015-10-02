@@ -9,10 +9,13 @@
 
 namespace Zend\Config;
 
+use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 
 class ReaderPluginManager extends AbstractPluginManager
 {
+    protected $instanceOf = Reader\ReaderInterface::class;
+
     /**
      * Default set of readers
      *
@@ -26,25 +29,9 @@ class ReaderPluginManager extends AbstractPluginManager
         'javaproperties'  => 'Zend\Config\Reader\JavaProperties',
     ];
 
-    /**
-     * Validate the plugin
-     * Checks that the reader loaded is an instance of Reader\ReaderInterface.
-     *
-     * @param  Reader\ReaderInterface $plugin
-     * @return void
-     * @throws Exception\InvalidArgumentException if invalid
-     */
-    public function validatePlugin($plugin)
+    public function __construct(ContainerInterface $container, array $config = [])
     {
-        if ($plugin instanceof Reader\ReaderInterface) {
-            // we're okay
-            return;
-        }
-
-        throw new Exception\InvalidArgumentException(sprintf(
-            'Plugin of type %s is invalid; must implement %s\Reader\ReaderInterface',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
-            __NAMESPACE__
-        ));
+        $config = array_merge_recursive(['invokables' => $this->invokableClasses], $config);
+        parent::__construct($container, $config);
     }
 }
