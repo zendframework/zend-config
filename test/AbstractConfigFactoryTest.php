@@ -12,7 +12,6 @@
 namespace ZendTest\Config;
 
 use Zend\Config\AbstractConfigFactory;
-use Zend\Mvc\Service\ServiceManagerConfig;
 use Zend\ServiceManager;
 
 /**
@@ -31,7 +30,7 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
     protected $application;
 
     /**
-     * @var \Zend\ServiceManager\ServiceManager
+     * @var ServiceManager
      */
     protected $serviceManager;
 
@@ -53,15 +52,14 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
             ]
         ];
 
-        $sm = $this->serviceManager = new ServiceManager\ServiceManager(
-            new ServiceManagerConfig([
+        $this->serviceManager = new ServiceManager\ServiceManager([
             'abstract_factories' => [
-                'Zend\Config\AbstractConfigFactory',
-            ]
-            ])
-        );
-
-        $sm->setService('Config', $this->config);
+                AbstractConfigFactory::class,
+            ],
+            'services' => [
+                'Config' => $this->config,
+            ],
+        ]);
     }
 
     /**
@@ -118,8 +116,8 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new AbstractConfigFactory();
         $serviceLocator = $this->serviceManager;
 
-        $this->assertFalse($factory->canCreateServiceWithName($serviceLocator, 'mymodulefail', 'MyModule\Fail'));
-        $this->assertTrue($factory->canCreateServiceWithName($serviceLocator, 'mymoduleconfig', 'MyModule\Config'));
+        $this->assertFalse($factory->canCreateServiceWithName($serviceLocator, 'MyModule\Fail'));
+        $this->assertTrue($factory->canCreateServiceWithName($serviceLocator, 'MyModule\Config'));
     }
 
     /**
