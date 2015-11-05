@@ -1,0 +1,12 @@
+{
+    "title": "Zend\\Config",
+    "target": "html/",
+    "content": [
+        "book/zend.config.introduction.md",
+        "book/zend.config.theory-of-operation.md",
+        "book/zend.config.reader.md",
+        "book/zend.config.writer.md",
+        "book/zend.config.processor.md",
+        "book/zend.config.factory.md"
+    ]
+}
