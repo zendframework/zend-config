@@ -11,8 +11,8 @@ namespace Zend\Config;
 
 use Interop\Container\ContainerInterface;
 use Traversable;
-use Zend\ServiceManager\Factory\AbstractFactoryInterface;
-
+use Zend\ServiceManager\AbstractFactoryInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 /**
  * Class AbstractConfigFactory
  */
@@ -37,13 +37,26 @@ class AbstractConfigFactory implements AbstractFactoryInterface
     protected $patterns;
 
     /**
-     * Determine if we can create a service with name
+     * Determine if we can create a service with name (SM v2)
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @param $name
+     * @param $requestedName
+     * @return bool
+     */
+    public function canCreateServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    {
+        return $this->canCreate($serviceLocator, $requestedName);
+    }
+
+    /**
+     * Determine if we can create a service (SM v3)
      *
      * @param ContainerInterface $container
      * @param string $requestedName
      * @return bool
      */
-    public function canCreateServiceWithName(ContainerInterface $container, $requestedName)
+    public function canCreate(ContainerInterface $container, $requestedName)
     {
         if (isset($this->configs[$requestedName])) {
             return true;
@@ -63,7 +76,20 @@ class AbstractConfigFactory implements AbstractFactoryInterface
     }
 
     /**
-     * Create service with name
+     * Create service with name (SM v2)
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @param string $name
+     * @param string $requestedName
+     * @return string|mixed|array
+     */
+    public function createServiceWithName(ServiceLocatorInterface $serviceLocator, $name, $requestedName)
+    {
+        return $this($serviceLocator, $requestedName);
+    }
+
+    /**
+     * Create service with name (SM v3)
      *
      * @param ContainerInterface $container
      * @param string $requestedName
