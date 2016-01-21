@@ -25,11 +25,6 @@ class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
     protected $config;
 
     /**
-     * @var \Zend\Mvc\Application
-     */
-    protected $application;
-
-    /**
      * @var ServiceManager
      */
     protected $serviceManager;
