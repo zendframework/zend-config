@@ -28,6 +28,7 @@ class ReaderPluginManager extends AbstractPluginManager
         'yaml'           => Reader\Yaml::class,
         'Yaml'           => Reader\Yaml::class,
         'javaproperties' => Reader\JavaProperties::class,
+        'javaProperties' => Reader\JavaProperties::class,
         'JavaProperties' => Reader\JavaProperties::class,
     ];
 

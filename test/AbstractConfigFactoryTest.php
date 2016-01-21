@@ -14,6 +14,7 @@ namespace ZendTest\Config;
 use Zend\Config\AbstractConfigFactory;
 use Zend\ServiceManager;
 use Zend\ServiceManager\Config as SMConfig;
+
 /**
  * Class AbstractConfigFactoryTest
  */
