@@ -83,7 +83,7 @@ class WriterPluginManager extends AbstractPluginManager
 
     public function __construct(ContainerInterface $container, array $config = [])
     {
-        $config = array_merge_recursive(['invokables' => $this->invokableClasses], $config);
+        $config = array_merge_recursive(['aliases' => $this->aliases], $config);
         parent::__construct($container, $config);
     }
 }
