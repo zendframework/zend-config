@@ -24,6 +24,7 @@ class WriterPluginManager extends AbstractPluginManager
         'json'     => Writer\Json::class,
         'Json'     => Writer\Json::class,
         'php'      => Writer\PhpArray::class,
+        'phparray' => Writer\PhpArray::class,
         'phpArray' => Writer\PhpArray::class,
         'PhpArray' => Writer\PhpArray::class,
         'yaml'     => Writer\Yaml::class,
