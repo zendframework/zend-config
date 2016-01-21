@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.0 - TBD
+## 2.6.0 - TBD
 
 ### Added
 
@@ -18,14 +18,15 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#8](https://github.com/zendframework/zend-config/pull/8) updates the
-  code base to work with the v3.0 version of zend-servicemanager. Primarily, this
-  involved:
-  - Updating the `AbstractConfigFactory` follow the new
-    `AbstractFactoryInterface` definition.
+- [#8](https://github.com/zendframework/zend-config/pull/8) and
+  [#18](https://github.com/zendframework/zend-config/pull/18) update the
+  code base to make it forwards-compatible with the v3.0 version of
+  zend-servicemanager. Primarily, this involved:
+  - Updating the `AbstractConfigFactory` to implement the new methods in the
+    v3 `AbstractFactoryInterface` definition, and updating the v2 methods to
+    proxy to those.
   - Updating `ReaderPluginManager` and `WriterPluginManager` to follow the
-    changes to `AbstractPluginManager`. In particular, they now take their
-    `$invokableClasses` configuration and merge it with the incoming
-    configuration before delegating to the parent constructor.
-  - Updating `Factory` to pass an empty `ServiceManager` to the plugin managers
-    when lazy-loading them.
+    changes to `AbstractPluginManager`. In particular, instead of defining
+    invokables, they now define a combination of aliases and factories (using
+    the new `InvokableFactory`); additionally, they each now implement both
+    `validatePlugin()` from v2 and `validate()` from v3.
