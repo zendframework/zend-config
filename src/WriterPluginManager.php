@@ -75,11 +75,15 @@ class WriterPluginManager extends AbstractPluginManager
      * Proxies to `validate()`.
      *
      * @param mixed $instance
-     * @throws InvalidServiceException
+     * @throws Exception\InvalidArgumentException
      */
     public function validatePlugin($instance)
     {
-        $this->validate($instance);
+        try {
+            $this->validate($instance);
+        } catch (InvalidServiceException $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 
     public function __construct(ContainerInterface $container, array $config = [])
