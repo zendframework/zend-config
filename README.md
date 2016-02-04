@@ -10,4 +10,4 @@ data may come from a variety of media supporting hierarchical data storage.
 
 
 - File issues at https://github.com/zendframework/zend-config/issues
-- Documentation is at http://framework.zend.com/manual/current/en/index.html#zend-config
+- Documentation is at https://zendframework.github.io/zend-config/
