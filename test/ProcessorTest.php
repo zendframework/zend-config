@@ -407,7 +407,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
-        $this->markTestIncomplete('Re-activate this test after zend-i18n is updated to zend-servicemanager v3');
+        if (! class_exists(ExtensionNotLoadedException::class)) {
+            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
+        }
 
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -428,7 +430,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorWithoutIntl()
     {
-        $this->markTestIncomplete('Re-activate this test after zend-i18n is updated to zend-servicemanager v3');
+        if (! class_exists(ExtensionNotLoadedException::class)) {
+            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
+        }
 
         if (extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl enabled');
@@ -449,7 +453,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorReadOnly()
     {
-        $this->markTestIncomplete('Re-activate this test after zend-i18n is updated to zend-servicemanager v3');
+        if (! class_exists(ExtensionNotLoadedException::class)) {
+            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
+        }
 
         $config     = new Config($this->translatorData, false);
         $translator = new Translator();
@@ -464,7 +470,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValue()
     {
-        $this->markTestIncomplete('Re-activate this test after zend-i18n is updated to zend-servicemanager v3');
+        if (! class_exists(ExtensionNotLoadedException::class)) {
+            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
+        }
 
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
@@ -479,7 +487,9 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValueWithoutIntl()
     {
-        $this->markTestIncomplete('Re-activate this test after zend-i18n is updated to zend-servicemanager v3');
+        if (! class_exists(ExtensionNotLoadedException::class)) {
+            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
+        }
 
         if (extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl enabled');
