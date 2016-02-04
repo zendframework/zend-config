@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Zend\Config\Processor - zend-config</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a href="http://framework.zend.com"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-config</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../theory/">Theory of Operation</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../reader/">Zend\Config\Reader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../writer/">Zend\Config\Writer</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Zend\Config\Processor</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../factory/">Config Factory</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="prev" href="../writer/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../factory/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-config">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#zend92config92processor">Zend\Config\Processor</a></li>
+        
+            <li><a href="#zend92config92processor92constant">Zend\Config\Processor\Constant</a></li>
+        
+            <li><a href="#zend92config92processor92filter">Zend\Config\Processor\Filter</a></li>
+        
+            <li><a href="#zend92config92processor92queue">Zend\Config\Processor\Queue</a></li>
+        
+            <li><a href="#zend92config92processor92token">Zend\Config\Processor\Token</a></li>
+        
+            <li><a href="#zend92config92processor92translator">Zend\Config\Processor\Translator</a></li>
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">Zend\Config\Processor</li>
+</ol>
+
+<nav class="hidden-lg">
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../writer/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../factory/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
+<h1 id="zend92config92processor">Zend\Config\Processor</h1>
+<p><code>Zend\Config\Processor</code> provides the ability to perform operations on a
+<code>Zend\Config\Config</code> object. <code>Zend\Config\Processor</code> is itself an interface that
+defining two methods: <code>process()</code> and <code>processValue()</code>.</p>
+<p>zend-config provides the following concrete implementations:</p>
+<ul>
+<li><code>Zend\Config\Processor\Constant</code>: manage PHP constant values.</li>
+<li><code>Zend\Config\Processor\Filter</code>: filter the configuration data using <code>Zend\Filter</code>.</li>
+<li><code>Zend\Config\Processor\Queue</code>: manage a queue of operations to apply to configuration data.</li>
+<li><code>Zend\Config\Processor\Token</code>: find and replace specific tokens.</li>
+<li><code>Zend\Config\Processor\Translator</code>: translate configuration values in other languages using <code>Zend\I18n\Translator</code>.</li>
+</ul>
+<h2 id="zend92config92processor92constant">Zend\Config\Processor\Constant</h2>
+<h3 id="using-zend92config92processor92constant">Using Zend\Config\Processor\Constant</h3>
+<p>This example illustrates the basic usage of <code>Zend\Config\Processor\Constant</code>:</p>
+<pre class="codehilite"><code class="language-php">define ('TEST_CONST', 'bar');
+
+// Provide the second parameter as boolean true to allow modifications:
+$config = new Zend\Config\Config(['foo' =&gt; 'TEST_CONST'], true);
+$processor = new Zend\Config\Processor\Constant();
+
+echo $config-&gt;foo . ',';
+$processor-&gt;process($config);
+echo $config-&gt;foo;</code></pre>
+
+
+<p>This example returns the output: <code>TEST_CONST,bar</code>.</p>
+<h2 id="zend92config92processor92filter">Zend\Config\Processor\Filter</h2>
+<h3 id="using-zend92config92processor92filter">Using Zend\Config\Processor\Filter</h3>
+<p>This example illustrates basic usage of <code>Zend\Config\Processor\Filter</code>:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Filter\StringToUpper;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Config;
+
+// Provide the second parameter as boolean true to allow modifications:
+$config = new Config(['foo' =&gt; 'bar'], true);
+$upper = new StringToUpper();
+
+$upperProcessor = new FilterProcessor($upper);
+
+echo $config-&gt;foo . ',';
+$upperProcessor-&gt;process($config);
+echo $config-&gt;foo;</code></pre>
+
+
+<p>This example returns the output: <code>bar,BAR</code>.</p>
+<h2 id="zend92config92processor92queue">Zend\Config\Processor\Queue</h2>
+<h3 id="using-zend92config92processor92queue">Using Zend\Config\Processor\Queue</h3>
+<p>This example illustrates basic usage of <code>Zend\Config\Processor\Queue</code>:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Filter\StringToLower;
+use Zend\Filter\StringToUpper;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Processor\Queue;
+use Zend\Config\Config;
+
+// Provide the second parameter as boolean true to allow modifications:
+$config = new Config(['foo' =&gt; 'bar'], true);
+$upper  = new StringToUpper();
+$lower  = new StringToLower();
+
+$lowerProcessor = new FilterProcessor($lower);
+$upperProcessor = new FilterProcessor($upper);
+
+$queue = new Queue();
+$queue-&gt;insert($upperProcessor);
+$queue-&gt;insert($lowerProcessor);
+$queue-&gt;process($config);
+
+echo $config-&gt;foo;</code></pre>
+
+
+<p>This example returns the output: <code>bar</code>. The filters in the queue are applied in
+<em>FIFO</em> (First In, First Out) order .</p>
+<h2 id="zend92config92processor92token">Zend\Config\Processor\Token</h2>
+<h3 id="using-zend92config92processor92token">Using Zend\Config\Processor\Token</h3>
+<p>This example illustrates basic usage of <code>Zend\Config\Processor\Token</code>:</p>
+<pre class="codehilite"><code class="language-php">// Provide the second parameter as boolean true to allow modifications:
+$config = new Config(['foo' =&gt; 'Value is TOKEN'], true);
+$processor = new TokenProcessor();
+
+$processor-&gt;addToken('TOKEN', 'bar');
+echo $config-&gt;foo . ',';
+$processor-&gt;process($config);
+echo $config-&gt;foo;</code></pre>
+
+
+<p>This example returns the output: <code>Value is TOKEN,Value is bar</code>.</p>
+<h2 id="zend92config92processor92translator">Zend\Config\Processor\Translator</h2>
+<h3 id="using-zend92config92processor92translator">Using Zend\Config\Processor\Translator</h3>
+<p>This example illustrates basic usage of <code>Zend\Config\Processor\Translator</code>:</p>
+<pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+use Zend\Config\Processor\Translator as TranslatorProcessor;
+use Zend\I18n\Translator\Translator;
+
+// Provide the second parameter as boolean true to allow modifications:
+$config = new Config(['animal' =&gt; 'dog'], true);
+
+/*
+ * The following mapping is used for the translation
+ * loader provided to the translator instance:
+ *
+ * $italian = [
+ *     'dog' =&gt; 'cane'
+ * ];
+ */
+
+$translator = new Translator();
+// ... configure the translator ...
+$processor = new TranslatorProcessor($translator);
+
+echo &quot;English: {$config-&gt;animal}, &quot;;
+$processor-&gt;process($config);
+echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre>
+
+
+<p>This example returns the output: <code>English: dog,Italian: cane</code>.</p>
+
+<hr />
+
+<nav>
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../writer/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../factory/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav></div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>

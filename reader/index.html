@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Zend\Config\Reader - zend-config</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a href="http://framework.zend.com"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-config</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../theory/">Theory of Operation</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li class="active">
+    <a href="./">Zend\Config\Reader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../writer/">Zend\Config\Writer</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../processor/">Zend\Config\Processor</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../factory/">Config Factory</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="prev" href="../theory/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../writer/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-config">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#zend92config92reader">Zend\Config\Reader</a></li>
+        
+            <li><a href="#differences-from-zf1">Differences from ZF1</a></li>
+        
+            <li><a href="#zend92config92reader92ini">Zend\Config\Reader\Ini</a></li>
+        
+            <li><a href="#zend92config92reader92xml">Zend\Config\Reader\Xml</a></li>
+        
+            <li><a href="#zend92config92reader92json">Zend\Config\Reader\Json</a></li>
+        
+            <li><a href="#zend92config92reader92yaml">Zend\Config\Reader\Yaml</a></li>
+        
+            <li><a href="#zend92config92reader92javaproperties">Zend\Config\Reader\JavaProperties</a></li>
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reference &raquo;</li>
+      
+    
+  
+  <li class="active">Zend\Config\Reader</li>
+</ol>
+
+<nav class="hidden-lg">
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../theory/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../writer/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
+<h1 id="zend92config92reader">Zend\Config\Reader</h1>
+<p><code>Zend\Config\Reader</code> gives you the ability to read a config file. It works with
+concrete implementations for different file formats. <code>Zend\Config\Reader</code> itself
+is only an interface, defining the methods <code>fromFile()</code> and <code>fromString()</code>. The
+concrete implementations of this interface are:</p>
+<ul>
+<li><code>Zend\Config\Reader\Ini</code></li>
+<li><code>Zend\Config\Reader\Xml</code></li>
+<li><code>Zend\Config\Reader\Json</code></li>
+<li><code>Zend\Config\Reader\Yaml</code></li>
+<li><code>Zend\Config\Reader\JavaProperties</code></li>
+</ul>
+<p><code>fromFile()</code> and <code>fromString()</code> are expected to return a PHP array containing
+the data from the specified configuration.</p>
+<blockquote>
+<h2 id="differences-from-zf1">Differences from ZF1</h2>
+<p>The <code>Zend\Config\Reader</code> component no longer supports the following features:</p>
+<ul>
+<li>Inheritance of sections.</li>
+<li>Reading of specific sections.</li>
+</ul>
+</blockquote>
+<h2 id="zend92config92reader92ini">Zend\Config\Reader\Ini</h2>
+<p><code>Zend\Config\Reader\Ini</code> enables developers to store configuration data in a
+familiar INI format, and then to read them in the application by using an array
+syntax.</p>
+<p><code>Zend\Config\Reader\Ini</code> utilizes the <a href="http://php.net/parse_ini_file"><code>parse_ini_file()</code></a> PHP
+function. Please review this documentation to be aware of its specific behaviors, which propagate to
+<code>Zend\Config\Reader\Ini</code>, such as how the special values of <code>TRUE</code>, <code>FALSE</code>, "yes", "no", and
+<code>NULL</code> are handled.</p>
+<blockquote>
+<h3 id="key-separator">Key Separator</h3>
+<p>By default, the key separator character is the period character (<code>.</code>). This can be changed,
+however, using the <code>setNestSeparator()</code> method. For example:</p>
+<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Ini();
+$reader-setNestSeparator('-');</code></pre>
+
+
+</blockquote>
+<p>The following example illustrates basic usage of <code>Zend\Config\Reader\Ini</code> for
+loading configuration data from an INI file. In this example, configuration data
+for both a production system and for a staging system exists.</p>
+<pre class="codehilite"><code class="language-ini">webhost                  = 'www.example.com'
+database.adapter         = 'pdo_mysql'
+database.params.host     = 'db.example.com'
+database.params.username = 'dbuser'
+database.params.password = 'secret'
+database.params.dbname   = 'dbproduction'</code></pre>
+
+
+<p>We can use <code>Zend\Config\Reader\Ini</code> to read this INI file:</p>
+<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Ini();
+$data   = $reader-&gt;fromFile('/path/to/config.ini');
+
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+
+
+<p><code>Zend\Config\Reader\Ini</code> supports a feature to include the content of a INI file
+in a specific section of another INI file. For instance, suppose we have an INI
+file with the database configuration:</p>
+<pre class="codehilite"><code class="language-ini">database.adapter         = 'pdo_mysql'
+database.params.host     = 'db.example.com'
+database.params.username = 'dbuser'
+database.params.password = 'secret'
+database.params.dbname   = 'dbproduction'</code></pre>
+
+
+<p>We can include this configuration in another INI file by using the <code>@include</code>
+notation:</p>
+<pre class="codehilite"><code class="language-ini">webhost  = 'www.example.com'
+@include = 'database.ini'</code></pre>
+
+
+<p>If we read this file using the component <code>Zend\Config\Reader\Ini</code>, we will obtain the same
+configuration data structure as in the previous example.</p>
+<p>The <code>@include = 'file-to-include.ini'</code> notation can be used also in a subelement
+of a value. For instance we can have an INI file like the following:</p>
+<pre class="codehilite"><code class="language-ini">adapter         = 'pdo_mysql'
+params.host     = 'db.example.com'
+params.username = 'dbuser'
+params.password = 'secret'
+params.dbname   = 'dbproduction'</code></pre>
+
+
+<p>And assign the <code>@include</code> as a subelement of the <code>database</code> value:</p>
+<pre class="codehilite"><code class="language-ini">webhost           = 'www.example.com'
+database.@include = 'database.ini'</code></pre>
+
+
+<h2 id="zend92config92reader92xml">Zend\Config\Reader\Xml</h2>
+<p><code>Zend\Config\Reader\Xml</code> enables developers to provide configuration data in a
+familiar XML format and consume it in the application using an array syntax.
+The root element of the XML file or string is irrelevant and may be named
+arbitrarily.</p>
+<p>The following example illustrates basic usage of <code>Zend\Config\Reader\Xml</code> for loading configuration
+data from an XML file. First, our XML configuration in the file <code>config.xml</code>:</p>
+<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;config&gt;
+    &lt;webhost&gt;www.example.com&lt;/webhost&gt;
+    &lt;database&gt;
+        &lt;adapter value=&quot;pdo_mysql&quot;/&gt;
+        &lt;params&gt;
+            &lt;host value=&quot;db.example.com&quot;/&gt;
+            &lt;username value=&quot;dbuser&quot;/&gt;
+            &lt;password value=&quot;secret&quot;/&gt;
+            &lt;dbname value=&quot;dbproduction&quot;/&gt;
+        &lt;/params&gt;
+    &lt;/database&gt;
+&lt;/config&gt;</code></pre>
+
+
+<p>We can use the <code>Zend\Config\Reader\Xml</code> to read the XML configuration:</p>
+<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Xml();
+$data   = $reader-&gt;fromFile('/path/to/config.xml');
+
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname']['value'];  // prints &quot;dbproduction&quot;</code></pre>
+
+
+<p><code>Zend\Config\Reader\Xml</code> utilizes PHP's <a href="http://php.net/xmlreader">XMLReader</a> class. Please
+review its documentation to be aware of its specific behaviors, which propagate to
+<code>Zend\Config\Reader\Xml</code>.</p>
+<p>Using <code>Zend\Config\Reader\Xml</code>, we can include the content of XML files in a
+specific XML element.  This is provided using the standard
+<a href="http://www.w3.org/TR/xinclude/">XInclude</a> functionality of XML. To use this
+functionality, you must add the namespace
+<code>xmlns:xi="http://www.w3.org/2001/XInclude"</code> to the XML file.</p>
+<p>Suppose we have an XML file that contains only the database configuration:</p>
+<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;config&gt;
+    &lt;database&gt;
+        &lt;adapter&gt;pdo_mysql&lt;/adapter&gt;
+        &lt;params&gt;
+            &lt;host&gt;db.example.com&lt;/host&gt;
+            &lt;username&gt;dbuser&lt;/username&gt;
+            &lt;password&gt;secret&lt;/password&gt;
+            &lt;dbname&gt;dbproduction&lt;/dbname&gt;
+        &lt;/params&gt;
+    &lt;/database&gt;
+&lt;/config&gt;</code></pre>
+
+
+<p>We can include this configuration in another XML file using an xinclude:</p>
+<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;config xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;
+    &lt;webhost&gt;www.example.com&lt;/webhost&gt;
+    &lt;xi:include href=&quot;database.xml&quot;/&gt;
+&lt;/config&gt;</code></pre>
+
+
+<p>The syntax to include an XML file in a specific element is <code>&lt;xi:include
+href="file-to-include.xml"/&gt;</code></p>
+<h2 id="zend92config92reader92json">Zend\Config\Reader\Json</h2>
+<p><code>Zend\Config\Reader\Json</code> enables developers to consume configuration data in
+JSON, and read it in the application by using an array syntax.</p>
+<p>The following example illustrates a basic use of <code>Zend\Config\Reader\Json</code> for
+loading configuration data from a JSON file.</p>
+<p>Consider the following JSON configuration file:</p>
+<pre class="codehilite"><code class="language-javascript">{
+  &quot;webhost&quot;  : &quot;www.example.com&quot;,
+  &quot;database&quot; : {
+    &quot;adapter&quot; : &quot;pdo_mysql&quot;,
+    &quot;params&quot;  : {
+      &quot;host&quot;     : &quot;db.example.com&quot;,
+      &quot;username&quot; : &quot;dbuser&quot;,
+      &quot;password&quot; : &quot;secret&quot;,
+      &quot;dbname&quot;   : &quot;dbproduction&quot;
+    }
+  }
+}</code></pre>
+
+
+<p>We can use <code>Zend\Config\Reader\Json</code> to read the file:</p>
+<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Json();
+$data   = $reader-&gt;fromFile('/path/to/config.json');
+
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+
+
+<p><code>Zend\Config\Reader\Json</code> utilizes <a href="https://github.com/zendframework/zend-json">zend-json</a>.</p>
+<p>Using <code>Zend\Config\Reader\Json</code>, we can include the content of a JSON file in a
+specific JSON section or element. This is provided using the special syntax
+<code>@include</code>. Suppose we have a JSON file that contains only the database
+configuration:</p>
+<pre class="codehilite"><code class="language-javascript">{
+  &quot;database&quot; : {
+    &quot;adapter&quot; : &quot;pdo_mysql&quot;,
+    &quot;params&quot;  : {
+      &quot;host&quot;     : &quot;db.example.com&quot;,
+      &quot;username&quot; : &quot;dbuser&quot;,
+      &quot;password&quot; : &quot;secret&quot;,
+      &quot;dbname&quot;   : &quot;dbproduction&quot;
+    }
+  }
+}</code></pre>
+
+
+<p>Now let's include it via another configuration file:</p>
+<pre class="codehilite"><code class="language-javascript">{
+    &quot;webhost&quot;  : &quot;www.example.com&quot;,
+    &quot;@include&quot; : &quot;database.json&quot;
+}</code></pre>
+
+
+<h2 id="zend92config92reader92yaml">Zend\Config\Reader\Yaml</h2>
+<p><code>Zend\Config\Reader\Yaml</code> enables developers to consume configuration data in a
+YAML format, and read them in the application by using an array syntax. In order
+to use the YAML reader, we need to pass a callback to an external PHP library or
+use the <a href="http://www.php.net/manual/en/book.yaml.php">YAML PECL extension</a>.</p>
+<p>The following example illustrates basic usage of <code>Zend\Config\Reader\Yaml</code>,
+using the YAML PECL extension.</p>
+<p>Consider the following YAML file:</p>
+<pre class="codehilite"><code class="language-yaml">webhost: www.example.com
+database:
+    adapter: pdo_mysql
+    params:
+      host:     db.example.com
+      username: dbuser
+      password: secret
+      dbname:   dbproduction</code></pre>
+
+
+<p>We can use <code>Zend\Config\Reader\Yaml</code> to read this YAML file:</p>
+<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Yaml();
+$data   = $reader-&gt;fromFile('/path/to/config.yaml');
+
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+
+
+<p>If you want to use an external YAML reader, you must pass a callback function to
+the class constructor.  For instance, if you want to use the
+<a href="http://code.google.com/p/spyc/">Spyc</a> library:</p>
+<pre class="codehilite"><code class="language-php">// include the Spyc library
+require_once 'path/to/spyc.php';
+
+$reader = new Zend\Config\Reader\Yaml(['Spyc', 'YAMLLoadString']);
+$data   = $reader-&gt;fromFile('/path/to/config.yaml');
+
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+
+
+<p>You can also instantiate <code>Zend\Config\Reader\Yaml</code> without any parameters, and
+specify the YAML reader using the <code>setYamlDecoder()</code> method.</p>
+<p>Using <code>Zend\Config\ReaderYaml</code>, we can include the content of another YAML file
+in a specific YAML section or element. This is provided using the special syntax
+<code>@include</code>.</p>
+<p>Consider the following YAML file containing only database configuration:</p>
+<pre class="codehilite"><code class="language-yaml">database:
+    adapter: pdo_mysql
+    params:
+      host:     db.example.com
+      username: dbuser
+      password: secret
+      dbname:   dbproduction</code></pre>
+
+
+<p>We can include this configuration in another YAML file:</p>
+<pre class="codehilite"><code class="language-yaml">webhost:  www.example.com
+@include: database.yaml</code></pre>
+
+
+<h2 id="zend92config92reader92javaproperties">Zend\Config\Reader\JavaProperties</h2>
+<p><code>Zend\Config\Reader\JavaProperties</code> enables developers to provide configuration
+data in the popular JavaProperties format, and read it in the application by
+using array syntax.</p>
+<p>The following example illustrates basic usage of <code>Zend\Config\Reader\JavaProperties</code>
+for loading configuration data from a JavaProperties file.</p>
+<p>Suppose we have the following JavaProperties configuration file:</p>
+<pre class="codehilite"><code class="language-ini">#comment
+!comment
+webhost:www.example.com
+database.adapter:pdo_mysql
+database.params.host:db.example.com
+database.params.username:dbuser
+database.params.password:secret
+database.params.dbname:dbproduction</code></pre>
+
+
+<p>We can use <code>Zend\Config\Reader\JavaProperties</code> to read it:</p>
+<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\JavaProperties();
+$data   = $reader-&gt;fromFile('/path/to/config.properties');
+
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database.params.dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+
+<hr />
+
+<nav>
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../theory/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../writer/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav></div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>
