@@ -6,7 +6,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#6](https://github.com/zendframework/zend-config/pull/6) adds the ability for
+  the `PhpArray` writer to optionally translate strings that evaluate to known
+  classes to `ClassName::class` syntax; the feature works for both keys and
+  values.
 
 ### Deprecated
 
