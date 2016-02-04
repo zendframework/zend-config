@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.6.0 - TBD
+## 2.6.0 - 2016-02-04
 
 ### Added
 
@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
   the `PhpArray` writer to optionally translate strings that evaluate to known
   classes to `ClassName::class` syntax; the feature works for both keys and
   values.
+- [#21](https://github.com/zendframework/zend-config/pull/21) adds revised
+  documentation, and publishes it to https://zendframework.github.io/zend-config/
 
 ### Deprecated
 
