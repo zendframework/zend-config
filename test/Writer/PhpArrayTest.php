@@ -11,6 +11,8 @@ namespace ZendTest\Config\Writer;
 
 use Zend\Config\Writer\PhpArray;
 use Zend\Config\Config;
+use ZendTest\Config\Writer\TestAssets\DummyClassA;
+use ZendTest\Config\Writer\TestAssets\DummyClassB;
 use ZendTest\Config\Writer\TestAssets\PhpReader;
 
 /**
@@ -116,8 +118,62 @@ class PhpArrayTest extends AbstractWriterTestCase
         $this->assertSame($expected, $result);
     }
 
+    public function testRenderWithClassNameScalarsEnabled()
+    {
+        $this->writer->setUseClassNameScalars(true);
+
+        $dummyFqnA = DummyClassA::class;
+        $dummyFqnB = DummyClassB::class;
+
+        // Dummy classes should not be loaded prior this test
+        $message = sprintf('class %s should not be loaded prior test', $dummyFqnA);
+        $this->assertFalse(class_exists($dummyFqnA, false), $message);
+
+        $message = sprintf('class %s should not be loaded prior test', $dummyFqnB);
+        $this->assertFalse(class_exists($dummyFqnB, false), $message);
+
+        $config = new Config([
+            "\\~" => 'bar',
+            'PhpArrayTest' => 'PhpArrayTest',
+            '' => 'emptyString',
+            'TestAssets\DummyClass' => 'foo',
+            $dummyFqnA => [
+                'fqnValue' => $dummyFqnB
+            ],
+            '\\' . $dummyFqnA => ''
+        ]);
+
+        $expected = <<< ECS
+<?php
+return array(
+    '\\\~' => 'bar',
+    'PhpArrayTest' => 'PhpArrayTest',
+    '' => 'emptyString',
+    'TestAssets\\\\DummyClass' => 'foo',
+    \\$dummyFqnA::class => array(
+        'fqnValue' => \\$dummyFqnB::class,
+    ),
+    \\$dummyFqnA::class => '',
+);
+
+ECS;
+        $result = $this->writer->toString($config);
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function testUseClassNameScalarsIsFalseByDefault()
+    {
+        $this->assertFalse($this->writer->getUseClassNameScalars(), 'useClassNameScalars should be false by default');
+    }
+
     public function testSetUseBracketArraySyntaxReturnsFluentInterface()
     {
         $this->assertSame($this->writer, $this->writer->setUseBracketArraySyntax(true));
+    }
+
+    public function testSetUseClassNameScalarsReturnsFluentInterface()
+    {
+        $this->assertSame($this->writer, $this->writer->setUseClassNameScalars(true));
     }
 }
