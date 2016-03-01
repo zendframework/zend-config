@@ -407,10 +407,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
-        if (! class_exists(ExtensionNotLoadedException::class)) {
-            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
-        }
-
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
         }
@@ -430,10 +426,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorWithoutIntl()
     {
-        if (! class_exists(ExtensionNotLoadedException::class)) {
-            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
-        }
-
         if (extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl enabled');
         }
@@ -453,10 +445,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorReadOnly()
     {
-        if (! class_exists(ExtensionNotLoadedException::class)) {
-            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
-        }
-
         $config     = new Config($this->translatorData, false);
         $translator = new Translator();
         $processor  = new TranslatorProcessor($translator);
@@ -470,10 +458,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValue()
     {
-        if (! class_exists(ExtensionNotLoadedException::class)) {
-            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
-        }
-
         if (!extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
         }
@@ -487,10 +471,6 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValueWithoutIntl()
     {
-        if (! class_exists(ExtensionNotLoadedException::class)) {
-            $this->markTestSkipped(sprintf('%s skipped to allow testing against zend-servicemanager v3', __FUNCTION__));
-        }
-
         if (extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl enabled');
         }
