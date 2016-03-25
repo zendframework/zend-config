@@ -107,18 +107,18 @@ class Config implements Countable, Iterator, ArrayAccess
      */
     public function __set($name, $value)
     {
-        if ($this->allowModifications) {
-            if (is_array($value)) {
-                $value = new static($value, true);
-            }
-
-            if (null === $name) {
-                $this->data[] = $value;
-            } else {
-                $this->data[$name] = $value;
-            }
-        } else {
+        if (!$this->allowModifications) {
             throw new Exception\RuntimeException('Config is read only');
+        }
+
+        if (is_array($value)) {
+            $value = new static($value, true);
+        }
+
+        if (null === $name) {
+            $this->data[] = $value;
+        } else {
+            $this->data[$name] = $value;
         }
     }
 
@@ -187,7 +187,9 @@ class Config implements Countable, Iterator, ArrayAccess
     {
         if (!$this->allowModifications) {
             throw new Exception\InvalidArgumentException('Config is read only');
-        } elseif (isset($this->data[$name])) {
+        }
+
+        if (isset($this->data[$name])) {
             unset($this->data[$name]);
             $this->skipNextIteration = true;
         }
