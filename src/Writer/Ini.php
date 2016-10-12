@@ -32,7 +32,7 @@ class Ini extends AbstractWriter
      * Set nest separator.
      *
      * @param  string $separator
-     * @return self
+     * @return Ini Provides a fluent interface
      */
     public function setNestSeparator($separator)
     {
@@ -57,7 +57,7 @@ class Ini extends AbstractWriter
      * into the global namespace of the INI file.
      *
      * @param  bool $withoutSections
-     * @return Ini
+     * @return Ini Provides a fluent interface
      */
     public function setRenderWithoutSectionsFlags($withoutSections)
     {

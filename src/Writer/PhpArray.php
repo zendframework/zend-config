@@ -50,7 +50,7 @@ class PhpArray extends AbstractWriter
      * Sets whether or not to use the PHP 5.4+ "[]" array syntax.
      *
      * @param  bool $value
-     * @return self
+     * @return PhpArray Provides a fluent interface
      */
     public function setUseBracketArraySyntax($value)
     {
@@ -62,7 +62,7 @@ class PhpArray extends AbstractWriter
      * Sets whether or not to render resolvable FQN strings as scalars, using PHP 5.5+ class-keyword
      *
      * @param boolean $value
-     * @return self
+     * @return PhpArray Provides a fluent interface
      */
     public function setUseClassNameScalars($value)
     {

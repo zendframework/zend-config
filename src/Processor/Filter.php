@@ -32,7 +32,7 @@ class Filter implements ProcessorInterface
 
     /**
      * @param  ZendFilter $filter
-     * @return Filter
+     * @return Filter Provides a fluent interface
      */
     public function setFilter(ZendFilter $filter)
     {

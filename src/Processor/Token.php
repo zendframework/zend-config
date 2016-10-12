@@ -62,7 +62,7 @@ class Token implements ProcessorInterface
 
     /**
      * @param  string $prefix
-     * @return Token
+     * @return Token Provides a fluent interface
      */
     public function setPrefix($prefix)
     {
@@ -82,7 +82,7 @@ class Token implements ProcessorInterface
 
     /**
      * @param  string $suffix
-     * @return Token
+     * @return Token Provides a fluent interface
      */
     public function setSuffix($suffix)
     {
@@ -106,7 +106,7 @@ class Token implements ProcessorInterface
      *
      * @param  array|Config|Traversable  $tokens  Associative array of TOKEN => value
      *                                            to replace it with
-     * @return Token
+     * @return Token Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function setTokens($tokens)
@@ -145,7 +145,7 @@ class Token implements ProcessorInterface
      *
      * @param  string $token
      * @param  mixed $value
-     * @return Token
+     * @return Token Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function addToken($token, $value)

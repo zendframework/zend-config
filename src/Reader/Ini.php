@@ -34,7 +34,7 @@ class Ini implements ReaderInterface
      * Set nest separator.
      *
      * @param  string $separator
-     * @return self
+     * @return Ini Provides a fluent interface
      */
     public function setNestSeparator($separator)
     {
