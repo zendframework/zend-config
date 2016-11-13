@@ -407,7 +407,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslator()
     {
-        if (!extension_loaded('intl')) {
+        if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -458,7 +458,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorSingleValue()
     {
-        if (!extension_loaded('intl')) {
+        if (! extension_loaded('intl')) {
             $this->markTestSkipped('ext/intl not enabled');
         }
 
@@ -578,7 +578,7 @@ class ProcessorTest extends \PHPUnit_Framework_TestCase
         $queue->insert($upperProcessor);
         $queue->insert($lowerProcessor);
 
-        $data ='TeSt';
+        $data = 'TeSt';
         $this->assertEquals('test', $queue->processValue($data));
     }
 

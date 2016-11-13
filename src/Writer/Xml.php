@@ -31,7 +31,7 @@ class Xml extends AbstractWriter
         $writer->startElement('zend-config');
 
         foreach ($config as $sectionName => $data) {
-            if (!is_array($data)) {
+            if (! is_array($data)) {
                 $writer->writeElement($sectionName, (string) $data);
             } else {
                 $this->addBranch($sectionName, $data, $writer);

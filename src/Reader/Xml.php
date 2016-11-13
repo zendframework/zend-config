@@ -53,7 +53,7 @@ class Xml implements ReaderInterface
      */
     public function fromFile($filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        if (! is_file($filename) || ! is_readable($filename)) {
             throw new Exception\RuntimeException(sprintf(
                 "File '%s' doesn't exist or not readable",
                 $filename
@@ -163,7 +163,7 @@ class Xml implements ReaderInterface
                 }
 
                 if (isset($children[$name])) {
-                    if (!is_array($children[$name]) || !array_key_exists(0, $children[$name])) {
+                    if (! is_array($children[$name]) || ! array_key_exists(0, $children[$name])) {
                         $children[$name] = [$children[$name]];
                     }
 

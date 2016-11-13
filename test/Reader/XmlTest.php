@@ -60,7 +60,7 @@ class XmlTest extends AbstractReaderTestCase
 
 ECS;
 
-        $arrayXml= $this->reader->fromString($xml);
+        $arrayXml = $this->reader->fromString($xml);
         $this->assertEquals($arrayXml['test'], 'foo');
         $this->assertEquals($arrayXml['bar'][0], 'baz');
         $this->assertEquals($arrayXml['bar'][1], 'foo');
@@ -79,7 +79,7 @@ ECS;
         $this->reader->fromString($xml);
     }
 
-    public function testZF300_MultipleKeysOfTheSameName()
+    public function testZF300MultipleKeysOfTheSameName()
     {
         $config = $this->reader->fromFile($this->getTestAssetPath('array'));
 
@@ -89,7 +89,7 @@ ECS;
         $this->assertEquals('5', $config['three']['four'][0]['five']);
     }
 
-    public function testZF300_ArraysWithMultipleChildren()
+    public function testZF300ArraysWithMultipleChildren()
     {
         $config = $this->reader->fromFile($this->getTestAssetPath('array'));
 

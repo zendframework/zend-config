@@ -18,7 +18,7 @@ class YamlTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-        if (!getenv('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
+        if (! getenv('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
             $this->markTestSkipped('Yaml test for Zend\Config skipped');
         }
 
