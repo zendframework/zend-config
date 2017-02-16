@@ -12,12 +12,12 @@ use Psr\Container\ContainerInterface;
 class StandaloneWriterPluginManager implements ContainerInterface
 {
     private $knownPlugins = [
-        'ini'            => Writer\Ini::class,
-        'json'           => Writer\Json::class,
-        'php'            => Writer\PhpArray::class,
-        'phparray'       => Writer\PhpArray::class,
-        'xml'            => Writer\Xml::class,
-        'yaml'           => Writer\Yaml::class,
+        'ini'      => Writer\Ini::class,
+        'json'     => Writer\Json::class,
+        'php'      => Writer\PhpArray::class,
+        'phparray' => Writer\PhpArray::class,
+        'xml'      => Writer\Xml::class,
+        'yaml'     => Writer\Yaml::class,
     ];
 
     /**
