@@ -12,9 +12,12 @@ namespace ZendTest\Config;
 use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 use RuntimeException;
 use Zend\Config\Factory;
 use Zend\Config\ReaderPluginManager;
+use Zend\Config\StandaloneReaderPluginManager;
+use Zend\Config\StandaloneWriterPluginManager;
 use Zend\Config\WriterPluginManager;
 
 /**
@@ -37,6 +40,7 @@ class FactoryTest extends TestCase
     {
         $this->originalIncludePath = get_include_path();
         set_include_path(__DIR__ . '/TestAssets');
+        $this->resetPluginManagers();
     }
 
     public function tearDown()
@@ -50,6 +54,17 @@ class FactoryTest extends TestCase
                 }
                 @unlink($file);
             }
+        }
+
+        $this->resetPluginManagers();
+    }
+
+    public function resetPluginManagers()
+    {
+        foreach (['readers', 'writers'] as $pluginManager) {
+            $r = new ReflectionProperty(Factory::class, $pluginManager);
+            $r->setAccessible(true);
+            $r->setValue(null);
         }
     }
 
@@ -256,5 +271,17 @@ class FactoryTest extends TestCase
 
         $res = Factory::toFile($file, ['one' => 1]);
         $this->assertEquals($res, true);
+    }
+
+    public function testDefaultReaderPluginManagerIsStandaloneVariant()
+    {
+        $readers = Factory::getReaderPluginManager();
+        $this->assertInstanceOf(StandaloneReaderPluginManager::class, $readers);
+    }
+
+    public function testDefaultWriterPluginManagerIsStandaloneVariant()
+    {
+        $writers = Factory::getWriterPluginManager();
+        $this->assertInstanceOf(StandaloneWriterPluginManager::class, $writers);
     }
 }

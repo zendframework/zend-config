@@ -221,7 +221,7 @@ class Factory
     public static function getReaderPluginManager()
     {
         if (static::$readers === null) {
-            static::$readers = new ReaderPluginManager(new ServiceManager());
+            static::$readers = new StandaloneReaderPluginManager();
         }
         return static::$readers;
     }
@@ -245,7 +245,7 @@ class Factory
     public static function getWriterPluginManager()
     {
         if (static::$writers === null) {
-            static::$writers = new WriterPluginManager(new ServiceManager());
+            static::$writers = new StandaloneWriterPluginManager();
         }
 
         return static::$writers;
