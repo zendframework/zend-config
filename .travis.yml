@@ -63,8 +63,11 @@ notifications:
   email: false
 
 before_install:
-  - travis_retry composer self-update
   - if [[ $TRAVIS_PHP_VERSION != "hhvm" && $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini ; fi
+  - travis_retry composer self-update
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer require --dev --no-update satooshi/php-coveralls ; fi
+  - if [[ $SERVICE_MANAGER_VERSION != '' ]]; then composer require --dev --no-update "zendframework/zend-servicemanager:$SERVICE_MANAGER_VERSION" ; fi
+  - if [[ $SERVICE_MANAGER_VERSION == '' ]]; then composer require --dev --no-update "zendframework/zend-servicemanager:^3.0.3" ; fi
 
 install:
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
@@ -82,4 +85,4 @@ after_script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer upload-coverage ; fi
 
 after_success:
-  - if [[ $DEPLOY_DOCS == "true" ]]; then ./zf-mkdoc-theme/deploy.sh ; fi
+  - if [[ $DEPLOY_DOCS == "true" ]]; then echo "Preparing to build and deploy documentation" ; ./zf-mkdoc-theme/deploy.sh ; echo "Completed deploying documentation" ; fi

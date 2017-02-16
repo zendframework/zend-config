@@ -20,7 +20,7 @@ class YamlTest extends AbstractWriterTestCase
 {
     public function setUp()
     {
-        if (!getenv('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
+        if (! getenv('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
             $this->markTestSkipped('Yaml test for Zend\Config skipped');
         }
 

@@ -55,7 +55,7 @@ class Yaml implements ReaderInterface
      */
     public function setYamlDecoder($yamlDecoder)
     {
-        if (!is_callable($yamlDecoder)) {
+        if (! is_callable($yamlDecoder)) {
             throw new Exception\RuntimeException(
                 'Invalid parameter to setYamlDecoder() - must be callable'
             );
@@ -84,7 +84,7 @@ class Yaml implements ReaderInterface
      */
     public function fromFile($filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        if (! is_file($filename) || ! is_readable($filename)) {
             throw new Exception\RuntimeException(sprintf(
                 "File '%s' doesn't exist or not readable",
                 $filename

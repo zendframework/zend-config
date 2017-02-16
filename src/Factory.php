@@ -69,8 +69,8 @@ class Factory
     public static function fromFile($filename, $returnConfigObject = false, $useIncludePath = false)
     {
         $filepath = $filename;
-        if (!file_exists($filename)) {
-            if (!$useIncludePath) {
+        if (! file_exists($filename)) {
+            if (! $useIncludePath) {
                 throw new Exception\RuntimeException(sprintf(
                     'Filename "%s" cannot be found relative to the working directory',
                     $filename
@@ -78,7 +78,7 @@ class Factory
             }
 
             $fromIncludePath = stream_resolve_include_path($filename);
-            if (!$fromIncludePath) {
+            if (! $fromIncludePath) {
                 throw new Exception\RuntimeException(sprintf(
                     'Filename "%s" cannot be found relative to the working directory or the include_path ("%s")',
                     $filename,
@@ -90,7 +90,7 @@ class Factory
 
         $pathinfo = pathinfo($filepath);
 
-        if (!isset($pathinfo['extension'])) {
+        if (! isset($pathinfo['extension'])) {
             throw new Exception\RuntimeException(sprintf(
                 'Filename "%s" is missing an extension and cannot be auto-detected',
                 $filename
@@ -100,7 +100,7 @@ class Factory
         $extension = strtolower($pathinfo['extension']);
 
         if ($extension === 'php') {
-            if (!is_file($filepath) || !is_readable($filepath)) {
+            if (! is_file($filepath) || ! is_readable($filepath)) {
                 throw new Exception\RuntimeException(sprintf(
                     "File '%s' doesn't exist or not readable",
                     $filename
@@ -110,7 +110,7 @@ class Factory
             $config = include $filepath;
         } elseif (isset(static::$extensions[$extension])) {
             $reader = static::$extensions[$extension];
-            if (!$reader instanceof Reader\ReaderInterface) {
+            if (! $reader instanceof Reader\ReaderInterface) {
                 $reader = static::getReaderPluginManager()->get($reader);
                 static::$extensions[$extension] = $reader;
             }
@@ -157,8 +157,8 @@ class Factory
      */
     public static function toFile($filename, $config)
     {
-        if ((is_object($config) && !($config instanceof Config))
-            || (!is_object($config) && !is_array($config))
+        if ((is_object($config) && ! ($config instanceof Config))
+            || (! is_object($config) && ! is_array($config))
         ) {
             throw new Exception\InvalidArgumentException(
                 __METHOD__." \$config should be an array or instance of Zend\\Config\\Config"
@@ -168,19 +168,19 @@ class Factory
         $extension = substr(strrchr($filename, '.'), 1);
         $directory = dirname($filename);
 
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             throw new Exception\RuntimeException(
                 "Directory '{$directory}' does not exists!"
             );
         }
 
-        if (!is_writable($directory)) {
+        if (! is_writable($directory)) {
             throw new Exception\RuntimeException(
                 "Cannot write in directory '{$directory}'"
             );
         }
 
-        if (!isset(static::$writerExtensions[$extension])) {
+        if (! isset(static::$writerExtensions[$extension])) {
             throw new Exception\RuntimeException(
                 "Unsupported config file extension: '.{$extension}' for writing."
             );
@@ -262,7 +262,7 @@ class Factory
     {
         $extension = strtolower($extension);
 
-        if (!is_string($reader) && !$reader instanceof Reader\ReaderInterface) {
+        if (! is_string($reader) && ! $reader instanceof Reader\ReaderInterface) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Reader should be plugin name, class name or ' .
                 'instance of %s\Reader\ReaderInterface; received "%s"',
@@ -286,7 +286,7 @@ class Factory
     {
         $extension = strtolower($extension);
 
-        if (!is_string($writer) && !$writer instanceof Writer\AbstractWriter) {
+        if (! is_string($writer) && ! $writer instanceof Writer\AbstractWriter) {
             throw new Exception\InvalidArgumentException(sprintf(
                 'Writer should be plugin name, class name or ' .
                 'instance of %s\Writer\AbstractWriter; received "%s"',

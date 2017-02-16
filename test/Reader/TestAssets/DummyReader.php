@@ -16,7 +16,7 @@ class DummyReader implements ReaderInterface
 {
     public function fromFile($filename)
     {
-        if (!is_readable($filename)) {
+        if (! is_readable($filename)) {
             throw new Exception\RuntimeException("File '{$filename}' doesn't exist or not readable");
         }
 
@@ -26,7 +26,7 @@ class DummyReader implements ReaderInterface
     public function fromString($string)
     {
         if (empty($string)) {
-            return array();
+            return [];
         }
 
         return unserialize($string);

@@ -42,7 +42,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         foreach ($this->tmpFiles as $file) {
             if (file_exists($file)) {
-                if (!is_writable($file)) {
+                if (! is_writable($file)) {
                     chmod($file, 0777);
                 }
                 @unlink($file);

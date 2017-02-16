@@ -33,7 +33,7 @@ class JavaProperties implements ReaderInterface
      */
     public function fromFile($filename)
     {
-        if (!is_file($filename) || !is_readable($filename)) {
+        if (! is_file($filename) || ! is_readable($filename)) {
             throw new Exception\RuntimeException(sprintf(
                 "File '%s' doesn't exist or not readable",
                 $filename
@@ -108,13 +108,13 @@ class JavaProperties implements ReaderInterface
         foreach ($lines as $i => $line) {
             // Ignore empty lines and commented lines
             if (empty($line)
-               || (!$isWaitingOtherLine && strpos($line, "#") === 0)
-               || (!$isWaitingOtherLine && strpos($line, "!") === 0)) {
+               || (! $isWaitingOtherLine && strpos($line, "#") === 0)
+               || (! $isWaitingOtherLine && strpos($line, "!") === 0)) {
                 continue;
             }
 
             // Add a new key-value pair or append value to a previous pair
-            if (!$isWaitingOtherLine) {
+            if (! $isWaitingOtherLine) {
                 $key = substr($line, 0, strpos($line, ':'));
                 $value = substr($line, strpos($line, ':') + 1, strlen($line));
             } else {
