@@ -20,8 +20,6 @@ use ZendTest\Config\Writer\TestAssets\PhpReader;
  */
 class PhpArrayTest extends AbstractWriterTestCase
 {
-    protected $_tempName;
-
     public function setUp()
     {
         $this->writer = new PhpArray();

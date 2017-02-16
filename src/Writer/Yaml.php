@@ -55,7 +55,7 @@ class Yaml extends AbstractWriter
      */
     public function setYamlEncoder($yamlEncoder)
     {
-        if (!is_callable($yamlEncoder)) {
+        if (! is_callable($yamlEncoder)) {
             throw new Exception\InvalidArgumentException('Invalid parameter to setYamlEncoder() - must be callable');
         }
         $this->yamlEncoder = $yamlEncoder;

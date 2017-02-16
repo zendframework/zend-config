@@ -10,6 +10,9 @@
 namespace ZendTest\Config;
 
 use Interop\Container\ContainerInterface;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
+use RuntimeException;
 use Zend\Config\Factory;
 use Zend\Config\ReaderPluginManager;
 use Zend\Config\WriterPluginManager;
@@ -17,7 +20,7 @@ use Zend\Config\WriterPluginManager;
 /**
  * @group      Zend_Config
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     protected $tmpFiles = [];
     protected $originalIncludePath;
@@ -42,7 +45,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
         foreach ($this->tmpFiles as $file) {
             if (file_exists($file)) {
-                if (!is_writable($file)) {
+                if (! is_writable($file)) {
                     chmod($file, 0777);
                 }
                 @unlink($file);
@@ -149,13 +152,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testNonExistentFileThrowsRuntimeException()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException(RuntimeException::class);
         $config = Factory::fromFile('foo.bar');
     }
 
     public function testUnsupportedFileExtensionThrowsRuntimeException()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException(RuntimeException::class);
         $config = Factory::fromFile(__DIR__ . '/TestAssets/bad.ext');
     }
 
@@ -186,13 +189,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryToFileInvalidFileExtension()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException(RuntimeException::class);
         $result = Factory::toFile(__DIR__.'/TestAssets/bad.ext', []);
     }
 
     public function testFactoryToFileNoDirInHere()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException(RuntimeException::class);
         $result = Factory::toFile(__DIR__.'/TestAssets/NoDirInHere/nonExisiting/dummy.php', []);
     }
 
@@ -219,13 +222,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     public function testFactoryToFileWrongConfig()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $result = Factory::toFile('test.ini', 'Im wrong');
     }
 
     public function testFactoryRegisterInvalidWriter()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         Factory::registerWriter('dum', new Reader\TestAssets\DummyReader());
     }
 

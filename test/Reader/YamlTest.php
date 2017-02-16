@@ -9,6 +9,7 @@
 
 namespace ZendTest\Config\Reader;
 
+use Zend\Config\Exception;
 use Zend\Config\Reader\Yaml as YamlReader;
 
 /**
@@ -18,7 +19,7 @@ class YamlTest extends AbstractReaderTestCase
 {
     public function setUp()
     {
-        if (!getenv('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
+        if (! getenv('TESTS_ZEND_CONFIG_YAML_ENABLED')) {
             $this->markTestSkipped('Yaml test for Zend\Config skipped');
         }
 
@@ -47,7 +48,7 @@ class YamlTest extends AbstractReaderTestCase
 
     public function testInvalidIniFile()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(Exception\RuntimeException::class);
         $arrayIni = $this->reader->fromFile($this->getTestAssetPath('invalid'));
     }
 
