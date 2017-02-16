@@ -9,6 +9,7 @@
 
 namespace ZendTest\Config\Reader;
 
+use Zend\Config\Exception;
 use Zend\Config\Reader\JavaProperties;
 
 /**
@@ -73,7 +74,8 @@ ASSET;
 
         $expectedErrorMessage = 'Cannot process @include statement for a string';
 
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', $expectedErrorMessage);
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage($expectedErrorMessage);
         $arrayJavaPropterties = $this->reader->fromString($JavaProperties);
     }
 }

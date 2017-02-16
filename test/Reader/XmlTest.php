@@ -9,8 +9,10 @@
 
 namespace ZendTest\Config\Reader;
 
+use PHPUnit\Framework\Error\Warning;
 use ReflectionProperty;
 use XMLReader;
+use Zend\Config\Exception;
 use Zend\Config\Reader\Xml;
 
 /**
@@ -41,10 +43,21 @@ class XmlTest extends AbstractReaderTestCase
         return __DIR__ . '/TestAssets/Xml/' . $name . '.xml';
     }
 
+    /**
+     * PHPUnit 5.7 does not namespace error classes; retrieve appropriate one
+     * based on what is available.
+     *
+     * @return string
+     */
+    protected function getExpectedWarningClass()
+    {
+        return class_exists(Warning::class) ? Warning::class : \PHPUnit_Framework_Error_Warning::class;
+    }
+
     public function testInvalidXmlFile()
     {
         $this->reader = new Xml();
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(Exception\RuntimeException::class);
         $arrayXml = $this->reader->fromFile($this->getTestAssetPath('invalid'));
     }
 
@@ -75,7 +88,7 @@ ECS;
 </zend-config>
 
 ECS;
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(Exception\RuntimeException::class);
         $this->reader->fromString($xml);
     }
 
@@ -134,7 +147,7 @@ ECS;
     {
         $configReader = new Xml();
 
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(Exception\RuntimeException::class);
 
         $configReader->fromFile(sys_get_temp_dir() . '/path/that/does/not/exist');
     }
@@ -151,7 +164,7 @@ ECS;
 
         $xmlReader = $this->getInternalXmlReader($configReader);
 
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $this->expectException($this->getExpectedWarningClass());
 
         // following operation should fail because the internal reader is closed (and expected to be closed)
         $xmlReader->setParserProperty(XMLReader::VALIDATE, true);
@@ -179,7 +192,7 @@ ECS;
 
         $xmlReader = $this->getInternalXmlReader($configReader);
 
-        $this->setExpectedException('PHPUnit_Framework_Error_Warning');
+        $this->expectException($this->getExpectedWarningClass());
 
         // following operation should fail because the internal reader is closed (and expected to be closed)
         $xmlReader->setParserProperty(XMLReader::VALIDATE, true);

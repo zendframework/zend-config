@@ -9,6 +9,7 @@
 
 namespace ZendTest\Config\Reader;
 
+use Zend\Config\Exception;
 use Zend\Config\Reader\Json;
 
 /**
@@ -34,7 +35,7 @@ class JsonTest extends AbstractReaderTestCase
 
     public function testInvalidJsonFile()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(Exception\RuntimeException::class);
         $arrayJson = $this->reader->fromFile($this->getTestAssetPath('invalid'));
     }
 
@@ -59,7 +60,7 @@ class JsonTest extends AbstractReaderTestCase
     {
         $json = '{"foo":"bar"';
 
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(Exception\RuntimeException::class);
         $arrayIni = $this->reader->fromString($json);
     }
 }

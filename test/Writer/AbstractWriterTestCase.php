@@ -9,8 +9,10 @@
 
 namespace ZendTest\Config\Writer;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Config\Config;
+use Zend\Config\Exception\InvalidArgumentException;
+use Zend\Config\Exception\RuntimeException;
 
 /**
  * @group      Zend_Config
@@ -59,19 +61,20 @@ abstract class AbstractWriterTestCase extends TestCase
 
     public function testNoFilenameSet()
     {
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'No file name specified');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('No file name specified');
         $this->writer->toFile('', '');
     }
 
     public function testFileNotValid()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         $this->writer->toFile('.', new Config([]));
     }
 
     public function testFileNotWritable()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException');
+        $this->expectException(RuntimeException::class);
         chmod($this->getTestAssetFileName(), 0444);
         $this->writer->toFile($this->getTestAssetFileName(), new Config([]));
     }

@@ -11,6 +11,7 @@
 
 namespace ZendTest\Config;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Config\AbstractConfigFactory;
 use Zend\ServiceManager;
 use Zend\ServiceManager\Config as SMConfig;
@@ -18,7 +19,7 @@ use Zend\ServiceManager\Config as SMConfig;
 /**
  * Class AbstractConfigFactoryTest
  */
-class AbstractConfigFactoryTest extends \PHPUnit_Framework_TestCase
+class AbstractConfigFactoryTest extends TestCase
 {
     /**
      * @var array

@@ -9,12 +9,14 @@
 
 namespace ZendTest\Config;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Config\Config;
+use Zend\Config\Exception;
 
 /**
  * @group      Zend_Config
  */
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     protected $iniFileConfig;
     protected $iniFileNested;
@@ -150,14 +152,16 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testNoModifications()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config = new Config($this->all);
         $config->hostname = 'test';
     }
 
     public function testNoNestedModifications()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config = new Config($this->all);
         $config->db->host = 'test';
     }
@@ -239,7 +243,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorWriteToReadOnly()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config = new Config($this->all);
         $config->test = '32';
     }
@@ -304,7 +309,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($config->hostname)); // top level
 
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage('is read only');
         unset($config->hostname);
     }
 
@@ -454,7 +460,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->b = 'b';
 
         $config->setReadOnly();
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config->c = 'c';
     }
 
