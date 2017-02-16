@@ -18,8 +18,8 @@ the data from the specified configuration.
 >
 > The `Zend\Config\Reader` component no longer supports the following features:
 >
-> - Inheritance of sections.
-> - Reading of specific sections.
+> * Inheritance of sections.
+> * Reading of specific sections.
 
 ## Zend\\Config\\Reader\\Ini
 
