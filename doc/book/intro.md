@@ -57,7 +57,7 @@ The following code illustrates how to use PHP configuration files:
 // config.php
 return [
     'webhost'  => 'www.example.com',
-    'database' => array(
+    'database' => [
         'adapter' => 'pdo_mysql',
         'params'  => [
             'host'     => 'db.example.com',
