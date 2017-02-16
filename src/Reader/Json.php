@@ -44,11 +44,7 @@ class Json implements ReaderInterface
 
         $this->directory = dirname($filename);
 
-        try {
-            $config = JsonFormat::decode(file_get_contents($filename), JsonFormat::TYPE_ARRAY);
-        } catch (JsonException\RuntimeException $e) {
-            throw new Exception\RuntimeException($e->getMessage());
-        }
+        $config = $this->decode(file_get_contents($filename));
 
         return $this->process($config);
     }
@@ -69,11 +65,7 @@ class Json implements ReaderInterface
 
         $this->directory = null;
 
-        try {
-            $config = JsonFormat::decode($string, JsonFormat::TYPE_ARRAY);
-        } catch (JsonException\RuntimeException $e) {
-            throw new Exception\RuntimeException($e->getMessage());
-        }
+        $config = $this->decode($string);
 
         return $this->process($config);
     }
@@ -101,5 +93,80 @@ class Json implements ReaderInterface
             }
         }
         return $data;
+    }
+
+    /**
+     * Decode JSON configuration.
+     *
+     * Determines if ext/json is present, and, if so, uses that to decode the
+     * configuration. Otherwise, it uses zend-json, and, if that is missing,
+     * raises an exception indicating inability to decode.
+     *
+     * @param string $data
+     * @return array
+     * @throws Exception\RuntimeException for any decoding errors.
+     * @throws Exception\MissingExtensionException if neither ext/json nor
+     *     zend-json are available.
+     */
+    private function decode($data)
+    {
+        if (function_exists('json_decode')) {
+            return $this->decodeViaExtension($data);
+        }
+
+        if (class_exists(JsonFormat::class)) {
+            return $this->decodeViaJsonComponent($data);
+        }
+
+        throw new Exception\MissingExtensionException(
+            'Cannot decode JSON config: missing ext/json. Compile PHP with '
+            . 'ext/json, or install zendframework/zend-json'
+        );
+    }
+
+    /**
+     * Decode the JSON data via ext/json
+     *
+     * @param string $data
+     * @return array
+     * @throws Exception\RuntimeException if a non-array/non-object was returned
+     *    by the configuration data.
+     * @throws Exception\RuntimeException if an error occured during decoding.
+     */
+    private function decodeViaExtension($data)
+    {
+        $config = json_decode($data, true);
+
+        if (null !== $config && ! is_array($config)) {
+            throw new Exception\RuntimeException(
+                'Invalid JSON configuration; did not return an array or object'
+            );
+        }
+
+        if (null !== $config) {
+            return $config;
+        }
+
+        if (JSON_ERROR_NONE === json_last_error()) {
+            return $config;
+        }
+
+        throw new Exception\RuntimeException(json_last_error_msg());
+    }
+
+    /**
+     * Use zend-json to decode the configuration data.
+     *
+     * @param string $data
+     * @return array
+     * @throws Exception\RuntimeException if unable to decode.
+     */
+    private function decodeViaJsonComponent($data)
+    {
+        try {
+            return JsonFormat::decode($data, JsonFormat::TYPE_ARRAY);
+        } catch (JsonException\RuntimeException $e) {
+            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }
