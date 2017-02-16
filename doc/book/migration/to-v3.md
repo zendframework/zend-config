@@ -4,8 +4,8 @@ Version 3 is essentially fully backwards compatible with previous versions, with
 one key exception: `Zend\Config\Factory` no longer requires usage of
 zend-servicemanager for resolving plugins.
 
-The reason this is considered a backwards compatibility break, however, is due
-to signature changes:
+The reason this is considered a backwards compatibility break is due to
+signature changes:
 
 - `Factory::setReaderPluginManager()` now accepts a
   `Psr\Container\ContainerInterface`, and not a `Zend\Config\ReaderPluginManager`
