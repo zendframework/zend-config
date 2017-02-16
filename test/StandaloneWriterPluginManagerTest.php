@@ -36,6 +36,9 @@ class StandaloneWriterPluginManagerTest extends TestCase
 
     /**
      * @dataProvider supportedConfigTypes
+     *
+     * @param string $type Configuration type.
+     * @param string $expectedType Expected plugin class.
      */
     public function testCanRetrieveWriterByType($type, $expectedType)
     {
@@ -62,6 +65,8 @@ class StandaloneWriterPluginManagerTest extends TestCase
 
     /**
      * @dataProvider supportedConfigClassNames
+     *
+     * @param string $class Plugin class to retrieve and expect.
      */
     public function testCanRetrieveWriterByPluginClassName($class)
     {

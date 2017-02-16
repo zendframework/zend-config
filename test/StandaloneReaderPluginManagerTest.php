@@ -34,6 +34,9 @@ class StandaloneReaderPluginManagerTest extends TestCase
 
     /**
      * @dataProvider supportedConfigExtensions
+     *
+     * @param string $extension Configuration file extension.
+     * @param string $expectedType Expected plugin class.
      */
     public function testCanRetrieveReaderByExtension($extension, $expectedType)
     {
@@ -60,6 +63,8 @@ class StandaloneReaderPluginManagerTest extends TestCase
 
     /**
      * @dataProvider supportedConfigClassNames
+     *
+     * @param string $class Plugin class to retrieve and expect.
      */
     public function testCanRetrieveReaderByPluginClassName($class)
     {
