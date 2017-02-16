@@ -2,11 +2,48 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.7.0 - TBD
+## 3.0.0 - TBD
 
 ### Added
 
-- Nothing.
+- [#36](https://github.com/zendframework/zend-config/pull/36) adds support for
+  [PSR-11](http://www.php-fig.org/psr/psr-11/).
+
+- [#36](https://github.com/zendframework/zend-config/pull/36) adds the class
+  `Zend\Config\StandaloneReaderPluginManager` for managing config reader plugins.
+  This implementation implements the PSR-11 `ContainerInterface`, and uses a
+  hard-coded list of reader plugins.
+
+- [#36](https://github.com/zendframework/zend-config/pull/36) adds the class
+  `Zend\Config\StandaloneWriterPluginManager` for managing config writer plugins.
+  This implementation implements the PSR-11 `ContainerInterface`, and uses a
+  hard-coded list of writer plugins.
+
+### Changes
+
+- [#36](https://github.com/zendframework/zend-config/pull/36) updates the
+  `Zend\Config\Factory::getReaderPluginManager()` method to lazy-load a
+  `StandaloneReaderPluginManager` by default, instead of a
+  `ReaderPluginManager`, allowing usage out-of-the-box without requiring
+  zend-servicemanager.
+
+- [#36](https://github.com/zendframework/zend-config/pull/36) updates the
+  `Zend\Config\Factory::setReaderPluginManager()` method to typehint against
+  `Psr\Container\ContainerInterface` instead of `ReaderPluginManager`. If you
+  were extending and overriding that method, you will need to update your
+  signature.
+
+- [#36](https://github.com/zendframework/zend-config/pull/36) updates the
+  `Zend\Config\Factory::getWriterPluginManager()` method to lazy-load a
+  `StandaloneWriterPluginManager` by default, instead of a
+  `WriterPluginManager`, allowing usage out-of-the-box without requiring
+  zend-servicemanager.
+
+- [#36](https://github.com/zendframework/zend-config/pull/36) updates the
+  `Zend\Config\Factory::setWriterPluginManager()` method to typehint against
+  `Psr\Container\ContainerInterface` instead of `WriterPluginManager`. If you
+  were extending and overriding that method, you will need to update your
+  signature.
 
 ### Deprecated
 
@@ -14,7 +51,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#36](https://github.com/zendframework/zend-config/pull/36) removes usage of
+  zend-json as a JSON de/serializer in the JSON writer and reader; the
+  component now requires ext/json is installed to use these features.
 
 ### Fixed
 
