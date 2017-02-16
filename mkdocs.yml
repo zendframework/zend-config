@@ -9,7 +9,9 @@ pages:
       - "Zend\\Config\\Writer": writer.md
       - "Zend\\Config\\Processor": processor.md
       - "Config Factory": factory.md
+      - Migration:
+        - "To version 3": migration/to-v3.md
 site_name: zend-config
 site_description: Zend\Config
 repo_url: 'https://github.com/zendframework/zend-config'
-copyright: 'Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+copyright: 'Copyright (c) 2017 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
