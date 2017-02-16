@@ -8,10 +8,8 @@
 namespace Zend\Config\Exception;
 
 use Psr\Container\NotFoundExceptionInterface;
-use RuntimeException;
 
 class PluginNotFoundException extends RuntimeException implements
-    ExceptionInterface,
     NotFoundExceptionInterface
 {
 }
