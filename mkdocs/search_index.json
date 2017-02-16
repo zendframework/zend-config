@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/", 
-            "text": "zend-config\n\n\n\n\n\n\nZend\\Config\n is designed to simplify access to configuration data within\napplications. It provides a nested object property-based user interface for\naccessing this configuration data within application code. The configuration\ndata may come from a variety of media supporting hierarchical data storage.\n\n\n\n\nFile issues at https://github.com/zendframework/zend-config/issues\n\n\nDocumentation is at https://zendframework.github.io/zend-config/", 
+            "text": "zend-config\n\n\n\n\n\n\nzend-config is designed to simplify access to configuration data within\napplications. It provides a nested object property-based user interface for\naccessing this configuration data within application code. The configuration\ndata may come from a variety of media supporting hierarchical data storage.\n\n\n\n\nFile issues at https://github.com/zendframework/zend-config/issues\n\n\nDocumentation is at https://docs.zendframework.com/zend-config/", 
             "title": "Home"
         }, 
         {
             "location": "/#zend-config", 
-            "text": "Zend\\Config  is designed to simplify access to configuration data within\napplications. It provides a nested object property-based user interface for\naccessing this configuration data within application code. The configuration\ndata may come from a variety of media supporting hierarchical data storage.   File issues at https://github.com/zendframework/zend-config/issues  Documentation is at https://zendframework.github.io/zend-config/", 
+            "text": "zend-config is designed to simplify access to configuration data within\napplications. It provides a nested object property-based user interface for\naccessing this configuration data within application code. The configuration\ndata may come from a variety of media supporting hierarchical data storage.   File issues at https://github.com/zendframework/zend-config/issues  Documentation is at https://docs.zendframework.com/zend-config/", 
             "title": "zend-config"
         }, 
         {
