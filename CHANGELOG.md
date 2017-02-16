@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.0.0 - TBD
+## 3.0.0 - 2017-02-16
 
 ### Added
 
@@ -54,24 +54,6 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#36](https://github.com/zendframework/zend-config/pull/36) removes usage of
   zend-json as a JSON de/serializer in the JSON writer and reader; the
   component now requires ext/json is installed to use these features.
-
-### Fixed
-
-- Nothing.
-
-## 2.6.1 - TBD
-
-### Added
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
 
 ### Fixed
 
