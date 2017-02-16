@@ -9,6 +9,7 @@
 
 namespace Zend\Config;
 
+use Psr\Container\ContainerInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 
@@ -17,14 +18,14 @@ class Factory
     /**
      * Plugin manager for loading readers
      *
-     * @var null|ReaderPluginManager
+     * @var null|ContainerInterface
      */
     public static $readers = null;
 
     /**
      * Plugin manager for loading writers
      *
-     * @var null|WriterPluginManager
+     * @var null|ContainerInterface
      */
     public static $writers = null;
 
@@ -204,10 +205,10 @@ class Factory
     /**
      * Set reader plugin manager
      *
-     * @param ReaderPluginManager $readers
+     * @param ContainerInterface $readers
      * @return void
      */
-    public static function setReaderPluginManager(ReaderPluginManager $readers)
+    public static function setReaderPluginManager(ContainerInterface $readers)
     {
         static::$readers = $readers;
     }
@@ -215,7 +216,7 @@ class Factory
     /**
      * Get the reader plugin manager
      *
-     * @return ReaderPluginManager
+     * @return ContainerInterface
      */
     public static function getReaderPluginManager()
     {
@@ -228,10 +229,10 @@ class Factory
     /**
      * Set writer plugin manager
      *
-     * @param WriterPluginManager $writers
+     * @param ContainerInterface $writers
      * @return void
      */
-    public static function setWriterPluginManager(WriterPluginManager $writers)
+    public static function setWriterPluginManager(ContainerInterface $writers)
     {
         static::$writers = $writers;
     }
@@ -239,7 +240,7 @@ class Factory
     /**
      * Get the writer plugin manager
      *
-     * @return WriterPluginManager
+     * @return ContainerInterface
      */
     public static function getWriterPluginManager()
     {
