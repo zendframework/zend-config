@@ -212,7 +212,10 @@ class Factory
     }
 
     /**
-     * Get the reader plugin manager
+     * Get the reader plugin manager.
+     *
+     * If none is available, registers and returns a
+     * StandaloneReaderPluginManager instance by default.
      *
      * @return ContainerInterface
      */
@@ -236,7 +239,10 @@ class Factory
     }
 
     /**
-     * Get the writer plugin manager
+     * Get the writer plugin manager.
+     *
+     * If none is available, registers and returns a
+     * StandaloneWriterPluginManager instance by default.
      *
      * @return ContainerInterface
      */
