@@ -56,8 +56,8 @@ class Ini extends AbstractWriter
      * If set to true, the INI file is rendered without sections completely
      * into the global namespace of the INI file.
      *
-     * @param  bool $withoutSections
-     * @return Ini
+     * @param bool $withoutSections
+     * @return self
      */
     public function setRenderWithoutSectionsFlags($withoutSections)
     {

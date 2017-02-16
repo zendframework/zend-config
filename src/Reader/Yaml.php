@@ -49,8 +49,8 @@ class Yaml implements ReaderInterface
     /**
      * Set callback for decoding YAML
      *
-     * @param  string|callable $yamlDecoder the decoder to set
-     * @return Yaml
+     * @param string|callable $yamlDecoder the decoder to set
+     * @return self
      * @throws Exception\RuntimeException
      */
     public function setYamlDecoder($yamlDecoder)
