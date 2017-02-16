@@ -50,7 +50,7 @@ class Yaml implements ReaderInterface
      * Set callback for decoding YAML
      *
      * @param  string|callable $yamlDecoder the decoder to set
-     * @return Yaml
+     * @return Yaml Provides a fluent interface
      * @throws Exception\RuntimeException
      */
     public function setYamlDecoder($yamlDecoder)

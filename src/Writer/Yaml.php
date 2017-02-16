@@ -50,7 +50,7 @@ class Yaml extends AbstractWriter
      * Set callback for decoding YAML
      *
      * @param  callable $yamlEncoder the decoder to set
-     * @return Yaml
+     * @return Yaml Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function setYamlEncoder($yamlEncoder)

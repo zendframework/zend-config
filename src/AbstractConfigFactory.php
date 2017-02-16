@@ -116,7 +116,7 @@ class AbstractConfigFactory implements AbstractFactoryInterface
 
     /**
      * @param string $pattern
-     * @return self
+     * @return AbstractConfigFactory Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function addPattern($pattern)
@@ -133,7 +133,7 @@ class AbstractConfigFactory implements AbstractFactoryInterface
 
     /**
      * @param array|Traversable $patterns
-     * @return self
+     * @return AbstractConfigFactory Provides a fluent interface
      * @throws Exception\InvalidArgumentException
      */
     public function addPatterns($patterns)
@@ -155,7 +155,7 @@ class AbstractConfigFactory implements AbstractFactoryInterface
 
     /**
      * @param array|Traversable $patterns
-     * @return self
+     * @return AbstractConfigFactory Provides a fluent interface
      * @throws \InvalidArgumentException
      */
     public function setPatterns($patterns)

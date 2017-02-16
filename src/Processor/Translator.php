@@ -47,7 +47,7 @@ class Translator implements ProcessorInterface
 
     /**
      * @param  ZendTranslator $translator
-     * @return Translator
+     * @return Translator Provides a fluent interface
      */
     public function setTranslator(ZendTranslator $translator)
     {
@@ -65,7 +65,7 @@ class Translator implements ProcessorInterface
 
     /**
      * @param  string|null $locale
-     * @return Translator
+     * @return Translator Provides a fluent interface
      */
     public function setLocale($locale)
     {
@@ -83,7 +83,7 @@ class Translator implements ProcessorInterface
 
     /**
      * @param  string $textDomain
-     * @return Translator
+     * @return Translator Provides a fluent interface
      */
     public function setTextDomain($textDomain)
     {
