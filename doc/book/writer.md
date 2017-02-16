@@ -7,11 +7,11 @@ is itself only an interface that defining the methods `toFile()` and
 
 We have five writers implementing the interface:
 
-* `Zend\Config\Writer\Ini`
-* `Zend\Config\Writer\Xml`
-* `Zend\Config\Writer\PhpArray`
-* `Zend\Config\Writer\Json`
-* `Zend\Config\Writer\Yaml`
+- `Zend\Config\Writer\Ini`
+- `Zend\Config\Writer\Xml`
+- `Zend\Config\Writer\PhpArray`
+- `Zend\Config\Writer\Json`
+- `Zend\Config\Writer\Yaml`
 
 ## Zend\\Config\\Writer\\Ini
 

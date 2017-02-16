@@ -6,11 +6,11 @@ defining two methods: `process()` and `processValue()`.
 
 zend-config provides the following concrete implementations:
 
-* `Zend\Config\Processor\Constant`: manage PHP constant values.
-* `Zend\Config\Processor\Filter`: filter the configuration data using `Zend\Filter`.
-* `Zend\Config\Processor\Queue`: manage a queue of operations to apply to configuration data.
-* `Zend\Config\Processor\Token`: find and replace specific tokens.
-* `Zend\Config\Processor\Translator`: translate configuration values in other languages using `Zend\I18n\Translator`.
+- `Zend\Config\Processor\Constant`: manage PHP constant values.
+- `Zend\Config\Processor\Filter`: filter the configuration data using `Zend\Filter`.
+- `Zend\Config\Processor\Queue`: manage a queue of operations to apply to configuration data.
+- `Zend\Config\Processor\Token`: find and replace specific tokens.
+- `Zend\Config\Processor\Translator`: translate configuration values in other languages using `Zend\I18n\Translator`.
 
 ## Zend\\Config\\Processor\\Constant
 

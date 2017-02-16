@@ -5,11 +5,11 @@ concrete implementations for different file formats. `Zend\Config\Reader` itself
 is only an interface, defining the methods `fromFile()` and `fromString()`. The
 concrete implementations of this interface are:
 
-* `Zend\Config\Reader\Ini`
-* `Zend\Config\Reader\Xml`
-* `Zend\Config\Reader\Json`
-* `Zend\Config\Reader\Yaml`
-* `Zend\Config\Reader\JavaProperties`
+- `Zend\Config\Reader\Ini`
+- `Zend\Config\Reader\Xml`
+- `Zend\Config\Reader\Json`
+- `Zend\Config\Reader\Yaml`
+- `Zend\Config\Reader\JavaProperties`
 
 `fromFile()` and `fromString()` are expected to return a PHP array containing
 the data from the specified configuration.
