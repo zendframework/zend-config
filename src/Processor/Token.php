@@ -47,11 +47,10 @@ class Token implements ProcessorInterface
      * Token Processor walks through a Config structure and replaces all
      * occurrences of tokens with supplied values.
      *
-     * @param  array|Config|Traversable   $tokens  Associative array of TOKEN => value
-     *                                             to replace it with
-     * @param    string $prefix
-     * @param    string $suffix
-     * @return   Token
+     * @param array|Config|Traversable $tokens Associative array of TOKEN =>
+     *     value to replace it with
+     * @param string $prefix
+     * @param string $suffix
      */
     public function __construct($tokens = [], $prefix = '', $suffix = '')
     {
@@ -62,7 +61,7 @@ class Token implements ProcessorInterface
 
     /**
      * @param  string $prefix
-     * @return Token
+     * @return self
      */
     public function setPrefix($prefix)
     {
@@ -82,7 +81,7 @@ class Token implements ProcessorInterface
 
     /**
      * @param  string $suffix
-     * @return Token
+     * @return self
      */
     public function setSuffix($suffix)
     {
@@ -104,9 +103,9 @@ class Token implements ProcessorInterface
     /**
      * Set token registry.
      *
-     * @param  array|Config|Traversable  $tokens  Associative array of TOKEN => value
-     *                                            to replace it with
-     * @return Token
+     * @param array|Config|Traversable $tokens Associative array of TOKEN =>
+     *     value to replace it with
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function setTokens($tokens)
@@ -143,9 +142,9 @@ class Token implements ProcessorInterface
     /**
      * Add new token.
      *
-     * @param  string $token
-     * @param  mixed $value
-     * @return Token
+     * @param string $token
+     * @param mixed $value
+     * @return self
      * @throws Exception\InvalidArgumentException
      */
     public function addToken($token, $value)
@@ -166,7 +165,7 @@ class Token implements ProcessorInterface
      *
      * @param string $token
      * @param mixed $value
-     * @return Token
+     * @return self
      */
     public function setToken($token, $value)
     {
