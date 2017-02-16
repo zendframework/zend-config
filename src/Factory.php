@@ -1,14 +1,13 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-config for the canonical source repository
+ * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   https://github.com/zendframework/zend-config/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Config;
 
+use Psr\Container\ContainerInterface;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 
@@ -17,14 +16,14 @@ class Factory
     /**
      * Plugin manager for loading readers
      *
-     * @var null|ReaderPluginManager
+     * @var null|ContainerInterface
      */
     public static $readers = null;
 
     /**
      * Plugin manager for loading writers
      *
-     * @var null|WriterPluginManager
+     * @var null|ContainerInterface
      */
     public static $writers = null;
 
@@ -204,23 +203,26 @@ class Factory
     /**
      * Set reader plugin manager
      *
-     * @param ReaderPluginManager $readers
+     * @param ContainerInterface $readers
      * @return void
      */
-    public static function setReaderPluginManager(ReaderPluginManager $readers)
+    public static function setReaderPluginManager(ContainerInterface $readers)
     {
         static::$readers = $readers;
     }
 
     /**
-     * Get the reader plugin manager
+     * Get the reader plugin manager.
      *
-     * @return ReaderPluginManager
+     * If none is available, registers and returns a
+     * StandaloneReaderPluginManager instance by default.
+     *
+     * @return ContainerInterface
      */
     public static function getReaderPluginManager()
     {
         if (static::$readers === null) {
-            static::$readers = new ReaderPluginManager(new ServiceManager());
+            static::$readers = new StandaloneReaderPluginManager();
         }
         return static::$readers;
     }
@@ -228,23 +230,26 @@ class Factory
     /**
      * Set writer plugin manager
      *
-     * @param WriterPluginManager $writers
+     * @param ContainerInterface $writers
      * @return void
      */
-    public static function setWriterPluginManager(WriterPluginManager $writers)
+    public static function setWriterPluginManager(ContainerInterface $writers)
     {
         static::$writers = $writers;
     }
 
     /**
-     * Get the writer plugin manager
+     * Get the writer plugin manager.
      *
-     * @return WriterPluginManager
+     * If none is available, registers and returns a
+     * StandaloneWriterPluginManager instance by default.
+     *
+     * @return ContainerInterface
      */
     public static function getWriterPluginManager()
     {
         if (static::$writers === null) {
-            static::$writers = new WriterPluginManager(new ServiceManager());
+            static::$writers = new StandaloneWriterPluginManager();
         }
 
         return static::$writers;
