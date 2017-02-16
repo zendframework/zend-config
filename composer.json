@@ -18,12 +18,13 @@
         "psr/container": "^1.0"
     },
     "require-dev": {
+        "zendframework/zend-coding-standard": "~1.0.0",
         "zendframework/zend-filter": "^2.7.1",
         "zendframework/zend-i18n": "^2.7.3",
         "zendframework/zend-json": "^2.6.1 || ^3.0",
         "zendframework/zend-servicemanager": "^2.7.8 || ^3.2.1",
-        "phpunit/phpunit": "^5.7 || ^6.0",
-        "zendframework/zend-coding-standard": "~1.0.0"
+        "malukenho/docheader": "^0.1.5",
+        "phpunit/phpunit": "^5.7 || ^6.0"
     },
     "conflict": {
         "container-interop/container-interop": "<1.2.0"
@@ -49,11 +50,14 @@
     },
     "scripts": {
         "check": [
+            "@license-check",
             "@cs-check",
             "@test"
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "license-check": "docheader check src/",
+        "license-check-all": "docheader check src/ test/",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "upload-coverage": "coveralls -v"
