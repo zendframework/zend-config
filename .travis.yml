@@ -11,11 +11,12 @@ cache:
   directories:
     - $HOME/.composer/cache
     - $HOME/.local
+    - vendor
     - zf-mkdoc-theme
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction"
+    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
     - SITE_URL="https://zendframework.github.io/zend-config"
     - GH_USER_NAME="Matthew Weier O'Phinney"
     - GH_USER_EMAIL="matthew@weierophinney.net"
@@ -67,7 +68,7 @@ before_install:
   - travis_retry composer self-update
 
 install:
-  - if [[ $TRAVIS_PHP_VERSION =~ ^5.6 ]]; then travis_retry composer update $COMPOSER_ARGS phpunit/phpunit --with-dependencies ; fi
+  - if [[ $TRAVIS_PHP_VERSION =~ ^5.6 ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies phpunit/phpunit ; fi
   - if [[ $TEST_COVERAGE == 'true' ]]; then travis_retry composer require --dev $COMPOSER_ARGS satooshi/php-coveralls:^1.0 ; fi
   - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
   - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
