@@ -9,7 +9,7 @@
 
 namespace ZendTest\Config;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Config\Exception\InvalidArgumentException;
 use Zend\Config\ReaderPluginManager;
 use Zend\Config\Reader\ReaderInterface;

@@ -9,7 +9,8 @@
 
 namespace ZendTest\Config\Reader;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
+use Zend\Config\Exception;
 use Zend\Config\Reader\ReaderInterface;
 
 /**
@@ -33,7 +34,8 @@ abstract class AbstractReaderTestCase extends TestCase
     public function testMissingFile()
     {
         $filename = $this->getTestAssetPath('no-file');
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', "doesn't exist or not readable");
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage("doesn't exist or not readable");
         $config = $this->reader->fromFile($filename);
     }
 

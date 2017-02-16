@@ -69,7 +69,7 @@ abstract class AbstractWriter implements WriterInterface
     {
         if ($config instanceof Traversable) {
             $config = ArrayUtils::iteratorToArray($config);
-        } elseif (!is_array($config)) {
+        } elseif (! is_array($config)) {
             throw new Exception\InvalidArgumentException(__METHOD__ . ' expects an array or Traversable config');
         }
 

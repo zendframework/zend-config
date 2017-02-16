@@ -18,8 +18,6 @@ use Zend\Config\Reader\Xml as XmlReader;
  */
 class XmlTest extends AbstractWriterTestCase
 {
-    protected $_tempName;
-
     public function setUp()
     {
         $this->writer = new XmlWriter();

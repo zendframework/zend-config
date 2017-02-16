@@ -150,7 +150,7 @@ class Token implements ProcessorInterface
      */
     public function addToken($token, $value)
     {
-        if (!is_scalar($token)) {
+        if (! is_scalar($token)) {
             throw new Exception\InvalidArgumentException('Cannot use ' . gettype($token) . ' as token name.');
         }
         $this->tokens[$token] = $value;
@@ -181,7 +181,7 @@ class Token implements ProcessorInterface
     protected function buildMap()
     {
         if (null === $this->map) {
-            if (!$this->suffix && !$this->prefix) {
+            if (! $this->suffix && ! $this->prefix) {
                 $this->map = $this->tokens;
             } else {
                 $this->map = [];
@@ -256,7 +256,7 @@ class Token implements ProcessorInterface
             return $value;
         }
 
-        if (!is_string($value) && (is_bool($value) || is_numeric($value))) {
+        if (! is_string($value) && (is_bool($value) || is_numeric($value))) {
             $stringVal  = (string) $value;
             $changedVal = strtr($stringVal, $this->map);
 

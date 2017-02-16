@@ -185,7 +185,7 @@ class Config implements Countable, Iterator, ArrayAccess
      */
     public function __unset($name)
     {
-        if (!$this->allowModifications) {
+        if (! $this->allowModifications) {
             throw new Exception\InvalidArgumentException('Config is read only');
         } elseif (isset($this->data[$name])) {
             unset($this->data[$name]);
@@ -381,6 +381,6 @@ class Config implements Countable, Iterator, ArrayAccess
      */
     public function isReadOnly()
     {
-        return !$this->allowModifications;
+        return ! $this->allowModifications;
     }
 }

@@ -9,12 +9,14 @@
 
 namespace ZendTest\Config;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Config\Config;
+use Zend\Config\Exception;
 
 /**
  * @group      Zend_Config
  */
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends TestCase
 {
     protected $iniFileConfig;
     protected $iniFileNested;
@@ -107,7 +109,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         ];
 
         $this->leadingdot = ['.test' => 'dot-test'];
-        $this->invalidkey = [' ' => 'test', ''=>'test2'];
+        $this->invalidkey = [' ' => 'test', '' => 'test2'];
     }
 
     public function testLoadSingleSection()
@@ -144,20 +146,22 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('anothername', $config->one->two->three);
 
         // create a new multi-level key
-        $config->does = ['not'=> ['exist' => 'yet']];
+        $config->does = ['not' => ['exist' => 'yet']];
         $this->assertEquals('yet', $config->does->not->exist);
     }
 
     public function testNoModifications()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config = new Config($this->all);
         $config->hostname = 'test';
     }
 
     public function testNoNestedModifications()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config = new Config($this->all);
         $config->db->host = 'test';
     }
@@ -200,7 +204,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         // top level
         $config = new Config($this->all);
         $var = '';
-        foreach ($config as $key=>$value) {
+        foreach ($config as $key => $value) {
             if (is_string($value)) {
                 $var .= "\nkey = $key, value = $value";
             }
@@ -209,7 +213,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         // 1 nest
         $var = '';
-        foreach ($config->db as $key=>$value) {
+        foreach ($config->db as $key => $value) {
             $var .= "\nkey = $key, value = $value";
         }
         $this->assertContains('key = host, value = 127.0.0.1', $var);
@@ -217,7 +221,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         // 2 nests
         $config = new Config($this->menuData1);
         $var = '';
-        foreach ($config->button->b1 as $key=>$value) {
+        foreach ($config->button->b1 as $key => $value) {
             $var .= "\nkey = $key, value = $value";
         }
         $this->assertContains('key = L1, value = button1-1', $var);
@@ -239,7 +243,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
     public function testErrorWriteToReadOnly()
     {
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config = new Config($this->all);
         $config->test = '32';
     }
@@ -274,14 +279,14 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testZf1019_HandlingInvalidKeyNames()
+    public function testZf1019HandlingInvalidKeyNames()
     {
         $config = new Config($this->leadingdot);
         $array = $config->toArray();
         $this->assertContains('dot-test', $array['.test']);
     }
 
-    public function testZF1019_EmptyKeys()
+    public function testZF1019EmptyKeys()
     {
         $config = new Config($this->invalidkey);
         $array = $config->toArray();
@@ -289,7 +294,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('test', $array['']);
     }
 
-    public function testZF1417_DefaultValues()
+    public function testZF1417DefaultValues()
     {
         $config = new Config($this->all);
         $value = $config->get('notthere', 'default');
@@ -304,7 +309,8 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(isset($config->hostname)); // top level
 
-        $this->setExpectedException('Zend\Config\Exception\InvalidArgumentException', 'is read only');
+        $this->expectException(Exception\InvalidArgumentException::class);
+        $this->expectExceptionMessage('is read only');
         unset($config->hostname);
     }
 
@@ -454,11 +460,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $config->b = 'b';
 
         $config->setReadOnly();
-        $this->setExpectedException('Zend\Config\Exception\RuntimeException', 'Config is read only');
+        $this->expectException(Exception\RuntimeException::class);
+        $this->expectExceptionMessage('Config is read only');
         $config->c = 'c';
     }
 
-    public function testZF3408_countNotDecreasingOnUnset()
+    public function testZF3408countNotDecreasingOnUnset()
     {
         $configData = [
             'a' => 'a',
@@ -471,7 +478,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(count($config), 2);
     }
 
-    public function testZF4107_ensureCloneDoesNotKeepNestedReferences()
+    public function testZF4107ensureCloneDoesNotKeepNestedReferences()
     {
         $parent = new Config(['key' => ['nested' => 'parent']], true);
         $newConfig = clone $parent;
@@ -487,7 +494,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testMergeHonoursAllowModificationsFlagAtAllLevels()
     {
-        $config = new Config(['key' => ['nested' => 'yes'], 'key2'=>'yes'], false);
+        $config = new Config(['key' => ['nested' => 'yes'], 'key2' => 'yes'], false);
         $config2 = new Config([], true);
 
         $config2->merge($config);
@@ -590,7 +597,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($config->one->two->isReadOnly(), 'Second level children are writable');
     }
 
-    public function testZF6995_toArrayDoesNotDisturbInternalIterator()
+    public function testZF6995toArrayDoesNotDisturbInternalIterator()
     {
         $config = new Config(range(1, 10));
         $config->rewind();
@@ -604,7 +611,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      * @depends testMerge
      * @link http://framework.zend.com/issues/browse/ZF2-186
      */
-    public function testZF2_186_mergeReplacingUnnamedConfigSettings()
+    public function testZF2186mergeReplacingUnnamedConfigSettings()
     {
         $arrayA = [
             'flag' => true,

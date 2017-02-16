@@ -229,7 +229,7 @@ class PhpArray extends AbstractWriter
      */
     protected function checkStringIsFqn($string)
     {
-        if (!preg_match('/^(?:\x5c[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)+$/', $string)) {
+        if (! preg_match('/^(?:\x5c[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*)+$/', $string)) {
             return false;
         }
 

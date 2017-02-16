@@ -121,7 +121,7 @@ class AbstractConfigFactory implements AbstractFactoryInterface
      */
     public function addPattern($pattern)
     {
-        if (!is_string($pattern)) {
+        if (! is_string($pattern)) {
             throw new Exception\InvalidArgumentException('pattern must be string');
         }
 
@@ -142,7 +142,7 @@ class AbstractConfigFactory implements AbstractFactoryInterface
             $patterns = iterator_to_array($patterns);
         }
 
-        if (!is_array($patterns)) {
+        if (! is_array($patterns)) {
             throw new Exception\InvalidArgumentException("patterns must be array or Traversable");
         }
 
@@ -164,7 +164,7 @@ class AbstractConfigFactory implements AbstractFactoryInterface
             $patterns = iterator_to_array($patterns);
         }
 
-        if (!is_array($patterns)) {
+        if (! is_array($patterns)) {
             throw new \InvalidArgumentException("patterns must be array or Traversable");
         }
 

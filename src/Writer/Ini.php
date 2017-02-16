@@ -91,7 +91,7 @@ class Ini extends AbstractWriter
             $config = $this->sortRootElements($config);
 
             foreach ($config as $sectionName => $data) {
-                if (!is_array($data)) {
+                if (! is_array($data)) {
                     $iniString .= $sectionName
                                .  ' = '
                                .  $this->prepareValue($data)
