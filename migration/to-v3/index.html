@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <link rel="shortcut icon" href="../img/favicon.ico">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 
-    <title>Config Factory - zend-config</title>
+    <title>To version 3 - zend-config</title>
 
-    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
     <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/zf.css" rel="stylesheet">
-    <link href="../css/prism-zf.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link href="../../css/zf.css" rel="stylesheet">
+    <link href="../../css/prism-zf.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -56,8 +56,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
-              <a href="..">zend-config</a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="../..">zend-config</a>
             </span>
         </div>
 
@@ -69,19 +69,19 @@
                 
                 
                     <li >
-                        <a href="..">Home</a>
+                        <a href="../..">Home</a>
                     </li>
                 
                 
                 
                     <li >
-                        <a href="../intro/">Introduction</a>
+                        <a href="../../intro/">Introduction</a>
                     </li>
                 
                 
                 
                     <li >
-                        <a href="../theory/">Theory of Operation</a>
+                        <a href="../../theory/">Theory of Operation</a>
                     </li>
                 
                 
@@ -92,25 +92,25 @@
                         
                             
 <li >
-    <a href="../reader/">Zend\Config\Reader</a>
+    <a href="../../reader/">Zend\Config\Reader</a>
 </li>
 
                         
                             
 <li >
-    <a href="../writer/">Zend\Config\Writer</a>
+    <a href="../../writer/">Zend\Config\Writer</a>
 </li>
 
                         
                             
 <li >
-    <a href="../processor/">Zend\Config\Processor</a>
+    <a href="../../processor/">Zend\Config\Processor</a>
 </li>
 
                         
                             
-<li class="active">
-    <a href="./">Config Factory</a>
+<li >
+    <a href="../../factory/">Config Factory</a>
 </li>
 
                         
@@ -120,8 +120,8 @@
     <ul class="dropdown-menu">
         
             
-<li >
-    <a href="../migration/to-v3/">To version 3</a>
+<li class="active">
+    <a href="./">To version 3</a>
 </li>
 
         
@@ -169,13 +169,7 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#the-factory">The Factory</a></li>
-        
-            <li><a href="#storage-writes-to-a-single-file">Storage writes to a single file</a></li>
-        
-            <li><a href="#loading-configuration-files">Loading configuration files</a></li>
-        
-            <li><a href="#storing-configuration">Storing configuration</a></li>
+        <li class="main active"><a href="#migration-to-version-3">Migration to version 3</a></li>
         
     
     </ul>
@@ -183,10 +177,10 @@
     
     <ul class="pager hidden-print">
       <li class="previous">
-        <a rel="prev" href="../processor/"><i class="fa fa-arrow-left"></i> Previous</a>
+        <a rel="prev" href="../../factory/"><i class="fa fa-arrow-left"></i> Previous</a>
       </li>
-      <li class="next">
-        <a rel="next" href="../migration/to-v3/">Next <i class="fa fa-arrow-right"></i></a>
+      <li class="next disabled ">
+        <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
       </li>
     </ul>
     
@@ -194,67 +188,58 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">Docs</a> &raquo;</li>
+  <li><a href="../..">Docs</a> &raquo;</li>
   
     
       
         <li>Reference &raquo;</li>
       
     
+      
+        <li>Migration &raquo;</li>
+      
+    
   
-  <li class="active">Config Factory</li>
+  <li class="active">To version 3</li>
 </ol>
 
-<h1 id="the-factory">The Factory</h1>
-<p><code>Zend\Config\Factory</code> provides the ability to load configuration files to an
-array or to a <code>Zend\Config\Config</code> object. The factory has two purposes</p>
+<h1 id="migration-to-version-3">Migration to version 3</h1>
+<p>Version 3 is essentially fully backwards compatible with previous versions, with
+one key exception: <code>Zend\Config\Factory</code> no longer requires usage of
+zend-servicemanager for resolving plugins.</p>
+<p>The reason this is considered a backwards compatibility break is due to
+signature changes:</p>
 <ul>
-<li>Loading configuration file(s)</li>
-<li>Storing a configuration file</li>
+<li>
+<p><code>Factory::setReaderPluginManager()</code> now accepts a
+  <code>Psr\Container\ContainerInterface</code>, and not a <code>Zend\Config\ReaderPluginManager</code>
+  instance; <code>ReaderPluginManager</code>, however, still fulfills that typehint.</p>
+</li>
+<li>
+<p><code>Factory::getReaderPluginManager()</code> now returns a
+  <code>Psr\Container\ContainerInterface</code> &mdash; specifically, a
+  <code>Zend\Config\StandaloneReaderPluginManager</code> &mdash;  and not a
+  <code>Zend\Config\ReaderPluginManager</code> instance, by default; <code>ReaderPluginManager</code>,
+  however, still fulfills that typehint.</p>
+</li>
+<li>
+<p><code>Factory::setWriterPluginManager()</code> now accepts a
+  <code>Psr\Container\ContainerInterface</code>, and not a <code>Zend\Config\WriterPluginManager</code>
+  instance; <code>WriterPluginManager</code>, however, still fulfills that typehint.</p>
+</li>
+<li>
+<p><code>Factory::getWriterPluginManager()</code> now returns a
+  <code>Psr\Container\ContainerInterface</code> &mdash; specifically, a
+  <code>Zend\Config\StandaloneWriterPluginManager</code> &mdash;  and not a
+  <code>Zend\Config\WriterPluginManager</code> instance, by default; <code>WriterPluginManager</code>,
+  however, still fulfills that typehint.</p>
+</li>
 </ul>
-<blockquote>
-<h2 id="storage-writes-to-a-single-file">Storage writes to a single file</h2>
-<p>Storing the configuration always writes to a <strong>single</strong> file. The factory is
-not aware of merged configuration files, and as such cannot split
-configuration to multiple files.  If you want to store particular
-configuration sections to separate files, you should separate them manually.</p>
-</blockquote>
-<h2 id="loading-configuration-files">Loading configuration files</h2>
-<p>The first example illustrates loading a single configuration file:</p>
-<pre class="codehilite"><code class="language-php linenums">// Load a PHP file as array:
-$config = Zend\Config\Factory::fromFile(__DIR__ . '/config/my.config.php');
-
-// Load an XML file as Config object; the second parameter, when true,
-// casts the configuration to a Config instance:
-$config = Zend\Config\Factory::fromFile(__DIR__.'/config/my.config.xml', true);</code></pre>
-
-<p>The next example demonstrates merging multiple files; note that they are in
-separate formats!</p>
-<pre class="codehilite"><code class="language-php linenums">$config = Zend\Config\Factory::fromFiles([
-    __DIR__.'/config/my.config.php',
-    __DIR__.'/config/my.config.xml',
-]);</code></pre>
-
-<h2 id="storing-configuration">Storing configuration</h2>
-<p>Sometimes you may want to write configuration to a file. To do this, use the
-factory's <code>toFile()</code> method:</p>
-<pre class="codehilite"><code class="language-php linenums">$config = new Zend\Config\Config([], true);
-$config-&gt;settings = [];
-$config-&gt;settings-&gt;myname = 'framework';
-$config-&gt;settings-&gt;date   = '2012-12-12 12:12:12';
-
-//Store the configuration
-Zend\Config\Factory::toFile(__DIR__ . '/config/my.config.php', $config);
-
-//Store an array
-$config = [
-    'settings' =&gt; [
-        'myname' =&gt; 'framework',
-        'data'   =&gt; '2012-12-12 12:12:12',
-    ],
-];
-
-Zend\Config\Factory::toFile(__DIR__ . '/config/my.config.php', $config);</code></pre>
+<p>If you were extending the class, you will need to update your signatures
+accordingly.</p>
+<p>This particular update means that you may use any PSR-11 container as a reader
+or writer plugin manager, and no longer require installation of
+zend-servicemanager to use the plugin manager facilities.</p>
 
 <hr />
 
@@ -262,10 +247,10 @@ Zend\Config\Factory::toFile(__DIR__ . '/config/my.config.php', $config);</code><
 <nav>
   <ul class="pager hidden-print">
     <li class="previous">
-      <a rel="prev" href="../processor/"><i class="fa fa-arrow-left"></i> Previous</a>
+      <a rel="prev" href="../../factory/"><i class="fa fa-arrow-left"></i> Previous</a>
     </li>
-    <li class="next">
-      <a rel="next" href="../migration/to-v3/">Next <i class="fa fa-arrow-right"></i></a>
+    <li class="next disabled ">
+      <a rel="next" >Next <i class="fa fa-arrow-right"></i></a>
     </li>
   </ul>
 </nav>
@@ -282,13 +267,13 @@ Zend\Config\Factory::toFile(__DIR__ . '/config/my.config.php', $config);</code><
         <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
     </footer>
 
-    <script src="../js/jquery-1.10.2.min.js"></script>
-    <script src="../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../js/prism-zf.js"></script>
+    <script src="../../js/jquery-1.10.2.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../../js/prism-zf.js"></script>
 
-    <script>var base_url = '..';</script>
-    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-    <script src="../js/base.js"></script>
+    <script>var base_url = '../..';</script>
+    <script data-main="../../mkdocs/js/search.js" src="../../mkdocs/js/require.js"></script>
+    <script src="../../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
