@@ -8,8 +8,6 @@
 namespace Zend\Config\Reader;
 
 use Zend\Config\Exception;
-use Zend\Json\Exception as JsonException;
-use Zend\Json\Json as JsonFormat;
 
 /**
  * JSON config reader.
@@ -103,35 +101,8 @@ class Json implements ReaderInterface
      * @param string $data
      * @return array
      * @throws Exception\RuntimeException for any decoding errors.
-     * @throws Exception\MissingExtensionException if neither ext/json nor
-     *     zend-json are available.
      */
     private function decode($data)
-    {
-        if (function_exists('json_decode')) {
-            return $this->decodeViaExtension($data);
-        }
-
-        if (class_exists(JsonFormat::class)) {
-            return $this->decodeViaJsonComponent($data);
-        }
-
-        throw new Exception\MissingExtensionException(
-            'Cannot decode JSON config: missing ext/json. Compile PHP with '
-            . 'ext/json, or install zendframework/zend-json'
-        );
-    }
-
-    /**
-     * Decode the JSON data via ext/json
-     *
-     * @param string $data
-     * @return array
-     * @throws Exception\RuntimeException if a non-array/non-object was returned
-     *    by the configuration data.
-     * @throws Exception\RuntimeException if an error occured during decoding.
-     */
-    private function decodeViaExtension($data)
     {
         $config = json_decode($data, true);
 
@@ -150,21 +121,5 @@ class Json implements ReaderInterface
         }
 
         throw new Exception\RuntimeException(json_last_error_msg());
-    }
-
-    /**
-     * Use zend-json to decode the configuration data.
-     *
-     * @param string $data
-     * @return array
-     * @throws Exception\RuntimeException if unable to decode.
-     */
-    private function decodeViaJsonComponent($data)
-    {
-        try {
-            return JsonFormat::decode($data, JsonFormat::TYPE_ARRAY);
-        } catch (JsonException\RuntimeException $e) {
-            throw new Exception\RuntimeException($e->getMessage(), $e->getCode(), $e);
-        }
     }
 }
