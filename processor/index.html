@@ -16,7 +16,6 @@
     <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/zf-web.css" rel="stylesheet">
     <link href="../css/zf.css" rel="stylesheet">
     <link href="../css/prism-zf.css" rel="stylesheet">
 
@@ -57,7 +56,7 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
               <a href="..">zend-config</a>
             </span>
         </div>
@@ -150,7 +149,7 @@
 </div>
 
     <!-- content:begin -->
-    <div id="page-top" class="container docs">
+    <div class="container">
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
@@ -184,7 +183,7 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">zend-config</a> &raquo;</li>
+  <li><a href="..">Docs</a> &raquo;</li>
   
     
       
@@ -210,7 +209,7 @@ defining two methods: <code>process()</code> and <code>processValue()</code>.</p
 <h2 id="zend92config92processor92constant">Zend\Config\Processor\Constant</h2>
 <h3 id="using-zend92config92processor92constant">Using Zend\Config\Processor\Constant</h3>
 <p>This example illustrates the basic usage of <code>Zend\Config\Processor\Constant</code>:</p>
-<pre class="codehilite"><code class="language-php">define ('TEST_CONST', 'bar');
+<pre class="codehilite"><code class="language-php linenums">define ('TEST_CONST', 'bar');
 
 // Provide the second parameter as boolean true to allow modifications:
 $config = new Zend\Config\Config(['foo' =&gt; 'TEST_CONST'], true);
@@ -220,12 +219,11 @@ echo $config-&gt;foo . ',';
 $processor-&gt;process($config);
 echo $config-&gt;foo;</code></pre>
 
-
 <p>This example returns the output: <code>TEST_CONST,bar</code>.</p>
 <h2 id="zend92config92processor92filter">Zend\Config\Processor\Filter</h2>
 <h3 id="using-zend92config92processor92filter">Using Zend\Config\Processor\Filter</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Filter</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Filter\StringToUpper;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Filter\StringToUpper;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Config;
 
@@ -239,12 +237,11 @@ echo $config-&gt;foo . ',';
 $upperProcessor-&gt;process($config);
 echo $config-&gt;foo;</code></pre>
 
-
 <p>This example returns the output: <code>bar,BAR</code>.</p>
 <h2 id="zend92config92processor92queue">Zend\Config\Processor\Queue</h2>
 <h3 id="using-zend92config92processor92queue">Using Zend\Config\Processor\Queue</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Queue</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Filter\StringToLower;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Filter\StringToLower;
 use Zend\Filter\StringToUpper;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Processor\Queue;
@@ -265,13 +262,12 @@ $queue-&gt;process($config);
 
 echo $config-&gt;foo;</code></pre>
 
-
 <p>This example returns the output: <code>bar</code>. The filters in the queue are applied in
 <em>FIFO</em> (First In, First Out) order .</p>
 <h2 id="zend92config92processor92token">Zend\Config\Processor\Token</h2>
 <h3 id="using-zend92config92processor92token">Using Zend\Config\Processor\Token</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Token</code>:</p>
-<pre class="codehilite"><code class="language-php">// Provide the second parameter as boolean true to allow modifications:
+<pre class="codehilite"><code class="language-php linenums">// Provide the second parameter as boolean true to allow modifications:
 $config = new Config(['foo' =&gt; 'Value is TOKEN'], true);
 $processor = new TokenProcessor();
 
@@ -280,12 +276,11 @@ echo $config-&gt;foo . ',';
 $processor-&gt;process($config);
 echo $config-&gt;foo;</code></pre>
 
-
 <p>This example returns the output: <code>Value is TOKEN,Value is bar</code>.</p>
 <h2 id="zend92config92processor92translator">Zend\Config\Processor\Translator</h2>
 <h3 id="using-zend92config92processor92translator">Using Zend\Config\Processor\Translator</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Translator</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Config\Config;
 use Zend\Config\Processor\Translator as TranslatorProcessor;
 use Zend\I18n\Translator\Translator;
 
@@ -309,7 +304,6 @@ echo &quot;English: {$config-&gt;animal}, &quot;;
 $processor-&gt;process($config);
 echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre>
 
-
 <p>This example returns the output: <code>English: dog,Italian: cane</code>.</p>
 
 <hr />
@@ -330,49 +324,13 @@ echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre>
     </div>
     <!-- content:end -->
 
-    <div id="footerwrap">
-    <div class="container">
-        <div class="row site-map">
-            <div class="col-lg-3">
-              <p>
-                <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
-                <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
-                <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
-                <a href="https://apigility.org">apigility.org</a><br />
-              </p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-12 centered">
-                <a class="back-to-top" href="#page-top"><i class="fa fa-chevron-circle-up fa-4" aria-hidden="true"></i></a>
-            </div>
-        </div>
-
-        <div class="spacing"></div>
-
-        <div class="row">
-            <div class="col-lg-8">
-                <h4>Copyright</h4>
-                <div class="hline-w"></div>
-
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
-            </div>
-
-            <div class="col-lg-4">
-                <h4>Contacts</h4>
-                <div class="hline-w"></div>
-                <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
-                    <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
-                    <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
 
     <script src="../js/jquery-1.10.2.min.js"></script>
     <script src="../js/bootstrap-3.0.3.min.js"></script>
@@ -412,7 +370,7 @@ echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="http://framework.zend.com/images/logos/zf-logo-mark.png" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -517,7 +475,7 @@ echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre>
     // Fetch the component list and display it.
     function loadComponentList () {
       $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
+        url: "//zendframework.github.io/zf-mkdoc-theme/scripts/zf-component-list.json",
         dataType: "text json",
         success: parseComponentList,
         error: function (e) {
