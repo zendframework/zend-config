@@ -324,7 +324,7 @@ class Config implements Countable, Iterator, ArrayAccess
      * - Items in $merge with STRING keys will overwrite current values.
      *
      * @param  Config $merge
-     * @return Config
+     * @return self
      */
     public function merge(Config $merge)
     {

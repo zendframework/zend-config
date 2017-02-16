@@ -49,7 +49,7 @@ class Constant extends Token implements ProcessorInterface
      * Should we use only user-defined constants?
      *
      * @param  bool $userOnly
-     * @return Constant
+     * @return self
      */
     public function setUserOnly($userOnly)
     {
