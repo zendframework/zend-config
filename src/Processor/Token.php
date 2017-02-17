@@ -231,7 +231,7 @@ class Token implements ProcessorInterface
      *
      * @throws Exception\InvalidArgumentException if the provided value is a read-only {@see Config}
      */
-    private function doProcess($value, array $replacements)
+    protected function doProcess($value, array $replacements)
     {
         if ($value instanceof Config) {
             if ($value->isReadOnly()) {

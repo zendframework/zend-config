@@ -79,4 +79,42 @@ class Constant extends Token implements ProcessorInterface
     {
         return $this->tokens;
     }
+
+    /**
+     * Override processing of individual value.
+     *
+     * If the value is a string and evaluates to a class constant, returns
+     * the class constant value; otherwise, delegates to the parent.
+     *
+     * @param mixed $value
+     * @param array $replacements
+     * @return mixed
+     */
+    protected function doProcess($value, array $replacements)
+    {
+        if (! is_string($value)) {
+            return parent::doProcess($value, $replacements);
+        }
+
+        if (false === strpos($value, '::')) {
+            return parent::doProcess($value, $replacements);
+        }
+
+        // Handle class constants
+        if (defined($value)) {
+            return constant($value);
+        }
+
+        // Handle ::class notation
+        if (! preg_match('/::class$/', $value)) {
+            return parent::doProcess($value, $replacements);
+        }
+
+        $class = substr($value, 0, strlen($value) - 7);
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        return parent::doProcess($value, $replacements);
+    }
 }
