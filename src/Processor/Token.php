@@ -21,6 +21,13 @@ class Token implements ProcessorInterface
     protected $prefix = '';
 
     /**
+     * Whether or not to process keys as well as values.
+     *
+     * @var bool
+     */
+    protected $processKeys = false;
+
+    /**
      * Token suffix.
      *
      * @var string
@@ -171,6 +178,16 @@ class Token implements ProcessorInterface
     }
 
     /**
+     * Enable processing keys as well as values.
+     *
+     * @return void
+     */
+    public function enableKeyProcessing()
+    {
+        $this->processKeys = true;
+    }
+
+    /**
      * Build replacement map
      *
      * @return array
@@ -239,8 +256,13 @@ class Token implements ProcessorInterface
             }
 
             foreach ($value as $key => $val) {
-                $key = $this->doProcess($key, $replacements);
-                $value->$key = $this->doProcess($val, $replacements);
+                $newKey = $this->processKeys ? $this->doProcess($key, $replacements) : $key;
+                $value->$newKey = $this->doProcess($val, $replacements);
+
+                // If the processed key differs from the original, remove the original
+                if ($newKey !== $key) {
+                    unset($value->$key);
+                }
             }
 
             return $value;

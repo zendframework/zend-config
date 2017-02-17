@@ -15,71 +15,69 @@ class ConstantTest extends TestCase
 {
     const CONFIG_TEST = 'config';
 
-    public function testCanResolveClassConstants()
-    {
-        $key = __CLASS__ . '::CONFIG_TEST';
-        $config = new Config([
-            'test' => __CLASS__ . '::CONFIG_TEST',
-        ], true);
-
-        $processor = new ConstantProcessor();
-        $processor->process($config);
-
-        $this->assertEquals(self::CONFIG_TEST, $config->get('test'));
-    }
-
-    public function testCanResolveClassPseudoConstant()
-    {
-        $key = __CLASS__ . '::CONFIG_TEST';
-        $config = new Config([
-            'test' => __CLASS__ . '::class',
-        ], true);
-
-        $processor = new ConstantProcessor();
-        $processor->process($config);
-
-        $this->assertEquals(self::class, $config->get('test'));
-    }
-
-    public function testCanProcessConstantValuesInKeys()
+    public function constantProvider()
     {
         if (! defined('ZEND_CONFIG_PROCESSOR_CONSTANT_TEST')) {
             define('ZEND_CONFIG_PROCESSOR_CONSTANT_TEST', 'test-key');
         }
 
-        $config = new Config([
-            'ZEND_CONFIG_PROCESSOR_CONSTANT_TEST' => 'value',
-        ], true);
-
-        $processor = new ConstantProcessor();
-        $processor->process($config);
-
-        $this->assertEquals('value', $config->get(ZEND_CONFIG_PROCESSOR_CONSTANT_TEST));
+        // @codingStandardsIgnoreStart
+        //                                    constantString,                        constantValue
+        return [
+            'constant'                    => ['ZEND_CONFIG_PROCESSOR_CONSTANT_TEST', ZEND_CONFIG_PROCESSOR_CONSTANT_TEST],
+            'class-constant'              => [__CLASS__ . '::CONFIG_TEST',           self::CONFIG_TEST],
+            'class-pseudo-constant'       => [__CLASS__ . '::class',                 self::class],
+            'class-pseudo-constant-upper' => [__CLASS__ . '::CLASS',                 self::class],
+        ];
+        // @codingStandardsIgnoreEnd
     }
 
-    public function testCanProcessClassConstantValuesInKeys()
+    /**
+     * @dataProvider constantProvider
+     *
+     * @param string $constantString
+     * @param string $constantValue
+     */
+    public function testCanResolveConstantValues($constantString, $constantValue)
     {
-        $key = __CLASS__ . '::CONFIG_TEST';
-        $config = new Config([
-            $key => 'value',
-        ], true);
+        $config = new Config(['test' => $constantString], true);
 
         $processor = new ConstantProcessor();
         $processor->process($config);
 
-        $this->assertEquals('value', $config->get(self::CONFIG_TEST));
+        $this->assertEquals($constantValue, $config->get('test'));
     }
 
-    public function testCanProcessPseudoClassConstantValuesInKeys()
+    /**
+     * @dataProvider constantProvider
+     *
+     * @param string $constantString
+     * @param string $constantValue
+     */
+    public function testWillNotProcessConstantValuesInKeysByDefault($constantString, $constantValue)
     {
-        $key = __CLASS__ . '::class';
-        $config = new Config([
-            $key => 'value',
-        ], true);
-
+        $config = new Config([$constantString => 'value'], true);
         $processor = new ConstantProcessor();
         $processor->process($config);
 
-        $this->assertEquals('value', $config->get(self::class));
+        $this->assertNotEquals('value', $config->get($constantValue));
+        $this->assertEquals('value', $config->get($constantString));
+    }
+
+    /**
+     * @dataProvider constantProvider
+     *
+     * @param string $constantString
+     * @param string $constantValue
+     */
+    public function testCanProcessConstantValuesInKeys($constantString, $constantValue)
+    {
+        $config = new Config([$constantString => 'value'], true);
+        $processor = new ConstantProcessor();
+        $processor->enableKeyProcessing();
+        $processor->process($config);
+
+        $this->assertEquals('value', $config->get($constantValue));
+        $this->assertNotEquals('value', $config->get($constantString));
     }
 }

@@ -106,7 +106,7 @@ class Constant extends Token implements ProcessorInterface
         }
 
         // Handle ::class notation
-        if (! preg_match('/::class$/', $value)) {
+        if (! preg_match('/::class$/i', $value)) {
             return parent::doProcess($value, $replacements);
         }
 
