@@ -239,6 +239,7 @@ class Token implements ProcessorInterface
             }
 
             foreach ($value as $key => $val) {
+                $key = $this->doProcess($key, $replacements);
                 $value->$key = $this->doProcess($val, $replacements);
             }
 
