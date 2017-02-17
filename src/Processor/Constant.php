@@ -115,6 +115,10 @@ class Constant extends Token implements ProcessorInterface
             return $class;
         }
 
-        return parent::doProcess($value, $replacements);
+        // While we've matched ::class, the class does not exist, and PHP will
+        // raise an error if you try to define a constant using that notation.
+        // As such, we have something that cannot possibly be a constant, so we
+        // can safely return the value verbatim.
+        return $value;
     }
 }
