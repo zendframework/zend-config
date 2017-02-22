@@ -21,7 +21,7 @@ interface ReaderInterface
      * Read from a string and create an array
      *
      * @param  string $string
-     * @return array|bool
+     * @return array|string
      */
     public function fromString($string);
 }

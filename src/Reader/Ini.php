@@ -88,7 +88,7 @@ class Ini implements ReaderInterface
      * fromString(): defined by Reader interface.
      *
      * @param  string $string
-     * @return array|bool
+     * @return array
      * @throws Exception\RuntimeException
      */
     public function fromString($string)
