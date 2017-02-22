@@ -83,7 +83,7 @@ class Xml implements ReaderInterface
      *
      * @see    ReaderInterface::fromString()
      * @param  string $string
-     * @return array|bool
+     * @return array
      * @throws Exception\RuntimeException
      */
     public function fromString($string)
