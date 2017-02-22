@@ -6,25 +6,14 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#37](https://github.com/zendframework/zend-config/pull/37) adds a new method,
+  `enableKeyProcessing()`, and constructor argument, `$enableKeyProcessing =
+  false`,  to each of the `Token` and `Constant` processors. These allow enabling
+  processing of tokens and/or constants encountered in configuration key values.
 
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 3.0.1 - TBD
-
-### Added
-
-- Nothing.
+- [#37](https://github.com/zendframework/zend-config/pull/37) adds the ability
+  for the `Constant` processor to process class constants, including the
+  `::class` pseudo-constant.
 
 ### Deprecated
 

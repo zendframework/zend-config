@@ -21,6 +21,13 @@ class Token implements ProcessorInterface
     protected $prefix = '';
 
     /**
+     * Whether or not to process keys as well as values.
+     *
+     * @var bool
+     */
+    protected $processKeys = false;
+
+    /**
      * Token suffix.
      *
      * @var string
@@ -49,12 +56,17 @@ class Token implements ProcessorInterface
      *     value to replace it with
      * @param string $prefix
      * @param string $suffix
+     * @param bool $enableKeyProcessing Whether or not to enable processing of
+     *     token values in configuration keys; defaults to false.
      */
-    public function __construct($tokens = [], $prefix = '', $suffix = '')
+    public function __construct($tokens = [], $prefix = '', $suffix = '', $enableKeyProcessing = false)
     {
         $this->setTokens($tokens);
-        $this->setPrefix($prefix);
-        $this->setSuffix($suffix);
+        $this->setPrefix((string) $prefix);
+        $this->setSuffix((string) $suffix);
+        if (true === $enableKeyProcessing) {
+            $this->enableKeyProcessing();
+        }
     }
 
     /**
@@ -171,6 +183,16 @@ class Token implements ProcessorInterface
     }
 
     /**
+     * Enable processing keys as well as values.
+     *
+     * @return void
+     */
+    public function enableKeyProcessing()
+    {
+        $this->processKeys = true;
+    }
+
+    /**
      * Build replacement map
      *
      * @return array
@@ -231,7 +253,7 @@ class Token implements ProcessorInterface
      *
      * @throws Exception\InvalidArgumentException if the provided value is a read-only {@see Config}
      */
-    private function doProcess($value, array $replacements)
+    protected function doProcess($value, array $replacements)
     {
         if ($value instanceof Config) {
             if ($value->isReadOnly()) {
@@ -239,7 +261,13 @@ class Token implements ProcessorInterface
             }
 
             foreach ($value as $key => $val) {
-                $value->$key = $this->doProcess($val, $replacements);
+                $newKey = $this->processKeys ? $this->doProcess($key, $replacements) : $key;
+                $value->$newKey = $this->doProcess($val, $replacements);
+
+                // If the processed key differs from the original, remove the original
+                if ($newKey !== $key) {
+                    unset($value->$key);
+                }
             }
 
             return $value;
