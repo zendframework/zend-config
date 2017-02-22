@@ -56,12 +56,17 @@ class Token implements ProcessorInterface
      *     value to replace it with
      * @param string $prefix
      * @param string $suffix
+     * @param bool $enableKeyProcessing Whether or not to enable processing of
+     *     token values in configuration keys; defaults to false.
      */
-    public function __construct($tokens = [], $prefix = '', $suffix = '')
+    public function __construct($tokens = [], $prefix = '', $suffix = '', $enableKeyProcessing = false)
     {
         $this->setTokens($tokens);
-        $this->setPrefix($prefix);
-        $this->setSuffix($suffix);
+        $this->setPrefix((string) $prefix);
+        $this->setSuffix((string) $suffix);
+        if (true === $enableKeyProcessing) {
+            $this->enableKeyProcessing();
+        }
     }
 
     /**

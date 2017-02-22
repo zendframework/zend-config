@@ -80,4 +80,16 @@ class ConstantTest extends TestCase
         $this->assertEquals('value', $config->get($constantValue));
         $this->assertNotEquals('value', $config->get($constantString));
     }
+
+    public function testKeyProcessingDisabledByDefault()
+    {
+        $processor = new ConstantProcessor();
+        $this->assertAttributeSame(false, 'processKeys', $processor);
+    }
+
+    public function testCanEnableKeyProcessingViaConstructorArgument()
+    {
+        $processor = new ConstantProcessor(true, '', '', true);
+        $this->assertAttributeSame(true, 'processKeys', $processor);
+    }
 }
