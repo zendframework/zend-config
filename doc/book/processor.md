@@ -12,6 +12,23 @@ zend-config provides the following concrete implementations:
 - `Zend\Config\Processor\Token`: find and replace specific tokens.
 - `Zend\Config\Processor\Translator`: translate configuration values in other languages using `Zend\I18n\Translator`.
 
+> ### What gets processed?
+>
+> Typically, you will process configuration _values_. However, there are use
+> cases for supplying constant and/or token _keys_; one common one is for
+> using class-based constants as keys to avoid using magic "strings":
+>
+> ```json
+> {
+>     "Acme\\Compoment::CONFIG_KEY": {}
+> }
+> ```
+>
+> As such, as of version 3.1.0, the `Constant` and `Token` processors can
+> optionally also process the keys of the `Config` instance provided to them, by
+> calling `enableKeyProcessing()` on their instances, or passing a boolean
+> `true` value for the fourth constructor argument.
+
 ## Zend\\Config\\Processor\\Constant
 
 ### Using Zend\\Config\\Processor\\Constant
@@ -31,6 +48,18 @@ echo $config->foo;
 ```
 
 This example returns the output: `TEST_CONST,bar`.
+
+As of version 3.1.0, you can also tell the `Constant` processor to process keys:
+
+```php
+// At instantiation:
+$processor = new Zend\Config\Processor\Constant(true, '', '', true);
+
+// Or later, via a method call:
+$processor->enableKeyProcessing();
+```
+
+When enabled, any constant values found in keys will also be replaced.
 
 ## Zend\\Config\\Processor\\Filter
 
@@ -106,6 +135,18 @@ echo $config->foo;
 ```
 
 This example returns the output: `Value is TOKEN,Value is bar`.
+
+As of version 3.1.0, you can also tell the `Constant` processor to process keys:
+
+```php
+// At instantiation:
+$processor = new Zend\Config\Processor\Token($tokens, '', '', true);
+
+// Or later, via a method call:
+$processor->enableKeyProcessing();
+```
+
+When enabled, any token values found in keys will also be replaced.
 
 ## Zend\\Config\\Processor\\Translator
 
