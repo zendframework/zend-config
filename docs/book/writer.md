@@ -253,7 +253,7 @@ You can use the method `toFile()` to save the YAML data to a file.
 
 If you want to use an external YAML writer library, pass the callback function
 that will generate the YAML from the configuration when instantiating the
-writer.  For instance, to use the [Spyc](http://code.google.com/p/spyc/)
+writer.  For instance, to use the [Spyc](https://github.com/mustangostang/spyc/)
 library:
 
 ```php
