@@ -9,8 +9,8 @@ namespace ZendTest\Config;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Config\Exception;
-use Zend\Config\Writer;
 use Zend\Config\StandaloneWriterPluginManager;
+use Zend\Config\Writer;
 
 class StandaloneWriterPluginManagerTest extends TestCase
 {

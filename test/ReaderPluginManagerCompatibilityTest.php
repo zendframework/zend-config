@@ -9,8 +9,8 @@ namespace ZendTest\Config;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Config\Exception\InvalidArgumentException;
-use Zend\Config\ReaderPluginManager;
 use Zend\Config\Reader\ReaderInterface;
+use Zend\Config\ReaderPluginManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Test\CommonPluginManagerTrait;
 
