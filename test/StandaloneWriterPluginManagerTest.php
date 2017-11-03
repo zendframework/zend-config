@@ -7,7 +7,6 @@
 
 namespace ZendTest\Config;
 
-use Psr\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
 use Zend\Config\Exception;
 use Zend\Config\Writer;

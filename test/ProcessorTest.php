@@ -14,7 +14,7 @@ use Zend\Config\Processor\Token as TokenProcessor;
 use Zend\Config\Processor\Translator as TranslatorProcessor;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Processor\Constant as ConstantProcessor;
-use Zend\Config\Processor\Queue as Queue;
+use Zend\Config\Processor\Queue;
 use Zend\I18n\Exception as I18nException;
 use Zend\I18n\Translator\Translator;
 use Zend\I18n\Translator\Loader\PhpArray;
