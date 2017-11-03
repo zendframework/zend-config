@@ -295,8 +295,8 @@ class ProcessorTest extends TestCase
 
         $processor->process($config);
 
-        $this->assertSame(true, $config['trueBoolKey']);
-        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertTrue($config['trueBoolKey']);
+        $this->assertFalse($config['falseBoolKey']);
         $this->assertSame(123, $config['intKey']);
         $this->assertSame((float) 123.456, $config['floatKey']);
         $this->assertSame((double) 456.789, $config['doubleKey']);
@@ -325,7 +325,7 @@ class ProcessorTest extends TestCase
 
         $this->assertSame('R', $config['trueBoolKey']);
         $this->assertSame('barR', $config['foo']);
-        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertFalse($config['falseBoolKey']);
         $this->assertSame('R23', $config['intKey']);
         $this->assertSame('R23.456', $config['floatKey']);
         $this->assertSame('456.78R', $config['doubleKey']);
