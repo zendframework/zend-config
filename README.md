@@ -1,7 +1,7 @@
 # zend-config
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-config.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-config)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zend-config/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-config?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-config/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-config?branch=master)
 
 zend-config is designed to simplify access to configuration data within
 applications. It provides a nested object property-based user interface for
