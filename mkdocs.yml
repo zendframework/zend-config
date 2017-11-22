@@ -14,4 +14,4 @@ pages:
 site_name: zend-config
 site_description: Zend\Config
 repo_url: 'https://github.com/zendframework/zend-config'
-copyright: 'Copyright (c) 2017 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
+copyright: 'Copyright (c) 2005-2017 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
