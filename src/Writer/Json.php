@@ -8,7 +8,6 @@
 namespace Zend\Config\Writer;
 
 use Zend\Config\Exception;
-use Zend\Json\Json as JsonFormat;
 
 class Json extends AbstractWriter
 {

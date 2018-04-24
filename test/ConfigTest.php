@@ -174,7 +174,7 @@ class ConfigTest extends TestCase
     public function testCount()
     {
         $data = new Config($this->menuData1);
-        $this->assertEquals(3, count($data->button));
+        $this->assertCount(3, $data->button);
     }
 
     public function testCountAfterMerge()
@@ -367,14 +367,14 @@ class ConfigTest extends TestCase
         // config->mixed
         $this->assertInstanceOf('\Zend\Config\Config', $configA->mixed);
         $this->assertEquals('bar', $configA->mixed->foo);
-        $this->assertSame(false, $configA->mixed->{0});
-        $this->assertSame(null, $configA->mixed->{1});
+        $this->assertFalse($configA->mixed->{0});
+        $this->assertNull($configA->mixed->{1});
 
         // config->replaceAssoc
-        $this->assertSame(null, $configA->replaceAssoc);
+        $this->assertNull($configA->replaceAssoc);
 
         // config->replaceNumerical
-        $this->assertSame(true, $configA->replaceNumerical);
+        $this->assertTrue($configA->replaceNumerical);
     }
 
     public function testArrayAccess()
@@ -471,9 +471,9 @@ class ConfigTest extends TestCase
             'c' => 'c',
             ];
         $config = new Config($configData, true);
-        $this->assertEquals(count($config), 3);
+        $this->assertCount(3, $config);
         unset($config->b);
-        $this->assertEquals(count($config), 2);
+        $this->assertCount(2, $config);
     }
 
     public function testZF4107ensureCloneDoesNotKeepNestedReferences()
