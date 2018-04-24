@@ -174,6 +174,8 @@
         
             <li><a href="#zend92config92writer92ini">Zend\Config\Writer\Ini</a></li>
         
+            <li><a href="#zend92config92writer92javaproperties">Zend\Config\Writer\JavaProperties</a></li>
+        
             <li><a href="#zend92config92writer92xml">Zend\Config\Writer\Xml</a></li>
         
             <li><a href="#zend92config92writer92phparray">Zend\Config\Writer\PhpArray</a></li>
@@ -215,12 +217,13 @@
 <code>Zend\Config\Config</code> instance, or any <code>Traversable</code> object. <code>Zend\Config\Writer</code>
 is itself only an interface that defining the methods <code>toFile()</code> and
 <code>toString()</code>.</p>
-<p>We have five writers implementing the interface:</p>
+<p>We have six writers implementing the interface:</p>
 <ul>
 <li><code>Zend\Config\Writer\Ini</code></li>
-<li><code>Zend\Config\Writer\Xml</code></li>
-<li><code>Zend\Config\Writer\PhpArray</code></li>
+<li><code>Zend\Config\Writer\JavaProperties</code></li>
 <li><code>Zend\Config\Writer\Json</code></li>
+<li><code>Zend\Config\Writer\PhpArray</code></li>
+<li><code>Zend\Config\Writer\Xml</code></li>
 <li><code>Zend\Config\Writer\Yaml</code></li>
 </ul>
 <h2 id="zend92config92writer92ini">Zend\Config\Writer\Ini</h2>
@@ -263,6 +266,50 @@ database.params.password = &quot;secret&quot;
 database.params.dbname = &quot;dbproduction&quot;</code></pre>
 
 <p>You can use the method <code>toFile()</code> to store the INI data to a file instead.</p>
+<h2 id="zend92config92writer92javaproperties">Zend\Config\Writer\JavaProperties</h2>
+<ul>
+<li>Since 3.2.0</li>
+</ul>
+<p>The JavaProperties writer can only write single-dimensional configuration (i.e.,
+key/value pairs); this is a limitation of the JavaProperties format.</p>
+<p><code>Zend\Config\Writer\JavaProperties</code> has a single, optional constructor
+parameter, <code>delimiter</code>, which defines with which character the key/value pairs
+are separated. The default is a single colon (<code>:</code>), such as is accepted by
+<code>Zend\Config\Reader\JavaProperties</code> by default.</p>
+<h3 id="using-zend92config92writer92javaproperties">Using Zend\Config\Writer\JavaProperties</h3>
+<p>Consider the following code, creating configuration:</p>
+<pre class="codehilite"><code class="language-php">// Create the config object
+$config = new Zend\Config\Config([], true);
+
+$config-&gt;webhost             = 'www.example.com'; // use object notation
+$config['database.host']     = 'localhost';       // or array notation, for complex key names
+$config['database.username'] = 'production';
+$config['database.password'] = 'secret';
+$config['database.dbname']   = 'dbproduction';
+
+$writer = new Zend\Config\Writer\JavaProperties();
+echo $writer-&gt;toString($config);</code></pre>
+
+<p>The result of this code is the following JavaProperties string:</p>
+<pre class="codehilite"><code class="language-properties">webhost:www.example.com
+database.host:localhost
+database.username:production
+database.password:secret
+database.dbname:dbproduction</code></pre>
+
+<p>You can use the method <code>toFile()</code> to store the JavaProperties data to a file instead.</p>
+<h3 id="using-an-alternate-delimiter">Using an alternate delimiter</h3>
+<p>If you want to use an alternate delimiter, such as <code>=</code>, pass it to the
+constructor:</p>
+<pre class="codehilite"><code class="language-php">$writer = new Zend\Config\Writer\JavaProperties('=');</code></pre>
+
+<p>Using the above configuration, we would now receive:</p>
+<pre class="codehilite"><code class="language-properties">webhost=www.example.com
+database.host=localhost
+database.username=production
+database.password=secret
+database.dbname=dbproduction</code></pre>
+
 <h2 id="zend92config92writer92xml">Zend\Config\Writer\Xml</h2>
 <p><code>Zend\Config\Writer\Xml</code> can be used to generate an XML string or file.</p>
 <h3 id="using-zend92config92writer92xml">Using Zend\Config\Writer\Xml</h3>
@@ -410,7 +457,7 @@ database:
 <p>You can use the method <code>toFile()</code> to save the YAML data to a file.</p>
 <p>If you want to use an external YAML writer library, pass the callback function
 that will generate the YAML from the configuration when instantiating the
-writer.  For instance, to use the <a href="http://code.google.com/p/spyc/">Spyc</a>
+writer.  For instance, to use the <a href="https://github.com/mustangostang/spyc/">Spyc</a>
 library:</p>
 <pre class="codehilite"><code class="language-php">// include the Spyc library
 require_once 'path/to/spyc.php';

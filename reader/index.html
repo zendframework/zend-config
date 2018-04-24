@@ -429,7 +429,7 @@ echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;<
 
 <p>If you want to use an external YAML reader, you must pass a callback function to
 the class constructor.  For instance, if you want to use the
-<a href="http://code.google.com/p/spyc/">Spyc</a> library:</p>
+<a href="https://github.com/mustangostang/spyc/">Spyc</a> library:</p>
 <pre class="codehilite"><code class="language-php">// include the Spyc library
 require_once 'path/to/spyc.php';
 
@@ -464,7 +464,7 @@ using array syntax.</p>
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\JavaProperties</code>
 for loading configuration data from a JavaProperties file.</p>
 <p>Suppose we have the following JavaProperties configuration file:</p>
-<pre class="codehilite"><code class="language-ini">#comment
+<pre class="codehilite"><code class="language-properties">#comment
 !comment
 webhost:www.example.com
 database.adapter:pdo_mysql
@@ -479,6 +479,38 @@ $data   = $reader-&gt;fromFile('/path/to/config.properties');
 
 echo $data['webhost'];  // prints &quot;www.example.com&quot;
 echo $data['database.params.dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+
+<h3 id="alternate-delimiters">Alternate delimiters</h3>
+<ul>
+<li>Since 3.2.0</li>
+</ul>
+<p>By default, the <code>JavaProperties</code> reader will assume that the delimiter between
+key/value pairs is <code>:</code>. If you wish to use an alternate delimiter, pass it as
+the first argument to the constructor:</p>
+<pre class="codehilite"><code class="language-php">$reader = new JavaProperties('='); // Use = as the delimiter</code></pre>
+
+<p>When specifying the default delimiter, you can use either <code>:</code> or the constant
+<code>JavaProperties::DELIMITER_DEFAULT</code>.</p>
+<h3 id="trimming-whitespace">Trimming whitespace</h3>
+<ul>
+<li>Since 3.2.0</li>
+</ul>
+<p>By default, whitespace is considered significant in JavaProperties files,
+including trailing whitespace. If you wish to have keys and values trimmed
+during parsing, you can pass a boolean <code>true</code> value, or the constant
+<code>JavaProperties::WHITESPACE_TRIM</code>, as the second argument to the constructor:</p>
+<pre class="codehilite"><code class="language-php">$reader = new JavaProperties(
+    JavaProperties::DELIMITER_DEFAULT, // use default delimiter
+    JavaProperties::WHITESPACE_TRIM
+);</code></pre>
+
+<p>This can be useful particularly when surrounding the delimiter with whitespace:</p>
+<pre class="codehilite"><code class="language-properties">webhost = www.example.com
+database.adapter = pdo_mysql
+database.params.host = db.example.com
+database.params.username = dbuser
+database.params.password = secret
+database.params.dbname = dbproduction</code></pre>
 
 <hr />
 
