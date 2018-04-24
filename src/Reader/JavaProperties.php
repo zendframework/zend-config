@@ -1,7 +1,7 @@
 <?php
 /**
  * @see       https://github.com/zendframework/zend-config for the canonical source repository
- * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-config/blob/master/LICENSE.md New BSD License
  */
 
@@ -15,6 +15,8 @@ use Zend\Config\Exception;
 class JavaProperties implements ReaderInterface
 {
     const DELIMITER_DEFAULT = ':';
+    const WHITESPACE_TRIM = true;
+    const WHITESPACE_KEEP = false;
 
     /**
      * Directory of the Java-style properties file
@@ -28,12 +30,20 @@ class JavaProperties implements ReaderInterface
      */
     private $delimiter;
 
+    /*
+     * Whether or not to trim whitespace from discovered keys and values.
+     *
+     * @var bool
+     */
+    private $trimWhitespace;
+
     /**
      * @param string $delimiter Delimiter to use for key/value pairs; defaults
      *     to self::DELIMITER_DEFAULT (':')
+     * @param bool $trimWhitespace
      * @throws Exception\InvalidArgumentException for invalid $delimiter values.
      */
-    public function __construct($delimiter = self::DELIMITER_DEFAULT)
+    public function __construct($delimiter = self::DELIMITER_DEFAULT, $trimWhitespace = self::WHITESPACE_KEEP)
     {
         if (! is_string($delimiter) || '' === $delimiter) {
             throw new Exception\InvalidArgumentException(sprintf(
@@ -43,6 +53,7 @@ class JavaProperties implements ReaderInterface
         }
 
         $this->delimiter = $delimiter;
+        $this->trimWhitespace = (bool) $trimWhitespace;
     }
 
     /**
@@ -133,7 +144,8 @@ class JavaProperties implements ReaderInterface
             // Ignore empty lines and commented lines
             if (empty($line)
                || (! $isWaitingOtherLine && strpos($line, "#") === 0)
-               || (! $isWaitingOtherLine && strpos($line, "!") === 0)) {
+               || (! $isWaitingOtherLine && strpos($line, "!") === 0)
+            ) {
                 continue;
             }
 
@@ -152,6 +164,11 @@ class JavaProperties implements ReaderInterface
             } else {
                 $isWaitingOtherLine = false;
             }
+
+            $key = $this->trimWhitespace ? trim($key) : $key;
+            $value = $this->trimWhitespace && ! $isWaitingOtherLine
+                ? trim($value)
+                : $value;
 
             $result[$key] = stripslashes($value);
             unset($lines[$i]);
