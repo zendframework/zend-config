@@ -282,7 +282,7 @@ echo $data['database']['params']['dbname'];  // prints "dbproduction"
 
 If you want to use an external YAML reader, you must pass a callback function to
 the class constructor.  For instance, if you want to use the
-[Spyc](http://code.google.com/p/spyc/) library:
+[Spyc](https://github.com/mustangostang/spyc/) library:
 
 ```php
 // include the Spyc library

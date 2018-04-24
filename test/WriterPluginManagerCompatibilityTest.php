@@ -9,8 +9,8 @@ namespace ZendTest\Config;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Config\Exception\InvalidArgumentException;
-use Zend\Config\WriterPluginManager;
 use Zend\Config\Writer\AbstractWriter;
+use Zend\Config\WriterPluginManager;
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\Test\CommonPluginManagerTrait;
 

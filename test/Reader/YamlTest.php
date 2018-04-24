@@ -21,15 +21,19 @@ class YamlTest extends AbstractReaderTestCase
             $this->markTestSkipped('Yaml test for Zend\Config skipped');
         }
 
-        if (getenv('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE')) {
-            require_once getenv('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE');
+        if ($lib = getenv('TESTS_ZEND_CONFIG_YAML_LIB_INCLUDE')) {
+            require_once $lib;
         }
 
-        $yamlReader = explode('::', getenv('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK'));
-        if (isset($yamlReader[1])) {
-            $this->reader = new YamlReader([$yamlReader[0], $yamlReader[1]]);
+        if ($readerCalback = getenv('TESTS_ZEND_CONFIG_READER_YAML_CALLBACK')) {
+            $yamlReader = explode('::', $readerCalback);
+            if (isset($yamlReader[1])) {
+                $this->reader = new YamlReader([$yamlReader[0], $yamlReader[1]]);
+            } else {
+                $this->reader = new YamlReader([$yamlReader[0]]);
+            }
         } else {
-            $this->reader = new YamlReader([$yamlReader[0]]);
+            $this->reader = new YamlReader();
         }
     }
 

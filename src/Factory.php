@@ -8,7 +8,6 @@
 namespace Zend\Config;
 
 use Psr\Container\ContainerInterface;
-use Zend\ServiceManager\ServiceManager;
 use Zend\Stdlib\ArrayUtils;
 
 class Factory

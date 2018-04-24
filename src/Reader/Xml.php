@@ -93,7 +93,7 @@ class Xml implements ReaderInterface
         }
         $this->reader = new XMLReader();
 
-        $this->reader->xml($string, null, LIBXML_XINCLUDE);
+        $this->reader->XML($string, null, LIBXML_XINCLUDE);
 
         $this->directory = null;
 

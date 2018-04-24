@@ -7,8 +7,8 @@
 
 namespace ZendTest\Config\Reader\TestAssets;
 
-use Zend\Config\Reader\ReaderInterface;
 use Zend\Config\Exception;
+use Zend\Config\Reader\ReaderInterface;
 
 class DummyReader implements ReaderInterface
 {
