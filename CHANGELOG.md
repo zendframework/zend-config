@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.2.0 - TBD
+## 3.2.0 - 2018-04-24
 
 ### Added
 
@@ -36,24 +36,6 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Removed
 
 - [#42](https://github.com/zendframework/zend-config/pull/42) removes support for HHVM.
-
-### Fixed
-
-- Nothing.
-
-## 3.1.1 - TBD
-
-### Added
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
 
 ### Fixed
 
