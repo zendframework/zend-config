@@ -14,12 +14,36 @@ use Zend\Config\Exception;
  */
 class JavaProperties implements ReaderInterface
 {
+    const DELIMITER_DEFAULT = ':';
+
     /**
      * Directory of the Java-style properties file
      *
      * @var string
      */
     protected $directory;
+
+    /**
+     * Delimiter for key/value pairs.
+     */
+    private $delimiter;
+
+    /**
+     * @param string $delimiter Delimiter to use for key/value pairs; defaults
+     *     to self::DELIMITER_DEFAULT (':')
+     * @throws Exception\InvalidArgumentException for invalid $delimiter values.
+     */
+    public function __construct($delimiter = self::DELIMITER_DEFAULT)
+    {
+        if (! is_string($delimiter) || '' === $delimiter) {
+            throw new Exception\InvalidArgumentException(sprintf(
+                'Invalid delimiter of type "%s"; must be a non-empty string',
+                is_object($delimiter) ? get_class($delimiter) : gettype($delimiter)
+            ));
+        }
+
+        $this->delimiter = $delimiter;
+    }
 
     /**
      * fromFile(): defined by Reader interface.
@@ -99,6 +123,8 @@ class JavaProperties implements ReaderInterface
      */
     protected function parse($string)
     {
+        $delimiter = $this->delimiter;
+        $delimLength = strlen($delimiter);
         $result = [];
         $lines = explode("\n", $string);
         $key = "";
@@ -113,8 +139,8 @@ class JavaProperties implements ReaderInterface
 
             // Add a new key-value pair or append value to a previous pair
             if (! $isWaitingOtherLine) {
-                $key = substr($line, 0, strpos($line, ':'));
-                $value = substr($line, strpos($line, ':') + 1, strlen($line));
+                $key = substr($line, 0, strpos($line, $delimiter));
+                $value = substr($line, strpos($line, $delimiter) + $delimLength, strlen($line));
             } else {
                 $value .= $line;
             }

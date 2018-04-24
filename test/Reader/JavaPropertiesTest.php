@@ -76,4 +76,41 @@ ASSET;
         $this->expectExceptionMessage($expectedErrorMessage);
         $arrayJavaPropterties = $this->reader->fromString($JavaProperties);
     }
+
+    public function testAllowsSpecifyingAlternateKeyValueDelimiter()
+    {
+        $reader = new JavaProperties('=');
+
+        $arrayJavaProperties = $reader->fromFile($this->getTestAssetPath('alternate-delimiter'));
+
+        $this->assertNotEmpty($arrayJavaProperties);
+        $this->assertEquals($arrayJavaProperties['single.line'], 'test');
+        $this->assertEquals($arrayJavaProperties['multiple'], 'line test');
+    }
+
+    public function invalidDelimiters()
+    {
+        return [
+            'null'         => [null],
+            'true'         => [true],
+            'false'        => [false],
+            'zero'         => [0],
+            'int'          => [1],
+            'zero-float'   => [0.0],
+            'float'        => [1.1],
+            'empty-string' => [''],
+            'array'        => [[':']],
+            'object'       => [(object) ['delimiter' => ':']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidDelimiters
+     * @param mixed $delimiter
+     */
+    public function testInvalidDelimiterValuesResultInExceptions($delimiter)
+    {
+        $this->expectException(Exception\InvalidArgumentException::class);
+        new JavaProperties($delimiter);
+    }
 }
