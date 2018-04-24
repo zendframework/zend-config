@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#45](https://github.com/zendframework/zend-config/pull/45) adds the ability to specify an alternate key/value delimiter to
+  the JavaProperties config reader via the constructor: `$reader = new JavaProperties("=");`.
+
 - [#42](https://github.com/zendframework/zend-config/pull/42) adds support for PHP 7.1 and 7.2.
 
 ### Deprecated
