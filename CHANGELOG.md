@@ -6,6 +6,16 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#46](https://github.com/zendframework/zend-config/pull/46) adds a constructor option to the JavaProperties reader to allow
+  users to indicate keys and values from the configuration should be trimmed of whitespace:
+
+  ```php
+  $reader = new JavaProperties(
+    JavaProperties::DELIMITER_DEFAULT, // or ":"
+    JavaProperties::WHITESPACE_TRIM,   // or true; default is false
+  );
+  ```
+
 - [#45](https://github.com/zendframework/zend-config/pull/45) adds the ability to specify an alternate key/value delimiter to
   the JavaProperties config reader via the constructor: `$reader = new JavaProperties("=");`.
 
