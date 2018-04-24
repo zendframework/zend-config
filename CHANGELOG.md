@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#47](https://github.com/zendframework/zend-config/pull/47) adds `Zend\Config\Writer\JavaProperties`, a complement to
+  `Zend\Config\Reader\JavaProperties`, for writing JavaProperties files from configuration. The writer supports
+  specifying an alternate key/value delimiter (the default is ":") via the constructor.
+
 - [#46](https://github.com/zendframework/zend-config/pull/46) adds a constructor option to the JavaProperties reader to allow
   users to indicate keys and values from the configuration should be trimmed of whitespace:
 
@@ -20,6 +24,10 @@ All notable changes to this project will be documented in this file, in reverse 
   the JavaProperties config reader via the constructor: `$reader = new JavaProperties("=");`.
 
 - [#42](https://github.com/zendframework/zend-config/pull/42) adds support for PHP 7.1 and 7.2.
+
+### Changed
+
+- Nothing.
 
 ### Deprecated
 

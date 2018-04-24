@@ -5,12 +5,13 @@
 is itself only an interface that defining the methods `toFile()` and
 `toString()`.
 
-We have five writers implementing the interface:
+We have six writers implementing the interface:
 
 - `Zend\Config\Writer\Ini`
-- `Zend\Config\Writer\Xml`
-- `Zend\Config\Writer\PhpArray`
+- `Zend\Config\Writer\JavaProperties`
 - `Zend\Config\Writer\Json`
+- `Zend\Config\Writer\PhpArray`
+- `Zend\Config\Writer\Xml`
 - `Zend\Config\Writer\Yaml`
 
 ## Zend\\Config\\Writer\\Ini
@@ -64,6 +65,67 @@ database.params.dbname = "dbproduction"
 ```
 
 You can use the method `toFile()` to store the INI data to a file instead.
+
+## Zend\\Config\\Writer\\JavaProperties
+
+- Since 3.2.0
+
+The JavaProperties writer can only write single-dimensional configuration (i.e.,
+key/value pairs); this is a limitation of the JavaProperties format.
+
+`Zend\Config\Writer\JavaProperties` has a single, optional constructor
+parameter, `delimiter`, which defines with which character the key/value pairs
+are separated. The default is a single colon (`:`), such as is accepted by
+`Zend\Config\Reader\JavaProperties` by default.
+
+### Using Zend\\Config\\Writer\\JavaProperties
+
+Consider the following code, creating configuration:
+
+```php
+// Create the config object
+$config = new Zend\Config\Config([], true);
+
+$config->webhost             = 'www.example.com'; // use object notation
+$config['database.host']     = 'localhost';       // or array notation, for complex key names
+$config['database.username'] = 'production';
+$config['database.password'] = 'secret';
+$config['database.dbname']   = 'dbproduction';
+
+$writer = new Zend\Config\Writer\JavaProperties();
+echo $writer->toString($config);
+```
+
+The result of this code is the following JavaProperties string:
+
+```properties
+webhost:www.example.com
+database.host:localhost
+database.username:production
+database.password:secret
+database.dbname:dbproduction
+```
+
+You can use the method `toFile()` to store the JavaProperties data to a file instead.
+
+### Using an alternate delimiter
+
+If you want to use an alternate delimiter, such as `=`, pass it to the
+constructor:
+
+```php
+$writer = new Zend\Config\Writer\JavaProperties('=');
+```
+
+Using the above configuration, we would now receive:
+
+```properties
+webhost=www.example.com
+database.host=localhost
+database.username=production
+database.password=secret
+database.dbname=dbproduction
+```
 
 ## Zend\\Config\\Writer\\Xml
 
