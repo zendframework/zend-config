@@ -282,7 +282,7 @@ echo $data['database']['params']['dbname'];  // prints "dbproduction"
 
 If you want to use an external YAML reader, you must pass a callback function to
 the class constructor.  For instance, if you want to use the
-[Spyc](http://code.google.com/p/spyc/) library:
+[Spyc](https://github.com/mustangostang/spyc/) library:
 
 ```php
 // include the Spyc library
@@ -332,7 +332,7 @@ for loading configuration data from a JavaProperties file.
 
 Suppose we have the following JavaProperties configuration file:
 
-```ini
+```properties
 #comment
 !comment
 webhost:www.example.com
@@ -351,4 +351,46 @@ $data   = $reader->fromFile('/path/to/config.properties');
 
 echo $data['webhost'];  // prints "www.example.com"
 echo $data['database.params.dbname'];  // prints "dbproduction"
+```
+
+### Alternate delimiters
+
+- Since 3.2.0
+
+By default, the `JavaProperties` reader will assume that the delimiter between
+key/value pairs is `:`. If you wish to use an alternate delimiter, pass it as
+the first argument to the constructor:
+
+```php
+$reader = new JavaProperties('='); // Use = as the delimiter
+```
+
+When specifying the default delimiter, you can use either `:` or the constant
+`JavaProperties::DELIMITER_DEFAULT`.
+
+### Trimming whitespace
+
+- Since 3.2.0
+
+By default, whitespace is considered significant in JavaProperties files,
+including trailing whitespace. If you wish to have keys and values trimmed
+during parsing, you can pass a boolean `true` value, or the constant
+`JavaProperties::WHITESPACE_TRIM`, as the second argument to the constructor:
+
+```php
+$reader = new JavaProperties(
+    JavaProperties::DELIMITER_DEFAULT, // use default delimiter
+    JavaProperties::WHITESPACE_TRIM
+);
+```
+
+This can be useful particularly when surrounding the delimiter with whitespace:
+
+```properties
+webhost = www.example.com
+database.adapter = pdo_mysql
+database.params.host = db.example.com
+database.params.username = dbuser
+database.params.password = secret
+database.params.dbname = dbproduction
 ```

@@ -2,6 +2,45 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.2.0 - TBD
+
+### Added
+
+- [#47](https://github.com/zendframework/zend-config/pull/47) adds `Zend\Config\Writer\JavaProperties`, a complement to
+  `Zend\Config\Reader\JavaProperties`, for writing JavaProperties files from configuration. The writer supports
+  specifying an alternate key/value delimiter (the default is ":") via the constructor.
+
+- [#46](https://github.com/zendframework/zend-config/pull/46) adds a constructor option to the JavaProperties reader to allow
+  users to indicate keys and values from the configuration should be trimmed of whitespace:
+
+  ```php
+  $reader = new JavaProperties(
+    JavaProperties::DELIMITER_DEFAULT, // or ":"
+    JavaProperties::WHITESPACE_TRIM,   // or true; default is false
+  );
+  ```
+
+- [#45](https://github.com/zendframework/zend-config/pull/45) adds the ability to specify an alternate key/value delimiter to
+  the JavaProperties config reader via the constructor: `$reader = new JavaProperties("=");`.
+
+- [#42](https://github.com/zendframework/zend-config/pull/42) adds support for PHP 7.1 and 7.2.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- [#42](https://github.com/zendframework/zend-config/pull/42) removes support for HHVM.
+
+### Fixed
+
+- Nothing.
+
 ## 3.1.1 - TBD
 
 ### Added

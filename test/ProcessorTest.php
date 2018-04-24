@@ -10,17 +10,17 @@ namespace ZendTest\Config;
 use PHPUnit\Framework\TestCase;
 use Zend\Config\Config;
 use Zend\Config\Exception;
+use Zend\Config\Processor\Constant as ConstantProcessor;
+use Zend\Config\Processor\Filter as FilterProcessor;
+use Zend\Config\Processor\Queue;
 use Zend\Config\Processor\Token as TokenProcessor;
 use Zend\Config\Processor\Translator as TranslatorProcessor;
-use Zend\Config\Processor\Filter as FilterProcessor;
-use Zend\Config\Processor\Constant as ConstantProcessor;
-use Zend\Config\Processor\Queue as Queue;
-use Zend\I18n\Exception as I18nException;
-use Zend\I18n\Translator\Translator;
-use Zend\I18n\Translator\Loader\PhpArray;
+use Zend\Filter\PregReplace;
 use Zend\Filter\StringToLower;
 use Zend\Filter\StringToUpper;
-use Zend\Filter\PregReplace;
+use Zend\I18n\Exception as I18nException;
+use Zend\I18n\Translator\Loader\PhpArray;
+use Zend\I18n\Translator\Translator;
 
 /**
  * @group      Zend_Config
@@ -295,8 +295,8 @@ class ProcessorTest extends TestCase
 
         $processor->process($config);
 
-        $this->assertSame(true, $config['trueBoolKey']);
-        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertTrue($config['trueBoolKey']);
+        $this->assertFalse($config['falseBoolKey']);
         $this->assertSame(123, $config['intKey']);
         $this->assertSame((float) 123.456, $config['floatKey']);
         $this->assertSame((double) 456.789, $config['doubleKey']);
@@ -325,7 +325,7 @@ class ProcessorTest extends TestCase
 
         $this->assertSame('R', $config['trueBoolKey']);
         $this->assertSame('barR', $config['foo']);
-        $this->assertSame(false, $config['falseBoolKey']);
+        $this->assertFalse($config['falseBoolKey']);
         $this->assertSame('R23', $config['intKey']);
         $this->assertSame('R23.456', $config['floatKey']);
         $this->assertSame('456.78R', $config['doubleKey']);
