@@ -39,7 +39,7 @@ function. Please review this documentation to be aware of its specific behaviors
 >
 > ```php
 > $reader = new Zend\Config\Reader\Ini();
-> $reader-setNestSeparator('-');
+> $reader->setNestSeparator('-');
 > ```
 
 The following example illustrates basic usage of `Zend\Config\Reader\Ini` for
