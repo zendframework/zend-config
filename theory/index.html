@@ -11,7 +11,7 @@
 
     <title>Theory of Operation - zend-config</title>
 
-    <link rel="stylesheet" href="../css/styles-e3f3751b65.css">
+    <link rel="stylesheet" href="../css/styles-f773ae3616.css">
 </head>
 <body id="page-top">
 
@@ -63,63 +63,64 @@
             
             
                 <div class="nav navbar-nav navbar-collapse visible-xs-block ">
-                    <div class="subnavigation hidden-print">
-    <h4 class="subnavigation__title">
-        <a href="..">zend-config</a>
-    </h4>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">zend-config</a>
+        </h4>
 
-    <h5 class="subnavigation__subtitle">Table of Contents</h5>
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
-    <ul class="subnavigation__list">
-        
+        <ul class="subnavigation__list">
             
-                <li class="subnavigation__list-item ">
-                    <a href=".." class="subnavigation__link">zend-config</a>
-                </li>
+                
+                    <li class="subnavigation__list-item ">
+                        <a href=".." class="subnavigation__link">zend-config</a>
+                    </li>
+                
             
-        
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                    </li>
+                
             
-                <li class="subnavigation__list-item ">
-                    <a href="../intro/" class="subnavigation__link">Introduction</a>
-                </li>
+                
+                    <li class="subnavigation__list-item subnavigation__list-item--active">
+                        <a href="./" class="subnavigation__link">Theory of Operation</a>
+                    </li>
+                
             
-        
-            
-                <li class="subnavigation__list-item subnavigation__list-item--active">
-                    <a href="./" class="subnavigation__link">Theory of Operation</a>
-                </li>
-            
-        
-            
-                <li class="subnavigation__list-item">
-                    <span class="subnavigation__headline">Reference</span>
-                    <ul class="subnavigation__list">
-                        
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Reference</span>
+                        <ul class="subnavigation__list">
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Migration</span>
         <ul class="subnavigation__list">
@@ -133,13 +134,14 @@
         </ul>
     </li>
 
-                        
-                    </ul>
-                </li>
+                            
+                        </ul>
+                    </li>
+                
             
-        
-    </ul>
-</div>
+        </ul>
+    </div>
+
                 </div>
             
 
@@ -256,7 +258,7 @@ determine if modifications to a given <code>Zend\Config\Config</code> object are
 and the <code>setReadOnly()</code> method can be used to stop any further modifications to
 a <code>Zend\Config\Config</code> object that was created allowing modifications.</p>
 <blockquote>
-<h2 id="modifying-config-does-not-save-changes">Modifying Config does not save changes</h2>
+<h3 id="modifying-config-does-not-save-changes">Modifying Config does not save changes</h3>
 <p>It is important not to confuse such in-memory modifications with saving
 configuration data out to specific storage media. Tools for creating and
 modifying configuration data for various storage media are out of scope with
@@ -270,7 +272,7 @@ object using the <code>merge()</code> function. For example, given <code>$config
 <code>$config-&gt;merge($localConfig);</code>. The items in <code>$localConfig</code> will override any
 items with the same name in <code>$config</code>.</p>
 <blockquote>
-<h2 id="merging-requires-modifications">Merging requires modifications</h2>
+<h3 id="merging-requires-modifications">Merging requires modifications</h3>
 <p>The <code>Zend\Config\Config</code> object that is performing the merge must have been
 constructed to allow modifications, by passing <code>TRUE</code> as the second parameter
 of the constructor. The <code>setReadOnly()</code> method can then be used to prevent any
@@ -324,63 +326,64 @@ further modifications after the merge is complete.</p>
         <optgroup label="Components"></optgroup>
     </select>
 </div>
-                    <div class="subnavigation hidden-print">
-    <h4 class="subnavigation__title">
-        <a href="..">zend-config</a>
-    </h4>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">zend-config</a>
+        </h4>
 
-    <h5 class="subnavigation__subtitle">Table of Contents</h5>
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
 
-    <ul class="subnavigation__list">
-        
+        <ul class="subnavigation__list">
             
-                <li class="subnavigation__list-item ">
-                    <a href=".." class="subnavigation__link">zend-config</a>
-                </li>
+                
+                    <li class="subnavigation__list-item ">
+                        <a href=".." class="subnavigation__link">zend-config</a>
+                    </li>
+                
             
-        
+                
+                    <li class="subnavigation__list-item ">
+                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                    </li>
+                
             
-                <li class="subnavigation__list-item ">
-                    <a href="../intro/" class="subnavigation__link">Introduction</a>
-                </li>
+                
+                    <li class="subnavigation__list-item subnavigation__list-item--active">
+                        <a href="./" class="subnavigation__link">Theory of Operation</a>
+                    </li>
+                
             
-        
-            
-                <li class="subnavigation__list-item subnavigation__list-item--active">
-                    <a href="./" class="subnavigation__link">Theory of Operation</a>
-                </li>
-            
-        
-            
-                <li class="subnavigation__list-item">
-                    <span class="subnavigation__headline">Reference</span>
-                    <ul class="subnavigation__list">
-                        
+                
+                    <li class="subnavigation__list-item">
+                        <span class="subnavigation__headline">Reference</span>
+                        <ul class="subnavigation__list">
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item ">
         <a href="../factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
-                        
                             
+                                
     <li class="subnavigation__list-item">
         <span class="subnavigation__headline">Migration</span>
         <ul class="subnavigation__list">
@@ -394,13 +397,14 @@ further modifications after the merge is complete.</p>
         </ul>
     </li>
 
-                        
-                    </ul>
-                </li>
+                            
+                        </ul>
+                    </li>
+                
             
-        
-    </ul>
-</div>
+        </ul>
+    </div>
+
                 
             </div>
         </div>
@@ -463,7 +467,7 @@ further modifications after the merge is complete.</p>
         var base_url = '..',
             siteName = 'zend-config';
     </script>
-    <script src="../js/scripts-dcbafde59f.js"></script>
+    <script src="../js/scripts-8a1f0cdb13.js"></script>
         <script src="../search/require.js"></script>
         <script src="../search/search.js"></script>
 
