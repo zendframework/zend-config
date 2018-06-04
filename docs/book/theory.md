@@ -30,7 +30,7 @@ determine if modifications to a given `Zend\Config\Config` object are allowed,
 and the `setReadOnly()` method can be used to stop any further modifications to
 a `Zend\Config\Config` object that was created allowing modifications.
 
-> ## Modifying Config does not save changes
+> ### Modifying Config does not save changes
 >
 > It is important not to confuse such in-memory modifications with saving
 > configuration data out to specific storage media. Tools for creating and
@@ -45,7 +45,7 @@ object using the `merge()` function. For example, given `$config` and
 `$config->merge($localConfig);`. The items in `$localConfig` will override any
 items with the same name in `$config`.
 
-> ## Merging requires modifications
+> ### Merging requires modifications
 >
 > The `Zend\Config\Config` object that is performing the merge must have been
 > constructed to allow modifications, by passing `TRUE` as the second parameter

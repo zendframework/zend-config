@@ -6,7 +6,7 @@ array or to a `Zend\Config\Config` object. The factory has two purposes
 - Loading configuration file(s)
 - Storing a configuration file
 
-> ## Storage writes to a single file
+> ### Storage writes to a single file
 >
 > Storing the configuration always writes to a **single** file. The factory is
 > not aware of merged configuration files, and as such cannot split

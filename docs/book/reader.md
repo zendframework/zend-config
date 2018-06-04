@@ -14,7 +14,7 @@ concrete implementations of this interface are:
 `fromFile()` and `fromString()` are expected to return a PHP array containing
 the data from the specified configuration.
 
-> ## Differences from ZF1
+> ### Differences from ZF1
 >
 > The `Zend\Config\Reader` component no longer supports the following features:
 >
