@@ -35,7 +35,7 @@ class Env extends Token implements ProcessorInterface
 
     /**
      * Parse env variables
-     * 
+     *
      * @param mixed $input input
      * @return string
      */
@@ -45,6 +45,6 @@ class Env extends Token implements ProcessorInterface
         if (is_array($input)) {
             $input = getenv($input[1]);
         }
-        return preg_replace_callback($regex, array($this, 'parseEnvRecursive'), $input);
+        return preg_replace_callback($regex, [$this, 'parseEnvRecursive'], $input);
     }
 }
