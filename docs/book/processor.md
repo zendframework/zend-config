@@ -7,6 +7,7 @@ defining two methods: `process()` and `processValue()`.
 zend-config provides the following concrete implementations:
 
 - `Zend\Config\Processor\Constant`: manage PHP constant values.
+- `Zend\Config\Processor\Env`: manage PHP getenv() function values.
 - `Zend\Config\Processor\Filter`: filter the configuration data using `Zend\Filter`.
 - `Zend\Config\Processor\Queue`: manage a queue of operations to apply to configuration data.
 - `Zend\Config\Processor\Token`: find and replace specific tokens.
@@ -58,8 +59,38 @@ $processor = new Zend\Config\Processor\Constant(true, '', '', true);
 // Or later, via a method call:
 $processor->enableKeyProcessing();
 ```
-
 When enabled, any constant values found in keys will also be replaced.
+
+## Zend\\Config\\Processor\\Env
+
+### Using Zend\\Config\\Processor\\Env
+
+This example illustrates the basic usage of `Zend\Config\Processor\Env`:
+
+```php
+putenv('AMQP_PASSWORD=guest');
+
+use Zend\Config\Config;
+use Zend\Config\Factory;
+use Zend\Config\Processor\Env as EnvProcessor;
+
+$config = new Config([
+            'host' => '127.0.0.1',
+            'port' => 5672,
+            'username' => 'guest',
+            'password' => 'env(AMQP_PASSWORD)',
+            'vhost' => '/',
+        ], true);
+
+$processor = new EnvProcessor;
+$processor->process($config);
+$config->setReadOnly();
+
+echo $config->amqp->password;
+```
+
+This example returns the output: `guest`.
+
 
 ## Zend\\Config\\Processor\\Filter
 
