@@ -148,7 +148,7 @@ class Ini implements ReaderInterface
      */
     private function buildNestedSection($sections, $value)
     {
-        if (count($sections) == 0) {
+        if (! $sections) {
             return $this->processSection($value);
         }
 
