@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [Issue #55](https://github.com/zendframework/zend-config/issues/55) - Infinite loop if class is extended (under specific circumstances)
 
 ## 3.2.0 - 2018-04-24
 
