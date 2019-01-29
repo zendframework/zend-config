@@ -58,7 +58,7 @@ class Config implements Countable, Iterator, ArrayAccess
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $this->data[$key] = new static($value, $this->allowModifications);
+                $this->data[$key] = new self($value, $this->allowModifications);
             } else {
                 $this->data[$key] = $value;
             }
