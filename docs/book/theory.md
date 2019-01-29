@@ -14,6 +14,22 @@ is itself an array, then the resulting object property is created as a new
 recursively, such that a hierarchy of configuration data may be created with any
 number of levels.
 
+> ### Extending `Zend\Config\Config` class
+>
+> If you decide to extend `Zend\Config\Config` class all each property (subnode)
+> becomes the same type as the parent class. For example:
+>
+> ```php
+> class ExtendedConfig extends Zend\Config\Config
+> {
+> }
+>
+> $config = new ExtendedConfig(['node' => ['key' => 'value']]);
+>
+> echo get_class($config->node);
+> // the result of above is ExtendedConfig not Zend\Config\Config!
+> ```
+
 `Zend\Config\Config` implements the [Countable](http://php.net/manual/en/class.countable.php)
 and [Iterator](http://php.net/manual/en/class.iterator.php) interfaces in order
 to facilitate simple access to configuration data. Thus, `Zend\Config\Config`
