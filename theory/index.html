@@ -11,7 +11,7 @@
 
     <title>Theory of Operation - zend-config</title>
 
-    <link rel="stylesheet" href="../css/styles-f773ae3616.css">
+    <link rel="stylesheet" href="../css/styles-e95dab66f8.css">
 </head>
 <body id="page-top">
 
@@ -198,13 +198,19 @@
             <!-- content:begin -->
                 
                     <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="https://framework.zend.com/">Home</a></li>
-  <li><a href="https://docs.zendframework.com/">Docs</a></li>
-  <li><a href="..">zend-config</a></li>
-  
+    <li><a href="https://framework.zend.com/">Home</a></li>
+
     
-  
-  <li class="active">Theory of Operation</li>
+        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+
+        
+            <li><a href="..">zend-config</a></li>
+
+            
+
+            <li class="active">Theory of Operation</li>
+        
+    
 </ol>
 
 
@@ -216,6 +222,10 @@
         <div class="toc">
             <h6 class="toc__headline">In This Article</h6>
             <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#extending-zendconfigconfig-class" class="toc__link">Extending Zend\Config\Config class</a>
+                    </li>
                 
                     <li class="toc__entry">
                         <a href="#modifying-config-does-not-save-changes" class="toc__link">Modifying Config does not save changes</a>
@@ -243,6 +253,32 @@ is itself an array, then the resulting object property is created as a new
 <code>Zend\Config\Config</code> object, loaded with the array data. This occurs
 recursively, such that a hierarchy of configuration data may be created with any
 number of levels.</p>
+<blockquote>
+<h3 id="extending-zendconfigconfig-class">Extending <code>Zend\Config\Config</code> class</h3>
+<p>If you decide to extend <code>Zend\Config\Config</code> class, each property (subnode)
+becomes the same type as the parent class. For example:</p>
+<pre class="codehilite"><code class="language-php">class ExtendedConfig extends Zend\Config\Config
+{
+}
+
+$config = new ExtendedConfig(['node' =&gt; ['key' =&gt; 'value']]);
+
+echo get_class($config-&gt;node);
+// the result of above is ExtendedConfig not Zend\Config\Config!</code></pre>
+
+<p>This casting occurs in the constructor, which uses the construct <code>new
+static()</code> for any array subvalues it encounters when traversing the provided
+array. As such, we DO NOT RECOMMEND extending the constructor; instead, create
+a <a href="http://verraes.net/2014/06/named-constructors-in-php/">named constructor</a>:</p>
+<pre class="codehilite"><code class="language-php">class ExtendedConfig extends Zend\Config\Config
+{
+    public static function createWithDefaults()
+    {
+        return new self([ /* ... */ ]);
+    }
+}</code></pre>
+
+</blockquote>
 <p><code>Zend\Config\Config</code> implements the <a href="http://php.net/manual/en/class.countable.php">Countable</a>
 and <a href="http://php.net/manual/en/class.iterator.php">Iterator</a> interfaces in order
 to facilitate simple access to configuration data. Thus, <code>Zend\Config\Config</code>
@@ -305,14 +341,16 @@ further modifications after the merge is complete.</p>
 </nav>
 
 
-<div class="help-wanted">
-    <p>
-        Found a mistake or want to contribute to the documentation?
-        <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/theory.md" target="_blank" class="help-wanted__link">
-            Edit this page on GitHub!
-        </a>
-    </p>
-</div>
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/theory.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
                 
             <!-- content:end -->
             </div>
@@ -457,6 +495,15 @@ further modifications after the merge is complete.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
+                    <li class="support__list-item">
+                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -467,7 +514,7 @@ further modifications after the merge is complete.</p>
         var base_url = '..',
             siteName = 'zend-config';
     </script>
-    <script src="../js/scripts-5141b2abfe.js"></script>
+    <script src="../js/scripts-a978f1ec1a.js"></script>
         <script src="../search/require.js"></script>
         <script src="../search/search.js"></script>
 
