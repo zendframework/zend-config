@@ -639,4 +639,15 @@ class ConfigTest extends TestCase
         $configA->merge($configB); // merge B onto A
         $this->assertEquals($mergeResult, $configA->toArray());
     }
+
+    public function testExtendedConfigHasSubnodesTheSameType()
+    {
+        $config = new TestAssets\ExtendedConfig([
+            'node' => [
+                'key' => 'value',
+            ],
+        ]);
+
+        $this->assertInstanceOf(TestAssets\ExtendedConfig::class, $config->node);
+    }
 }
