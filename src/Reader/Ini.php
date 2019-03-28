@@ -29,6 +29,14 @@ class Ini implements ReaderInterface
     protected $directory;
 
     /**
+     * Flag which determines whether sections are processed or not.
+     *
+     * @see https://www.php.net/parse_ini_file
+     * @var bool
+     */
+    protected $processSections = true;
+
+    /**
      * Set nest separator.
      *
      * @param  string $separator
@@ -48,6 +56,28 @@ class Ini implements ReaderInterface
     public function getNestSeparator()
     {
         return $this->nestSeparator;
+    }
+
+    /**
+     * Sets process sections
+     *
+     * @param bool $processSections
+     * @return $this
+     */
+    public function setProcessSections($processSections)
+    {
+        $this->processSections = (bool) $processSections;
+        return $this;
+    }
+
+    /**
+     * Get process sections
+     *
+     * @return bool
+     */
+    public function getProcessSections()
+    {
+        return $this->processSections;
     }
 
     /**
@@ -78,7 +108,7 @@ class Ini implements ReaderInterface
             },
             E_WARNING
         );
-        $ini = parse_ini_file($filename, true);
+        $ini = parse_ini_file($filename, $this->getProcessSections());
         restore_error_handler();
 
         return $this->process($ini);
@@ -107,7 +137,7 @@ class Ini implements ReaderInterface
             },
             E_WARNING
         );
-        $ini = parse_ini_string($string, true);
+        $ini = parse_ini_string($string, $this->getProcessSections());
         restore_error_handler();
 
         return $this->process($ini);

@@ -42,6 +42,17 @@ function. Please review this documentation to be aware of its specific behaviors
 > $reader->setNestSeparator('-');
 > ```
 
+> ### Process Sections
+>
+> By default, the INI reader executes `parse_ini_file()`  with the optional parameter `$process_sections` being `true`. The result is a multidimensional array, with the section names and settings included.
+>
+> To merge sections, set the parameter via `setProcessSections()` to `false` as follows.
+>
+> ```php
+> $reader = new Zend\Config\Reader\Ini();
+> $reader->setProcessSections(false);
+> ```
+
 The following example illustrates basic usage of `Zend\Config\Reader\Ini` for
 loading configuration data from an INI file. In this example, configuration data
 for both a production system and for a staging system exists.

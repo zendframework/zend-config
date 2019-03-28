@@ -95,4 +95,26 @@ ECS;
         $this->assertEquals($arrayIni['bla']['foo']['baz'][0], 'foobaz1');
         $this->assertEquals($arrayIni['bla']['foo']['baz'][1], 'foobaz2');
     }
+
+    public function testFromFileParseSections()
+    {
+        $arrayIni = $this->reader->fromFile($this->getTestAssetPath('sections'));
+
+        $this->assertEquals($arrayIni['production']['env'], 'production');
+        $this->assertEquals($arrayIni['production']['production_key'], 'foo');
+        $this->assertEquals($arrayIni['staging : production']['env'], 'staging');
+        $this->assertEquals($arrayIni['staging : production']['staging_key'], 'bar');
+    }
+
+    public function testFromFileDontParseSections()
+    {
+        $reader = $this->reader;
+        $reader->setProcessSections(false);
+
+        $arrayIni = $reader->fromFile($this->getTestAssetPath('sections'));
+
+        $this->assertEquals($arrayIni['env'], 'staging');
+        $this->assertEquals($arrayIni['production_key'], 'foo');
+        $this->assertEquals($arrayIni['staging_key'], 'bar');
+    }
 }
