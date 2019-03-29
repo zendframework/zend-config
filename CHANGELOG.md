@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#58](https://github.com/zendframework/zend-config/pull/58) adds `$processSections` to INI reader, allowing control over
+    whether sections should be parsed or not
 
 ### Changed
 
