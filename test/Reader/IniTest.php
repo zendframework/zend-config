@@ -117,4 +117,46 @@ ECS;
         $this->assertEquals('foo', $arrayIni['production_key']);
         $this->assertEquals('bar', $arrayIni['staging_key']);
     }
+
+    public function testFromStringParseSections()
+    {
+        $ini = <<<ECS
+[production]
+env='production'
+production_key='foo'
+
+[staging : production]
+env='staging'
+staging_key='bar'
+
+ECS;
+        $arrayIni = $this->reader->fromString($ini);
+
+        $this->assertEquals('production', $arrayIni['production']['env']);
+        $this->assertEquals('foo', $arrayIni['production']['production_key']);
+        $this->assertEquals('staging', $arrayIni['staging : production']['env']);
+        $this->assertEquals('bar', $arrayIni['staging : production']['staging_key']);
+    }
+
+    public function testFromStringDontParseSections()
+    {
+        $ini = <<<ECS
+[production]
+env='production'
+production_key='foo'
+
+[staging : production]
+env='staging'
+staging_key='bar'
+
+ECS;
+        $reader = $this->reader;
+        $reader->setProcessSections(false);
+
+        $arrayIni = $reader->fromString($ini);
+
+        $this->assertEquals('staging', $arrayIni['env']);
+        $this->assertEquals('foo', $arrayIni['production_key']);
+        $this->assertEquals('bar', $arrayIni['staging_key']);
+    }
 }
