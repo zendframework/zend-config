@@ -48,9 +48,9 @@ bar[]= "foo"
 ECS;
 
         $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['test'], 'foo');
-        $this->assertEquals($arrayIni['bar'][0], 'baz');
-        $this->assertEquals($arrayIni['bar'][1], 'foo');
+        $this->assertEquals('foo', $arrayIni['test']);
+        $this->assertEquals('baz', $arrayIni['bar'][0]);
+        $this->assertEquals('foo', $arrayIni['bar'][1]);
     }
 
     public function testInvalidString()
@@ -74,9 +74,9 @@ bar[]= "foo"
 ECS;
 
         $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['all']['test'], 'foo');
-        $this->assertEquals($arrayIni['all']['bar'][0], 'baz');
-        $this->assertEquals($arrayIni['all']['bar'][1], 'foo');
+        $this->assertEquals('foo', $arrayIni['all']['test']);
+        $this->assertEquals('baz', $arrayIni['all']['bar'][0]);
+        $this->assertEquals('foo', $arrayIni['all']['bar'][1]);
     }
 
     public function testFromStringNested()
@@ -90,20 +90,20 @@ bla.foo.baz[] = foobaz2
 ECS;
 
         $arrayIni = $this->reader->fromString($ini);
-        $this->assertEquals($arrayIni['bla']['foo']['bar'], 'foobar');
-        $this->assertEquals($arrayIni['bla']['foobar'][0], 'foobarArray');
-        $this->assertEquals($arrayIni['bla']['foo']['baz'][0], 'foobaz1');
-        $this->assertEquals($arrayIni['bla']['foo']['baz'][1], 'foobaz2');
+        $this->assertEquals('foobar', $arrayIni['bla']['foo']['bar']);
+        $this->assertEquals('foobarArray', $arrayIni['bla']['foobar'][0]);
+        $this->assertEquals('foobaz1', $arrayIni['bla']['foo']['baz'][0]);
+        $this->assertEquals('foobaz2', $arrayIni['bla']['foo']['baz'][1]);
     }
 
     public function testFromFileParseSections()
     {
         $arrayIni = $this->reader->fromFile($this->getTestAssetPath('sections'));
 
-        $this->assertEquals($arrayIni['production']['env'], 'production');
-        $this->assertEquals($arrayIni['production']['production_key'], 'foo');
-        $this->assertEquals($arrayIni['staging : production']['env'], 'staging');
-        $this->assertEquals($arrayIni['staging : production']['staging_key'], 'bar');
+        $this->assertEquals('production', $arrayIni['production']['env']);
+        $this->assertEquals('foo', $arrayIni['production']['production_key']);
+        $this->assertEquals('staging', $arrayIni['staging : production']['env']);
+        $this->assertEquals('bar', $arrayIni['staging : production']['staging_key']);
     }
 
     public function testFromFileDontParseSections()
@@ -113,8 +113,8 @@ ECS;
 
         $arrayIni = $reader->fromFile($this->getTestAssetPath('sections'));
 
-        $this->assertEquals($arrayIni['env'], 'staging');
-        $this->assertEquals($arrayIni['production_key'], 'foo');
-        $this->assertEquals($arrayIni['staging_key'], 'bar');
+        $this->assertEquals('staging', $arrayIni['env']);
+        $this->assertEquals('foo', $arrayIni['production_key']);
+        $this->assertEquals('bar', $arrayIni['staging_key']);
     }
 }
