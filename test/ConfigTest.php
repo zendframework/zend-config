@@ -664,4 +664,26 @@ class ConfigTest extends TestCase
 
         $this->assertInstanceOf(TestAssets\ExtendedConfig::class, $config->node);
     }
+
+    /**
+     * @see https://github.com/zendframework/zend-config/pull/59
+     */
+    public function testAllowModificationByReference()
+    {
+        $config = new Config($this->all, true);
+
+        $closure = function (&$property, $value) {
+            if ($property === null) {
+                return;
+            }
+
+            $property = $value;
+        };
+
+        $closure($config['db']['pass'], 'secret');
+        $closure($config['db']['pass2'], 'secret');
+
+        $this->assertEquals('secret', $config['db']['pass']);
+        $this->assertNull($config['db']['pass2']);
+    }
 }
