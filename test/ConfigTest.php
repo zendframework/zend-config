@@ -18,6 +18,20 @@ class ConfigTest extends TestCase
 {
     protected $iniFileConfig;
     protected $iniFileNested;
+    /** @var array */
+    private $all;
+    /** @var array */
+    private $numericData;
+    /** @var array */
+    private $menuData1;
+    /** @var array */
+    private $toCombineA;
+    /** @var array */
+    private $toCombineB;
+    /** @var array */
+    private $leadingdot;
+    /** @var array */
+    private $invalidkey;
 
     public function setUp()
     {
