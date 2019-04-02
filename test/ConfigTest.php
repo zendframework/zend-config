@@ -685,5 +685,8 @@ class ConfigTest extends TestCase
 
         $this->assertEquals('secret', $config['db']['pass']);
         $this->assertNull($config['db']['pass2']);
+
+        // this tests that 'pass2' key is not created
+        $this->assertEquals('not-set', $config['db']->get('pass2', 'not-set'));
     }
 }
