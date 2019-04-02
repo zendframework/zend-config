@@ -10,7 +10,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#59](https://github.com/zendframework/zend-config/pull/59)
+  `Zend\Config\Config` `offsetGet` allows reference access instead of yielding
+  Indirect modification of overloaded element of `Zend\Config\Config` has no effect
+  notice message.
 
 ### Deprecated
 

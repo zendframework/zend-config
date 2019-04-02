@@ -283,9 +283,15 @@ class Config implements Countable, Iterator, ArrayAccess
      * @param  mixed $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function &offsetGet($offset)
     {
-        return $this->__get($offset);
+        if (array_key_exists($offset, $this->data)) {
+            $value = &$this->data[$offset];
+        } else {
+            $value = null;
+        }
+
+        return $value;
     }
 
     /**
