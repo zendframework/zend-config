@@ -193,7 +193,9 @@ class Ini implements ReaderInterface
 
             if ($pieces[0] === '' || $pieces[1] === '') {
                 throw new Exception\RuntimeException(sprintf('Invalid key "%s"', $key));
-            } elseif (! isset($config[$pieces[0]])) {
+            }
+
+            if (! isset($config[$pieces[0]])) {
                 if ($pieces[0] === '0' && ! empty($config)) {
                     $config = [$pieces[0] => $config];
                 } else {
