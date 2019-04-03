@@ -154,7 +154,7 @@ echo $writer->toString($config);
 
 The result of this code is the following XML string:
 
-```markup
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <zend-config>
     <production>
@@ -251,7 +251,7 @@ echo $writer->toString($config);
 
 The result of this code is the following JSON string:
 
-```javascript
+```json
 {
   "webhost": "www.example.com",
   "database": {
