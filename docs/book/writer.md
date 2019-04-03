@@ -203,22 +203,22 @@ The result of this code is the following PHP script:
 
 ```php
 <?php
-return array (
+return [
   'production' =>
-  array (
+  [
     'webhost' => 'www.example.com',
     'database' =>
-    array (
+    [
       'params' =>
-      array (
+      [
         'host' => 'localhost',
         'username' => 'production',
         'password' => 'secret',
         'dbname' => 'dbproduction',
-      ),
-    ),
-  ),
-);
+      ],
+    ],
+  ],
+];
 ```
 
 You can use the method `toFile()` to save the PHP script to a file.
