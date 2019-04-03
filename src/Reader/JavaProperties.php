@@ -138,7 +138,7 @@ class JavaProperties implements ReaderInterface
         $delimLength = strlen($delimiter);
         $result = [];
         $lines = explode("\n", $string);
-        $key = "";
+        $key = '';
         $isWaitingOtherLine = false;
         foreach ($lines as $i => $line) {
             // Ignore empty lines and commented lines
