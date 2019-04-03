@@ -192,6 +192,6 @@ class AbstractConfigFactory implements AbstractFactoryInterface
                 return $matches[1];
             }
         }
-        return;
+        return null;
     }
 }
