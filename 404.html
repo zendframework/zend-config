@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Zend\Config">  
-    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <link rel="shortcut icon" href="//img/favicon.ico">
 
-    <title>To version 3 - zend-config - Zend Framework Docs</title>
+    <title>zend-config - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../../css/styles-f3b53f5ceb.css">
+    <link rel="stylesheet" href="//css/styles-f3b53f5ceb.css">
 </head>
 <body id="page-top">
 
@@ -31,7 +31,7 @@
             
             <span class="navbar-brand">
                 <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
-                    <img src="../../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                    <img src="//img/zend-framework-logo.svg" height="28" alt="Zend Framework">
                 </a>
             </span>
         </div>
@@ -66,7 +66,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">zend-config</a>
+            <a href="/.">zend-config</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,19 +75,19 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../.." class="subnavigation__link">zend-config</a>
+                        <a href="/." class="subnavigation__link">zend-config</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="/intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../../theory/" class="subnavigation__link">Theory of Operation</a>
+                        <a href="/theory/" class="subnavigation__link">Theory of Operation</a>
                     </li>
                 
             
@@ -98,25 +98,25 @@
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../reader/" class="subnavigation__link">Zend\Config\Reader</a>
+        <a href="/reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../writer/" class="subnavigation__link">Zend\Config\Writer</a>
+        <a href="/writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../processor/" class="subnavigation__link">Zend\Config\Processor</a>
+        <a href="/processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../factory/" class="subnavigation__link">Config Factory</a>
+        <a href="/factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
                             
@@ -126,8 +126,8 @@
         <ul class="subnavigation__list">
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">To version 3</a>
+    <li class="subnavigation__list-item ">
+        <a href="/migration/to-v3/" class="subnavigation__link">To version 3</a>
     </li>
 
             
@@ -208,113 +208,18 @@
             <div class="col-md-9 col-xs-12 content" role="main">
             <!-- content:begin -->
                 
-                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-    <li><a href="https://framework.zend.com/">Home</a></li>
 
-    
-        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-        
-            <li><a href="../..">zend-config</a></li>
-
-            
-                
-                    <li>Migration</li>
-                
-            
-                
-                    <li>Reference</li>
-                
-            
-
-            <li class="active">To version 3</li>
-        
-    
-</ol>
+<a href="/" class="btn btn-default" role="button">Go to homepage</a>
 
 
-    
-        <h2 class="chapter__headline">Migration</h2>
-    
-
-    
-    
-
-    
-    
-
-
-    <h1 id="migration-to-version-3">Migration to version 3</h1>
-<p>Version 3 is essentially fully backwards compatible with previous versions, with
-one key exception: <code>Zend\Config\Factory</code> no longer requires usage of
-zend-servicemanager for resolving plugins.</p>
-<p>The reason this is considered a backwards compatibility break is due to
-signature changes:</p>
-<ul>
-<li>
-<p><code>Factory::setReaderPluginManager()</code> now accepts a
-  <code>Psr\Container\ContainerInterface</code>, and not a <code>Zend\Config\ReaderPluginManager</code>
-  instance; <code>ReaderPluginManager</code>, however, still fulfills that typehint.</p>
-</li>
-<li>
-<p><code>Factory::getReaderPluginManager()</code> now returns a
-  <code>Psr\Container\ContainerInterface</code> &mdash; specifically, a
-  <code>Zend\Config\StandaloneReaderPluginManager</code> &mdash;  and not a
-  <code>Zend\Config\ReaderPluginManager</code> instance, by default; <code>ReaderPluginManager</code>,
-  however, still fulfills that typehint.</p>
-</li>
-<li>
-<p><code>Factory::setWriterPluginManager()</code> now accepts a
-  <code>Psr\Container\ContainerInterface</code>, and not a <code>Zend\Config\WriterPluginManager</code>
-  instance; <code>WriterPluginManager</code>, however, still fulfills that typehint.</p>
-</li>
-<li>
-<p><code>Factory::getWriterPluginManager()</code> now returns a
-  <code>Psr\Container\ContainerInterface</code> &mdash; specifically, a
-  <code>Zend\Config\StandaloneWriterPluginManager</code> &mdash;  and not a
-  <code>Zend\Config\WriterPluginManager</code> instance, by default; <code>WriterPluginManager</code>,
-  however, still fulfills that typehint.</p>
-</li>
-</ul>
-<p>If you were extending the class, you will need to update your signatures
-accordingly.</p>
-<p>This particular update means that you may use any PSR-11 container as a reader
-or writer plugin manager, and no longer require installation of
-zend-servicemanager to use the plugin manager facilities.</p>
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../factory/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/migration/to-v3.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             <!-- content:end -->
             </div>
             <div class="col-md-3 col-xs-12 sidebar">
@@ -330,7 +235,7 @@ zend-servicemanager to use the plugin manager facilities.</p>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="../..">zend-config</a>
+            <a href="/.">zend-config</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -339,19 +244,19 @@ zend-servicemanager to use the plugin manager facilities.</p>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../.." class="subnavigation__link">zend-config</a>
+                        <a href="/." class="subnavigation__link">zend-config</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="/intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../../theory/" class="subnavigation__link">Theory of Operation</a>
+                        <a href="/theory/" class="subnavigation__link">Theory of Operation</a>
                     </li>
                 
             
@@ -362,25 +267,25 @@ zend-servicemanager to use the plugin manager facilities.</p>
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../reader/" class="subnavigation__link">Zend\Config\Reader</a>
+        <a href="/reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../writer/" class="subnavigation__link">Zend\Config\Writer</a>
+        <a href="/writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../processor/" class="subnavigation__link">Zend\Config\Processor</a>
+        <a href="/processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../../factory/" class="subnavigation__link">Config Factory</a>
+        <a href="/factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
                             
@@ -390,8 +295,8 @@ zend-servicemanager to use the plugin manager facilities.</p>
         <ul class="subnavigation__list">
             
                 
-    <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">To version 3</a>
+    <li class="subnavigation__list-item ">
+        <a href="/migration/to-v3/" class="subnavigation__link">To version 3</a>
     </li>
 
             
@@ -474,11 +379,11 @@ zend-servicemanager to use the plugin manager facilities.</p>
 </footer>
 
     <script>
-        var base_url = '../..',
+        var base_url = '/',
             siteName = 'zend-config';
     </script>
-    <script src="../../js/scripts-8d7ae56abf.js"></script>
-        <script src="../../search/main.js"></script>
+    <script src="//js/scripts-8d7ae56abf.js"></script>
+        <script src="/search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
