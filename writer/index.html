@@ -12,6 +12,7 @@
     <title>Zend\Config\Writer - zend-config</title>
 
     <link rel="stylesheet" href="../css/styles-18b942728f.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
 </head>
 <body id="page-top">
 
@@ -66,7 +67,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-config</a>
+            <a href="">zend-config</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,19 +76,19 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-config</a>
+                        <a href="" class="subnavigation__link">zend-config</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../theory/" class="subnavigation__link">Theory of Operation</a>
+                        <a href="theory/" class="subnavigation__link">Theory of Operation</a>
                     </li>
                 
             
@@ -98,25 +99,25 @@
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../reader/" class="subnavigation__link">Zend\Config\Reader</a>
+        <a href="reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Zend\Config\Writer</a>
+        <a href="writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../processor/" class="subnavigation__link">Zend\Config\Processor</a>
+        <a href="processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Config Factory</a>
+        <a href="factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
                             
@@ -127,7 +128,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/to-v3/" class="subnavigation__link">To version 3</a>
+        <a href="migration/to-v3/" class="subnavigation__link">To version 3</a>
     </li>
 
             
@@ -215,7 +216,7 @@
         <li><a href="https://docs.zendframework.com/">Documentation</a></li>
 
         
-            <li><a href="..">zend-config</a></li>
+            <li><a href="">zend-config</a></li>
 
             
                 
@@ -314,11 +315,11 @@ echo $writer-&gt;toString($config);</code></pre>
 
 <p>The result of this code is the following INI string:</p>
 <pre class="codehilite"><code class="language-ini">[production]
-webhost = &quot;www.example.com&quot;
-database.params.host = &quot;localhost&quot;
-database.params.username = &quot;production&quot;
-database.params.password = &quot;secret&quot;
-database.params.dbname = &quot;dbproduction&quot;</code></pre>
+webhost = "www.example.com"
+database.params.host = "localhost"
+database.params.username = "production"
+database.params.password = "secret"
+database.params.dbname = "dbproduction"</code></pre>
 
 <p>You can use the method <code>toFile()</code> to store the INI data to a file instead.</p>
 <h2 id="zend92config92writer92javaproperties">Zend\Config\Writer\JavaProperties</h2>
@@ -385,7 +386,7 @@ $writer = new Zend\Config\Writer\Xml();
 echo $writer-&gt;toString($config);</code></pre>
 
 <p>The result of this code is the following XML string:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;zend-config&gt;
     &lt;production&gt;
         &lt;webhost&gt;www.example.com&lt;/webhost&gt;
@@ -463,13 +464,13 @@ echo $writer-&gt;toString($config);</code></pre>
 
 <p>The result of this code is the following JSON string:</p>
 <pre class="codehilite"><code class="language-javascript">{
-  &quot;webhost&quot;: &quot;www.example.com&quot;,
-  &quot;database&quot;: {
-    &quot;params&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;username&quot;: &quot;production&quot;,
-      &quot;password&quot;: &quot;secret&quot;,
-      &quot;dbname&quot;: &quot;dbproduction&quot;
+  "webhost": "www.example.com",
+  "database": {
+    "params": {
+      "host": "localhost",
+      "username": "production",
+      "password": "secret",
+      "dbname": "dbproduction"
     }
   }
 }</code></pre>
@@ -528,7 +529,7 @@ echo $writer-&gt;toString($config);</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../reader/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="reader/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -537,7 +538,7 @@ echo $writer-&gt;toString($config);</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../processor/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="processor/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -572,7 +573,7 @@ echo $writer-&gt;toString($config);</code></pre>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-config</a>
+            <a href="">zend-config</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -581,19 +582,19 @@ echo $writer-&gt;toString($config);</code></pre>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-config</a>
+                        <a href="" class="subnavigation__link">zend-config</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../theory/" class="subnavigation__link">Theory of Operation</a>
+                        <a href="theory/" class="subnavigation__link">Theory of Operation</a>
                     </li>
                 
             
@@ -604,25 +605,25 @@ echo $writer-&gt;toString($config);</code></pre>
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../reader/" class="subnavigation__link">Zend\Config\Reader</a>
+        <a href="reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Zend\Config\Writer</a>
+        <a href="writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../processor/" class="subnavigation__link">Zend\Config\Processor</a>
+        <a href="processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Config Factory</a>
+        <a href="factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
                             
@@ -633,7 +634,7 @@ echo $writer-&gt;toString($config);</code></pre>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/to-v3/" class="subnavigation__link">To version 3</a>
+        <a href="migration/to-v3/" class="subnavigation__link">To version 3</a>
     </li>
 
             
@@ -719,9 +720,8 @@ echo $writer-&gt;toString($config);</code></pre>
         var base_url = '..',
             siteName = 'zend-config';
     </script>
-    <script src="../js/scripts-0bcb0a3bb3.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+    <script src="../js/scripts-edc4cfa790.js"></script>
+        <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
@@ -750,6 +750,14 @@ echo $writer-&gt;toString($config);</code></pre>
             </div>
         </div>
     </div>
+
+<script>
+// Anchors
+anchors.options.placement = 'left';
+anchors.add(
+    '.content h1:not(.content__title), .content h2, .content > h3, .content h4, .content h5'
+);
+</script>
 
 
 

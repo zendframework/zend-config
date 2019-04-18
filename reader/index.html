@@ -12,6 +12,7 @@
     <title>Zend\Config\Reader - zend-config</title>
 
     <link rel="stylesheet" href="../css/styles-18b942728f.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
 </head>
 <body id="page-top">
 
@@ -66,7 +67,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-config</a>
+            <a href="">zend-config</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,19 +76,19 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-config</a>
+                        <a href="" class="subnavigation__link">zend-config</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../theory/" class="subnavigation__link">Theory of Operation</a>
+                        <a href="theory/" class="subnavigation__link">Theory of Operation</a>
                     </li>
                 
             
@@ -98,25 +99,25 @@
                             
                                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Zend\Config\Reader</a>
+        <a href="reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../writer/" class="subnavigation__link">Zend\Config\Writer</a>
+        <a href="writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../processor/" class="subnavigation__link">Zend\Config\Processor</a>
+        <a href="processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Config Factory</a>
+        <a href="factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
                             
@@ -127,7 +128,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/to-v3/" class="subnavigation__link">To version 3</a>
+        <a href="migration/to-v3/" class="subnavigation__link">To version 3</a>
     </li>
 
             
@@ -215,7 +216,7 @@
         <li><a href="https://docs.zendframework.com/">Documentation</a></li>
 
         
-            <li><a href="..">zend-config</a></li>
+            <li><a href="">zend-config</a></li>
 
             
                 
@@ -319,8 +320,8 @@ database.params.dbname   = 'dbproduction'</code></pre>
 <pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Ini();
 $data   = $reader-&gt;fromFile('/path/to/config.ini');
 
-echo $data['webhost'];  // prints &quot;www.example.com&quot;
-echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+echo $data['webhost'];  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
 
 <p><code>Zend\Config\Reader\Ini</code> supports a feature to include the content of a INI file
 in a specific section of another INI file. For instance, suppose we have an INI
@@ -357,16 +358,16 @@ The root element of the XML file or string is irrelevant and may be named
 arbitrarily.</p>
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\Xml</code> for loading configuration
 data from an XML file. First, our XML configuration in the file <code>config.xml</code>:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;config&gt;
     &lt;webhost&gt;www.example.com&lt;/webhost&gt;
     &lt;database&gt;
-        &lt;adapter value=&quot;pdo_mysql&quot;/&gt;
+        &lt;adapter value="pdo_mysql"/&gt;
         &lt;params&gt;
-            &lt;host value=&quot;db.example.com&quot;/&gt;
-            &lt;username value=&quot;dbuser&quot;/&gt;
-            &lt;password value=&quot;secret&quot;/&gt;
-            &lt;dbname value=&quot;dbproduction&quot;/&gt;
+            &lt;host value="db.example.com"/&gt;
+            &lt;username value="dbuser"/&gt;
+            &lt;password value="secret"/&gt;
+            &lt;dbname value="dbproduction"/&gt;
         &lt;/params&gt;
     &lt;/database&gt;
 &lt;/config&gt;</code></pre>
@@ -375,8 +376,8 @@ data from an XML file. First, our XML configuration in the file <code>config.xml
 <pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Xml();
 $data   = $reader-&gt;fromFile('/path/to/config.xml');
 
-echo $data['webhost'];  // prints &quot;www.example.com&quot;
-echo $data['database']['params']['dbname']['value'];  // prints &quot;dbproduction&quot;</code></pre>
+echo $data['webhost'];  // prints "www.example.com"
+echo $data['database']['params']['dbname']['value'];  // prints "dbproduction"</code></pre>
 
 <p><code>Zend\Config\Reader\Xml</code> utilizes PHP's <a href="http://php.net/xmlreader">XMLReader</a> class. Please
 review its documentation to be aware of its specific behaviors, which propagate to
@@ -387,7 +388,7 @@ specific XML element.  This is provided using the standard
 functionality, you must add the namespace
 <code>xmlns:xi="http://www.w3.org/2001/XInclude"</code> to the XML file.</p>
 <p>Suppose we have an XML file that contains only the database configuration:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="utf-8"?&gt;
 &lt;config&gt;
     &lt;database&gt;
         &lt;adapter&gt;pdo_mysql&lt;/adapter&gt;
@@ -401,10 +402,10 @@ functionality, you must add the namespace
 &lt;/config&gt;</code></pre>
 
 <p>We can include this configuration in another XML file using an xinclude:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;config xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;
+<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;config xmlns:xi="http://www.w3.org/2001/XInclude"&gt;
     &lt;webhost&gt;www.example.com&lt;/webhost&gt;
-    &lt;xi:include href=&quot;database.xml&quot;/&gt;
+    &lt;xi:include href="database.xml"/&gt;
 &lt;/config&gt;</code></pre>
 
 <p>The syntax to include an XML file in a specific element is <code>&lt;xi:include
@@ -416,14 +417,14 @@ JSON, and read it in the application by using an array syntax.</p>
 loading configuration data from a JSON file.</p>
 <p>Consider the following JSON configuration file:</p>
 <pre class="codehilite"><code class="language-javascript">{
-  &quot;webhost&quot;  : &quot;www.example.com&quot;,
-  &quot;database&quot; : {
-    &quot;adapter&quot; : &quot;pdo_mysql&quot;,
-    &quot;params&quot;  : {
-      &quot;host&quot;     : &quot;db.example.com&quot;,
-      &quot;username&quot; : &quot;dbuser&quot;,
-      &quot;password&quot; : &quot;secret&quot;,
-      &quot;dbname&quot;   : &quot;dbproduction&quot;
+  "webhost"  : "www.example.com",
+  "database" : {
+    "adapter" : "pdo_mysql",
+    "params"  : {
+      "host"     : "db.example.com",
+      "username" : "dbuser",
+      "password" : "secret",
+      "dbname"   : "dbproduction"
     }
   }
 }</code></pre>
@@ -432,8 +433,8 @@ loading configuration data from a JSON file.</p>
 <pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Json();
 $data   = $reader-&gt;fromFile('/path/to/config.json');
 
-echo $data['webhost'];  // prints &quot;www.example.com&quot;
-echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+echo $data['webhost'];  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
 
 <p><code>Zend\Config\Reader\Json</code> utilizes <a href="https://github.com/zendframework/zend-json">zend-json</a>.</p>
 <p>Using <code>Zend\Config\Reader\Json</code>, we can include the content of a JSON file in a
@@ -441,21 +442,21 @@ specific JSON section or element. This is provided using the special syntax
 <code>@include</code>. Suppose we have a JSON file that contains only the database
 configuration:</p>
 <pre class="codehilite"><code class="language-javascript">{
-  &quot;database&quot; : {
-    &quot;adapter&quot; : &quot;pdo_mysql&quot;,
-    &quot;params&quot;  : {
-      &quot;host&quot;     : &quot;db.example.com&quot;,
-      &quot;username&quot; : &quot;dbuser&quot;,
-      &quot;password&quot; : &quot;secret&quot;,
-      &quot;dbname&quot;   : &quot;dbproduction&quot;
+  "database" : {
+    "adapter" : "pdo_mysql",
+    "params"  : {
+      "host"     : "db.example.com",
+      "username" : "dbuser",
+      "password" : "secret",
+      "dbname"   : "dbproduction"
     }
   }
 }</code></pre>
 
 <p>Now let's include it via another configuration file:</p>
 <pre class="codehilite"><code class="language-javascript">{
-    &quot;webhost&quot;  : &quot;www.example.com&quot;,
-    &quot;@include&quot; : &quot;database.json&quot;
+    "webhost"  : "www.example.com",
+    "@include" : "database.json"
 }</code></pre>
 
 <h2 id="zend92config92reader92yaml">Zend\Config\Reader\Yaml</h2>
@@ -479,8 +480,8 @@ database:
 <pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Yaml();
 $data   = $reader-&gt;fromFile('/path/to/config.yaml');
 
-echo $data['webhost'];  // prints &quot;www.example.com&quot;
-echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+echo $data['webhost'];  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
 
 <p>If you want to use an external YAML reader, you must pass a callback function to
 the class constructor.  For instance, if you want to use the
@@ -491,8 +492,8 @@ require_once 'path/to/spyc.php';
 $reader = new Zend\Config\Reader\Yaml(['Spyc', 'YAMLLoadString']);
 $data   = $reader-&gt;fromFile('/path/to/config.yaml');
 
-echo $data['webhost'];  // prints &quot;www.example.com&quot;
-echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+echo $data['webhost'];  // prints "www.example.com"
+echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
 
 <p>You can also instantiate <code>Zend\Config\Reader\Yaml</code> without any parameters, and
 specify the YAML reader using the <code>setYamlDecoder()</code> method.</p>
@@ -532,8 +533,8 @@ database.params.dbname:dbproduction</code></pre>
 <pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\JavaProperties();
 $data   = $reader-&gt;fromFile('/path/to/config.properties');
 
-echo $data['webhost'];  // prints &quot;www.example.com&quot;
-echo $data['database.params.dbname'];  // prints &quot;dbproduction&quot;</code></pre>
+echo $data['webhost'];  // prints "www.example.com"
+echo $data['database.params.dbname'];  // prints "dbproduction"</code></pre>
 
 <h3 id="alternate-delimiters">Alternate delimiters</h3>
 <ul>
@@ -575,7 +576,7 @@ database.params.dbname = dbproduction</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../theory/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="theory/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -584,7 +585,7 @@ database.params.dbname = dbproduction</code></pre>
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../writer/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="writer/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -619,7 +620,7 @@ database.params.dbname = dbproduction</code></pre>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-config</a>
+            <a href="">zend-config</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -628,19 +629,19 @@ database.params.dbname = dbproduction</code></pre>
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-config</a>
+                        <a href="" class="subnavigation__link">zend-config</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../theory/" class="subnavigation__link">Theory of Operation</a>
+                        <a href="theory/" class="subnavigation__link">Theory of Operation</a>
                     </li>
                 
             
@@ -651,25 +652,25 @@ database.params.dbname = dbproduction</code></pre>
                             
                                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Zend\Config\Reader</a>
+        <a href="reader/" class="subnavigation__link">Zend\Config\Reader</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../writer/" class="subnavigation__link">Zend\Config\Writer</a>
+        <a href="writer/" class="subnavigation__link">Zend\Config\Writer</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../processor/" class="subnavigation__link">Zend\Config\Processor</a>
+        <a href="processor/" class="subnavigation__link">Zend\Config\Processor</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../factory/" class="subnavigation__link">Config Factory</a>
+        <a href="factory/" class="subnavigation__link">Config Factory</a>
     </li>
 
                             
@@ -680,7 +681,7 @@ database.params.dbname = dbproduction</code></pre>
             
                 
     <li class="subnavigation__list-item ">
-        <a href="../migration/to-v3/" class="subnavigation__link">To version 3</a>
+        <a href="migration/to-v3/" class="subnavigation__link">To version 3</a>
     </li>
 
             
@@ -766,9 +767,8 @@ database.params.dbname = dbproduction</code></pre>
         var base_url = '..',
             siteName = 'zend-config';
     </script>
-    <script src="../js/scripts-0bcb0a3bb3.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+    <script src="../js/scripts-edc4cfa790.js"></script>
+        <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
@@ -797,6 +797,14 @@ database.params.dbname = dbproduction</code></pre>
             </div>
         </div>
     </div>
+
+<script>
+// Anchors
+anchors.options.placement = 'left';
+anchors.add(
+    '.content h1:not(.content__title), .content h2, .content > h3, .content h4, .content h5'
+);
+</script>
 
 
 
