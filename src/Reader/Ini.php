@@ -148,7 +148,7 @@ class Ini implements ReaderInterface
      */
     private function buildNestedSection($sections, $value)
     {
-        if (count($sections) == 0) {
+        if (count($sections) === 0) {
             return $this->processSection($value);
         }
 
@@ -191,9 +191,11 @@ class Ini implements ReaderInterface
         if (strpos($key, $this->nestSeparator) !== false) {
             $pieces = explode($this->nestSeparator, $key, 2);
 
-            if (! strlen($pieces[0]) || ! strlen($pieces[1])) {
+            if ($pieces[0] === '' || $pieces[1] === '') {
                 throw new Exception\RuntimeException(sprintf('Invalid key "%s"', $key));
-            } elseif (! isset($config[$pieces[0]])) {
+            }
+
+            if (! isset($config[$pieces[0]])) {
                 if ($pieces[0] === '0' && ! empty($config)) {
                     $config = [$pieces[0] => $config];
                 } else {

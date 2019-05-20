@@ -138,7 +138,7 @@ class JavaProperties implements ReaderInterface
         $delimLength = strlen($delimiter);
         $result = [];
         $lines = explode("\n", $string);
-        $key = "";
+        $key = '';
         $isWaitingOtherLine = false;
         foreach ($lines as $i => $line) {
             // Ignore empty lines and commented lines
@@ -159,7 +159,7 @@ class JavaProperties implements ReaderInterface
 
             // Check if ends with single '\' (indicating another line is expected)
             if (strrpos($value, "\\") === strlen($value) - strlen("\\")) {
-                $value = substr($value, 0, strlen($value) - 1);
+                $value = substr($value, 0, -1);
                 $isWaitingOtherLine = true;
             } else {
                 $isWaitingOtherLine = false;
