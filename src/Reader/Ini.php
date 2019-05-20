@@ -1,7 +1,7 @@
 <?php
 /**
  * @see       https://github.com/zendframework/zend-config for the canonical source repository
- * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-config/blob/master/LICENSE.md New BSD License
  */
 
@@ -59,8 +59,11 @@ class Ini implements ReaderInterface
     }
 
     /**
-     * Sets process sections
+     * Marks whether sections should be processed.
+     * When sections are not processed,section names are stripped and section
+     * values are merged
      *
+     * @see https://www.php.net/parse_ini_file
      * @param bool $processSections
      * @return $this
      */
@@ -71,8 +74,11 @@ class Ini implements ReaderInterface
     }
 
     /**
-     * Get process sections
+     * Get if sections should be processed
+     * When sections are not processed,section names are stripped and section
+     * values are merged
      *
+     * @see https://www.php.net/parse_ini_file
      * @return bool
      */
     public function getProcessSections()
