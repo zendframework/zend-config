@@ -1,7 +1,7 @@
 <?php
 /**
  * @see       https://github.com/zendframework/zend-config for the canonical source repository
- * @copyright Copyright (c) 2005-2017 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2005-2019 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   https://github.com/zendframework/zend-config/blob/master/LICENSE.md New BSD License
  */
 
@@ -118,6 +118,23 @@ ECS;
         $this->assertEquals('bar', $arrayIni['staging_key']);
     }
 
+    public function testFromFileIgnoresNestingInSectionNamesWhenSectionsNotProcessed()
+    {
+        $reader = $this->reader;
+        $reader->setProcessSections(false);
+
+        $arrayIni = $reader->fromFile($this->getTestAssetPath('nested-sections'));
+
+        $this->assertArrayNotHasKey('environments.production', $arrayIni);
+        $this->assertArrayNotHasKey('environments.staging', $arrayIni);
+        $this->assertArrayNotHasKey('environments', $arrayIni);
+        $this->assertArrayNotHasKey('production', $arrayIni);
+        $this->assertArrayNotHasKey('staging', $arrayIni);
+        $this->assertEquals('staging', $arrayIni['env']);
+        $this->assertEquals('foo', $arrayIni['production_key']);
+        $this->assertEquals('bar', $arrayIni['staging_key']);
+    }
+
     public function testFromStringParseSections()
     {
         $ini = <<<ECS
@@ -155,6 +172,32 @@ ECS;
 
         $arrayIni = $reader->fromString($ini);
 
+        $this->assertEquals('staging', $arrayIni['env']);
+        $this->assertEquals('foo', $arrayIni['production_key']);
+        $this->assertEquals('bar', $arrayIni['staging_key']);
+    }
+
+    public function testFromStringIgnoresNestingInSectionNamesWhenSectionsNotProcessed()
+    {
+        $ini = <<<ECS
+[environments.production]
+env='production'
+production_key='foo'
+
+[environments.staging]
+env='staging'
+staging_key='bar'
+ECS;
+        $reader = $this->reader;
+        $reader->setProcessSections(false);
+
+        $arrayIni = $reader->fromString($ini);
+
+        $this->assertArrayNotHasKey('environments.production', $arrayIni);
+        $this->assertArrayNotHasKey('environments.staging', $arrayIni);
+        $this->assertArrayNotHasKey('environments', $arrayIni);
+        $this->assertArrayNotHasKey('production', $arrayIni);
+        $this->assertArrayNotHasKey('staging', $arrayIni);
         $this->assertEquals('staging', $arrayIni['env']);
         $this->assertEquals('foo', $arrayIni['production_key']);
         $this->assertEquals('bar', $arrayIni['staging_key']);
