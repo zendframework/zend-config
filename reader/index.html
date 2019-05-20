@@ -464,7 +464,7 @@ JSON, and read it in the application by using an array syntax.</p>
 <p>The following example illustrates a basic use of <code>Zend\Config\Reader\Json</code> for
 loading configuration data from a JSON file.</p>
 <p>Consider the following JSON configuration file:</p>
-<pre class="codehilite"><code class="language-javascript">{
+<pre class="codehilite"><code class="language-json">{
   "webhost"  : "www.example.com",
   "database" : {
     "adapter" : "pdo_mysql",
@@ -489,7 +489,7 @@ echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pr
 specific JSON section or element. This is provided using the special syntax
 <code>@include</code>. Suppose we have a JSON file that contains only the database
 configuration:</p>
-<pre class="codehilite"><code class="language-javascript">{
+<pre class="codehilite"><code class="language-json">{
   "database" : {
     "adapter" : "pdo_mysql",
     "params"  : {
@@ -502,7 +502,7 @@ configuration:</p>
 }</code></pre>
 
 <p>Now let's include it via another configuration file:</p>
-<pre class="codehilite"><code class="language-javascript">{
+<pre class="codehilite"><code class="language-json">{
     "webhost"  : "www.example.com",
     "@include" : "database.json"
 }</code></pre>

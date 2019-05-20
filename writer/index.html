@@ -434,7 +434,7 @@ $writer = new Zend\Config\Writer\Xml();
 echo $writer-&gt;toString($config);</code></pre>
 
 <p>The result of this code is the following XML string:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<pre class="codehilite"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;zend-config&gt;
     &lt;production&gt;
         &lt;webhost&gt;www.example.com&lt;/webhost&gt;
@@ -472,22 +472,22 @@ echo $writer-&gt;toString($config);</code></pre>
 
 <p>The result of this code is the following PHP script:</p>
 <pre class="codehilite"><code class="language-php">&lt;?php
-return array (
+return [
   'production' =&gt;
-  array (
+  [
     'webhost' =&gt; 'www.example.com',
     'database' =&gt;
-    array (
+    [
       'params' =&gt;
-      array (
+      [
         'host' =&gt; 'localhost',
         'username' =&gt; 'production',
         'password' =&gt; 'secret',
         'dbname' =&gt; 'dbproduction',
-      ),
-    ),
-  ),
-);</code></pre>
+      ],
+    ],
+  ],
+];</code></pre>
 
 <p>You can use the method <code>toFile()</code> to save the PHP script to a file.</p>
 <h2 id="zend92config92writer92json">Zend\Config\Writer\Json</h2>
@@ -511,7 +511,7 @@ $writer = new Zend\Config\Writer\Json();
 echo $writer-&gt;toString($config);</code></pre>
 
 <p>The result of this code is the following JSON string:</p>
-<pre class="codehilite"><code class="language-javascript">{
+<pre class="codehilite"><code class="language-json">{
   "webhost": "www.example.com",
   "database": {
     "params": {
