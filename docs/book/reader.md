@@ -192,7 +192,7 @@ loading configuration data from a JSON file.
 
 Consider the following JSON configuration file:
 
-```javascript
+```json
 {
   "webhost"  : "www.example.com",
   "database" : {
@@ -224,7 +224,7 @@ specific JSON section or element. This is provided using the special syntax
 `@include`. Suppose we have a JSON file that contains only the database
 configuration:
 
-```javascript
+```json
 {
   "database" : {
     "adapter" : "pdo_mysql",
@@ -240,7 +240,7 @@ configuration:
 
 Now let's include it via another configuration file:
 
-```javascript
+```json
 {
     "webhost"  : "www.example.com",
     "@include" : "database.json"

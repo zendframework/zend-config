@@ -154,7 +154,7 @@ echo $writer->toString($config);
 
 The result of this code is the following XML string:
 
-```markup
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <zend-config>
     <production>
@@ -203,22 +203,22 @@ The result of this code is the following PHP script:
 
 ```php
 <?php
-return array (
+return [
   'production' =>
-  array (
+  [
     'webhost' => 'www.example.com',
     'database' =>
-    array (
+    [
       'params' =>
-      array (
+      [
         'host' => 'localhost',
         'username' => 'production',
         'password' => 'secret',
         'dbname' => 'dbproduction',
-      ),
-    ),
-  ),
-);
+      ],
+    ],
+  ],
+];
 ```
 
 You can use the method `toFile()` to save the PHP script to a file.
@@ -251,7 +251,7 @@ echo $writer->toString($config);
 
 The result of this code is the following JSON string:
 
-```javascript
+```json
 {
   "webhost": "www.example.com",
   "database": {

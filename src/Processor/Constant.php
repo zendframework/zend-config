@@ -116,7 +116,7 @@ class Constant extends Token implements ProcessorInterface
             return parent::doProcess($value, $replacements);
         }
 
-        $class = substr($value, 0, strlen($value) - 7);
+        $class = substr($value, 0, -7);
         if (class_exists($class)) {
             return $class;
         }
