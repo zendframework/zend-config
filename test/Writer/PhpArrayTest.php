@@ -41,6 +41,16 @@ class PhpArrayTest extends AbstractWriterTestCase
 
         $configString = $this->writer->toString($config);
 
+        $object = "stdClass::__set_state(array(\n"
+            . "   'foo' => 'bar',\n"
+            . ')),';
+
+        if (version_compare(PHP_VERSION, '7.3.0') !== -1) {
+            $object = '(object) array(' . "\n"
+                . "   'foo' => 'bar',\n"
+                . '),';
+        }
+
         // build string line by line as we are trailing-whitespace sensitive.
         $expected = "<?php\n";
         $expected .= "return array(\n";
@@ -50,9 +60,7 @@ class PhpArrayTest extends AbstractWriterTestCase
         $expected .= "        1 => 'foo',\n";
         $expected .= "    ),\n";
         $expected .= "    'emptyArray' => array(),\n";
-        $expected .= "    'object' => stdClass::__set_state(array(\n";
-        $expected .= "   'foo' => 'bar',\n";
-        $expected .= ")),\n";
+        $expected .= "    'object' => " . $object . "\n";
         $expected .= "    'integer' => 123,\n";
         $expected .= "    'boolean' => false,\n";
         $expected .= "    'null' => null,\n";
