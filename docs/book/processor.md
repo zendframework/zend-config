@@ -124,6 +124,9 @@ This example returns the output: `bar`. The filters in the queue are applied in
 This example illustrates basic usage of `Zend\Config\Processor\Token`:
 
 ```php
+use Zend\Config\Config;
+use Zend\Config\Processor\Token as TokenProcessor;
+
 // Provide the second parameter as boolean true to allow modifications:
 $config = new Config(['foo' => 'Value is TOKEN'], true);
 $processor = new TokenProcessor();
@@ -136,7 +139,7 @@ echo $config->foo;
 
 This example returns the output: `Value is TOKEN,Value is bar`.
 
-As of version 3.1.0, you can also tell the `Constant` processor to process keys:
+As of version 3.1.0, you can also tell the `Token` processor to process keys:
 
 ```php
 // At instantiation:
@@ -147,6 +150,44 @@ $processor->enableKeyProcessing();
 ```
 
 When enabled, any token values found in keys will also be replaced.
+
+### Using Token processor as a simple environment processor
+
+Token processor can be utilized to populate config values using common
+format `%env(ENV_VAR)%` with values from environment by setting Token
+processor `$prefix` and `$suffix` parameters to `%env(` and `)%` respectively:
+
+```php
+use Zend\Config\Config;
+use Zend\Config\Processor\Token as TokenProcessor;
+
+putenv('AMQP_PASSWORD=guest');
+
+// Populate list if tokens to replace from environment:
+$processor = new TokenProcessor(getenv(), '%env(', ')%');
+
+// Provide the second parameter as boolean true to allow modifications:
+$config = new Config([
+    'host' => '127.0.0.1',
+    'port' => 5672,
+    'username' => '%env(AMQP_USER)%',
+    'password' => '%env(AMQP_PASSWORD)%',
+    'vhost' => '/',
+], true);
+
+$processor->process($config);
+print_r($config->toArray());
+// Array
+// (
+//     [host] => 127.0.0.1
+//     [port] => 5672
+//     [username] => %env(AMQP_USER)%
+//     [password] => guest
+//     [vhost] => /
+// )
+```
+Do note, however, that only values present in environment will be replaced.
+This allows multiple fallback processors to be provided as a queue.
 
 ## Zend\\Config\\Processor\\Translator
 
