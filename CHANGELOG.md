@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 3.3.1 - 2018-06-15
+
+### Added
+
+- Added Env processor to allows users to read the value of the getenv() function in static configuration files.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 3.3.0 - TBD
 
 ### Added
