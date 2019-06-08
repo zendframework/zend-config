@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#58](https://github.com/zendframework/zend-config/pull/58) adds
   `$processSections` to INI reader, allowing control over whether sections
   should be parsed or not
+- [#63](https://github.com/zendframework/zend-config/pull/63) adds .yml to
+  Zend\Config\Factory as an alternative extension for yaml
 
 ### Changed
 
