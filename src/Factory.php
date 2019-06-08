@@ -37,6 +37,7 @@ class Factory
         'json'        => 'json',
         'xml'         => 'xml',
         'yaml'        => 'yaml',
+        'yml'         => 'yaml',
         'properties'  => 'javaproperties',
     ];
 
@@ -52,6 +53,7 @@ class Factory
         'json' => 'json',
         'xml'  => 'xml',
         'yaml' => 'yaml',
+        'yml'  => 'yaml',
     ];
 
     /**
