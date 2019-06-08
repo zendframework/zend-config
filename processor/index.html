@@ -411,7 +411,10 @@ echo $config-&gt;foo;</code></pre>
 <h2 id="zend92config92processor92token">Zend\Config\Processor\Token</h2>
 <h3 id="using-zend92config92processor92token">Using Zend\Config\Processor\Token</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Token</code>:</p>
-<pre class="codehilite"><code class="language-php">// Provide the second parameter as boolean true to allow modifications:
+<pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+use Zend\Config\Processor\Token as TokenProcessor;
+
+// Provide the second parameter as boolean true to allow modifications:
 $config = new Config(['foo' =&gt; 'Value is TOKEN'], true);
 $processor = new TokenProcessor();
 
@@ -421,7 +424,7 @@ $processor-&gt;process($config);
 echo $config-&gt;foo;</code></pre>
 
 <p>This example returns the output: <code>Value is TOKEN,Value is bar</code>.</p>
-<p>As of version 3.1.0, you can also tell the <code>Constant</code> processor to process keys:</p>
+<p>As of version 3.1.0, you can also tell the <code>Token</code> processor to process keys:</p>
 <pre class="codehilite"><code class="language-php">// At instantiation:
 $processor = new Zend\Config\Processor\Token($tokens, '', '', true);
 
@@ -429,6 +432,39 @@ $processor = new Zend\Config\Processor\Token($tokens, '', '', true);
 $processor-&gt;enableKeyProcessing();</code></pre>
 
 <p>When enabled, any token values found in keys will also be replaced.</p>
+<h3 id="using-token-processor-as-a-simple-environment-processor">Using Token processor as a simple environment processor</h3>
+<p>Token processor can be utilized to populate config values using common
+format <code>%env(ENV_VAR)%</code> with values from environment by setting Token
+processor <code>$prefix</code> and <code>$suffix</code> parameters to <code>%env(</code> and <code>)%</code> respectively:</p>
+<p><pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+use Zend\Config\Processor\Token as TokenProcessor;
+
+putenv('AMQP_PASSWORD=guest');
+
+// Populate list if tokens to replace from environment:
+$processor = new TokenProcessor(getenv(), '%env(', ')%');
+
+// Provide the second parameter as boolean true to allow modifications:
+$config = new Config([
+    'host' =&gt; '127.0.0.1',
+    'port' =&gt; 5672,
+    'username' =&gt; '%env(AMQP_USER)%',
+    'password' =&gt; '%env(AMQP_PASSWORD)%',
+    'vhost' =&gt; '/',
+], true);
+
+$processor-&gt;process($config);
+print_r($config-&gt;toArray());
+// Array
+// (
+//     [host] =&gt; 127.0.0.1
+//     [port] =&gt; 5672
+//     [username] =&gt; %env(AMQP_USER)%
+//     [password] =&gt; guest
+//     [vhost] =&gt; /
+// )</code></pre>
+Do note, however, that only values present in environment will be replaced.
+This allows multiple fallback processors to be provided as a queue.</p>
 <h2 id="zend92config92processor92translator">Zend\Config\Processor\Translator</h2>
 <h3 id="using-zend92config92processor92translator">Using Zend\Config\Processor\Translator</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Translator</code>:</p>
