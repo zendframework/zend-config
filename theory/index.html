@@ -273,25 +273,6 @@
 
     
     
-        <div class="toc">
-            <h6 class="toc__headline">In This Article</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#extending-zendconfigconfig-class" class="toc__link">Extending Zend\Config\Config class</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#modifying-config-does-not-save-changes" class="toc__link">Modifying Config does not save changes</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#merging-requires-modifications" class="toc__link">Merging requires modifications</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
 
     </div>
 
@@ -309,30 +290,29 @@ is itself an array, then the resulting object property is created as a new
 recursively, such that a hierarchy of configuration data may be created with any
 number of levels.</p>
 <blockquote>
-<h3 id="extending-zendconfigconfig-class">Extending <code>Zend\Config\Config</code> class</h3>
+<h3>Extending <code>Zend\Config\Config</code> class</h3>
 <p>If you decide to extend <code>Zend\Config\Config</code> class, each property (subnode)
 becomes the same type as the parent class. For example:</p>
-<pre class="codehilite"><code class="language-php">class ExtendedConfig extends Zend\Config\Config
+<p>```php
+class ExtendedConfig extends Zend\Config\Config
 {
-}
-
-$config = new ExtendedConfig(['node' =&gt; ['key' =&gt; 'value']]);
-
-echo get_class($config-&gt;node);
-// the result of above is ExtendedConfig not Zend\Config\Config!</code></pre>
-
+}</p>
+<p>$config = new ExtendedConfig(['node' =&gt; ['key' =&gt; 'value']]);</p>
+<p>echo get_class($config-&gt;node);
+// the result of above is ExtendedConfig not Zend\Config\Config!
+```</p>
 <p>This casting occurs in the constructor, which uses the construct <code>new
 static()</code> for any array subvalues it encounters when traversing the provided
 array. As such, we DO NOT RECOMMEND extending the constructor; instead, create
 a <a href="http://verraes.net/2014/06/named-constructors-in-php/">named constructor</a>:</p>
-<pre class="codehilite"><code class="language-php">class ExtendedConfig extends Zend\Config\Config
+<p><code>php
+class ExtendedConfig extends Zend\Config\Config
 {
     public static function createWithDefaults()
     {
         return new self([ /* ... */ ]);
     }
-}</code></pre>
-
+}</code></p>
 </blockquote>
 <p><code>Zend\Config\Config</code> implements the <a href="http://php.net/manual/en/class.countable.php">Countable</a>
 and <a href="http://php.net/manual/en/class.iterator.php">Iterator</a> interfaces in order
@@ -349,7 +329,7 @@ determine if modifications to a given <code>Zend\Config\Config</code> object are
 and the <code>setReadOnly()</code> method can be used to stop any further modifications to
 a <code>Zend\Config\Config</code> object that was created allowing modifications.</p>
 <blockquote>
-<h3 id="modifying-config-does-not-save-changes">Modifying Config does not save changes</h3>
+<h3>Modifying Config does not save changes</h3>
 <p>It is important not to confuse such in-memory modifications with saving
 configuration data out to specific storage media. Tools for creating and
 modifying configuration data for various storage media are out of scope with
@@ -363,7 +343,7 @@ object using the <code>merge()</code> function. For example, given <code>$config
 <code>$config-&gt;merge($localConfig);</code>. The items in <code>$localConfig</code> will override any
 items with the same name in <code>$config</code>.</p>
 <blockquote>
-<h3 id="merging-requires-modifications">Merging requires modifications</h3>
+<h3>Merging requires modifications</h3>
 <p>The <code>Zend\Config\Config</code> object that is performing the merge must have been
 constructed to allow modifications, by passing <code>TRUE</code> as the second parameter
 of the constructor. The <code>setReadOnly()</code> method can then be used to prevent any
@@ -402,7 +382,7 @@ further modifications after the merge is complete.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-config/edit/master/docs/theory.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/theory.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

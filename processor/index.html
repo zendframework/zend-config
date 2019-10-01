@@ -287,10 +287,6 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#what-gets-processed" class="toc__link">What gets processed?</a>
-                    </li>
-                
-                    <li class="toc__entry">
                         <a href="#zend92config92processor92constant" class="toc__link">Zend\Config\Processor\Constant</a>
                     </li>
                 
@@ -329,23 +325,23 @@ defining two methods: <code>process()</code> and <code>processValue()</code>.</p
 <li><code>Zend\Config\Processor\Translator</code>: translate configuration values in other languages using <code>Zend\I18n\Translator</code>.</li>
 </ul>
 <blockquote>
-<h3 id="what-gets-processed">What gets processed?</h3>
+<h3>What gets processed?</h3>
 <p>Typically, you will process configuration <em>values</em>. However, there are use
 cases for supplying constant and/or token <em>keys</em>; one common one is for
 using class-based constants as keys to avoid using magic "strings":</p>
-<pre class="codehilite"><code class="language-json">{
+<p><code>json
+{
     "Acme\\Compoment::CONFIG_KEY": {}
-}</code></pre>
-
+}</code></p>
 <p>As such, as of version 3.1.0, the <code>Constant</code> and <code>Token</code> processors can
 optionally also process the keys of the <code>Config</code> instance provided to them, by
 calling <code>enableKeyProcessing()</code> on their instances, or passing a boolean
 <code>true</code> value for the fourth constructor argument.</p>
 </blockquote>
 <h2 id="zend92config92processor92constant">Zend\Config\Processor\Constant</h2>
-<h3 id="using-zend92config92processor92constant">Using Zend\Config\Processor\Constant</h3>
+<h3>Using Zend\Config\Processor\Constant</h3>
 <p>This example illustrates the basic usage of <code>Zend\Config\Processor\Constant</code>:</p>
-<pre class="codehilite"><code class="language-php">define ('TEST_CONST', 'bar');
+<p> <pre class=codehilite><code class=language-php>define ('TEST_CONST', 'bar');
 
 // Provide the second parameter as boolean true to allow modifications:
 $config = new Zend\Config\Config(['foo' =&gt; 'TEST_CONST'], true);
@@ -353,21 +349,19 @@ $processor = new Zend\Config\Processor\Constant();
 
 echo $config-&gt;foo . ',';
 $processor-&gt;process($config);
-echo $config-&gt;foo;</code></pre>
-
+echo $config-&gt;foo;</code></pre></p>
 <p>This example returns the output: <code>TEST_CONST,bar</code>.</p>
 <p>As of version 3.1.0, you can also tell the <code>Constant</code> processor to process keys:</p>
-<pre class="codehilite"><code class="language-php">// At instantiation:
+<p> <pre class=codehilite><code class=language-php>// At instantiation:
 $processor = new Zend\Config\Processor\Constant(true, '', '', true);
 
 // Or later, via a method call:
-$processor-&gt;enableKeyProcessing();</code></pre>
-
+$processor-&gt;enableKeyProcessing();</code></pre></p>
 <p>When enabled, any constant values found in keys will also be replaced.</p>
 <h2 id="zend92config92processor92filter">Zend\Config\Processor\Filter</h2>
-<h3 id="using-zend92config92processor92filter">Using Zend\Config\Processor\Filter</h3>
+<h3>Using Zend\Config\Processor\Filter</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Filter</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Filter\StringToUpper;
+<p> <pre class=codehilite><code class=language-php>use Zend\Filter\StringToUpper;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Config;
 
@@ -379,13 +373,12 @@ $upperProcessor = new FilterProcessor($upper);
 
 echo $config-&gt;foo . ',';
 $upperProcessor-&gt;process($config);
-echo $config-&gt;foo;</code></pre>
-
+echo $config-&gt;foo;</code></pre></p>
 <p>This example returns the output: <code>bar,BAR</code>.</p>
 <h2 id="zend92config92processor92queue">Zend\Config\Processor\Queue</h2>
-<h3 id="using-zend92config92processor92queue">Using Zend\Config\Processor\Queue</h3>
+<h3>Using Zend\Config\Processor\Queue</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Queue</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Filter\StringToLower;
+<p> <pre class=codehilite><code class=language-php>use Zend\Filter\StringToLower;
 use Zend\Filter\StringToUpper;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Processor\Queue;
@@ -404,14 +397,13 @@ $queue-&gt;insert($upperProcessor);
 $queue-&gt;insert($lowerProcessor);
 $queue-&gt;process($config);
 
-echo $config-&gt;foo;</code></pre>
-
+echo $config-&gt;foo;</code></pre></p>
 <p>This example returns the output: <code>bar</code>. The filters in the queue are applied in
 <em>FIFO</em> (First In, First Out) order .</p>
 <h2 id="zend92config92processor92token">Zend\Config\Processor\Token</h2>
-<h3 id="using-zend92config92processor92token">Using Zend\Config\Processor\Token</h3>
+<h3>Using Zend\Config\Processor\Token</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Token</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+<p> <pre class=codehilite><code class=language-php>use Zend\Config\Config;
 use Zend\Config\Processor\Token as TokenProcessor;
 
 // Provide the second parameter as boolean true to allow modifications:
@@ -421,22 +413,20 @@ $processor = new TokenProcessor();
 $processor-&gt;addToken('TOKEN', 'bar');
 echo $config-&gt;foo . ',';
 $processor-&gt;process($config);
-echo $config-&gt;foo;</code></pre>
-
+echo $config-&gt;foo;</code></pre></p>
 <p>This example returns the output: <code>Value is TOKEN,Value is bar</code>.</p>
 <p>As of version 3.1.0, you can also tell the <code>Token</code> processor to process keys:</p>
-<pre class="codehilite"><code class="language-php">// At instantiation:
+<p> <pre class=codehilite><code class=language-php>// At instantiation:
 $processor = new Zend\Config\Processor\Token($tokens, '', '', true);
 
 // Or later, via a method call:
-$processor-&gt;enableKeyProcessing();</code></pre>
-
+$processor-&gt;enableKeyProcessing();</code></pre></p>
 <p>When enabled, any token values found in keys will also be replaced.</p>
-<h3 id="using-token-processor-as-a-simple-environment-processor">Using Token processor as a simple environment processor</h3>
+<h3>Using Token processor as a simple environment processor</h3>
 <p>Token processor can be utilized to populate config values using common
 format <code>%env(ENV_VAR)%</code> with values from environment by setting Token
 processor <code>$prefix</code> and <code>$suffix</code> parameters to <code>%env(</code> and <code>)%</code> respectively:</p>
-<p><pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+<p> <pre class=codehilite><code class=language-php>use Zend\Config\Config;
 use Zend\Config\Processor\Token as TokenProcessor;
 
 putenv('AMQP_PASSWORD=guest');
@@ -462,13 +452,13 @@ print_r($config-&gt;toArray());
 //     [username] =&gt; %env(AMQP_USER)%
 //     [password] =&gt; guest
 //     [vhost] =&gt; /
-// )</code></pre>
-Do note, however, that only values present in environment will be replaced.
+// )</code></pre></p>
+<p>Do note, however, that only values present in environment will be replaced.
 This allows multiple fallback processors to be provided as a queue.</p>
 <h2 id="zend92config92processor92translator">Zend\Config\Processor\Translator</h2>
-<h3 id="using-zend92config92processor92translator">Using Zend\Config\Processor\Translator</h3>
+<h3>Using Zend\Config\Processor\Translator</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Translator</code>:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Config\Config;
+<p> <pre class=codehilite><code class=language-php>use Zend\Config\Config;
 use Zend\Config\Processor\Translator as TranslatorProcessor;
 use Zend\I18n\Translator\Translator;
 
@@ -488,10 +478,9 @@ $translator = new Translator();
 // ... configure the translator ...
 $processor = new TranslatorProcessor($translator);
 
-echo "English: {$config-&gt;animal}, ";
+echo &quot;English: {$config-&gt;animal}, &quot;;
 $processor-&gt;process($config);
-echo "Italian: {$config-&gt;animal}";</code></pre>
-
+echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre></p>
 <p>This example returns the output: <code>English: dog,Italian: cane</code>.</p>
 
 
@@ -526,7 +515,7 @@ echo "Italian: {$config-&gt;animal}";</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-config/edit/master/docs/processor.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/processor.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

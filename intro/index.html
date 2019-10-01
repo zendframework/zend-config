@@ -302,7 +302,7 @@ stored in INI, JSON, YAML, and XML files.</p>
 configuration file, but if configuration data is available in a PHP array, one
 may simply pass the data to <code>Zend\Config\Config</code>'s constructor in order to
 utilize a simple object-oriented interface:</p>
-<pre class="codehilite"><code class="language-php">// An array of configuration data is given
+<p> <pre class=codehilite><code class=language-php>// An array of configuration data is given
 $configArray = [
     'webhost'  =&gt; 'www.example.com',
     'database' =&gt; [
@@ -320,20 +320,18 @@ $configArray = [
 $config = new Zend\Config\Config($configArray);
 
 // Print a configuration datum (results in 'www.example.com')
-echo $config-&gt;webhost;</code></pre>
-
+echo $config-&gt;webhost;</code></pre></p>
 <p>As illustrated in the example above, <code>Zend\Config\Config</code> provides nested object
 property syntax to access configuration data passed to its constructor.</p>
 <p>Along with the object-oriented access to the data values, <code>Zend\Config\Config</code>
 also has a <code>get()</code> method that accepts a default value to return if the data
 element requested doesn't exist in the configuration array. For example:</p>
-<pre class="codehilite"><code class="language-php">$host = $config-&gt;database-&gt;get('host', 'localhost');</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$host = $config-&gt;database-&gt;get('host', 'localhost');</code></pre></p>
 <h2 id="using-php-configuration-files">Using PHP Configuration Files</h2>
 <p>PHP-based configuration files are often recommended due to the speed with which
 they are parsed, and the fact that they can be cached by opcode caches.</p>
 <p>The following code illustrates how to use PHP configuration files:</p>
-<pre class="codehilite"><code class="language-php">// config.php
+<div class=md-fenced-code-tabs id=tab-tab-group-2><ul class="nav nav-tabs"><li class="nav-item active"><a href=#tab-group-2-0_php role=tab data-toggle=tab data-lang=php>Php</a></li><li class="nav-item "><a href=#tab-group-2-1_php role=tab data-toggle=tab data-lang=php>Php</a></li></ul><div class=tab-content><div id=tab-group-2-0_php class="tab-pane active" role=tabpanel><pre class=codehilite><code class=language-php>// config.php
 return [
     'webhost'  =&gt; 'www.example.com',
     'database' =&gt; [
@@ -345,13 +343,11 @@ return [
             'dbname'   =&gt; 'mydatabase',
         ],
     ],
-];</code></pre>
-
-<pre class="codehilite"><code class="language-php">// Consumes the configuration array
+];</code></pre></div><div id=tab-group-2-1_php class="tab-pane " role=tabpanel><pre class=codehilite><code class=language-php>// Consumes the configuration array
 $config = new Zend\Config\Config(include 'config.php');
 
 // Print a configuration datum (results in 'www.example.com')
-echo $config-&gt;webhost;</code></pre>
+echo $config-&gt;webhost;</code></pre></div></div></div>
 
 
 
@@ -385,7 +381,7 @@ echo $config-&gt;webhost;</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-config/edit/master/docs/intro.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

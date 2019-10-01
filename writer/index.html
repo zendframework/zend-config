@@ -344,9 +344,9 @@ considerations to keep in mind. To create or modify a value, you simply say set
 the parameter of the <code>Config</code> object via the parameter accessor (<code>-&gt;</code>). To
 create a section in the root or to create a branch, just create a new array
 (<code>$config-&gt;branch = [];</code>).</p>
-<h3 id="using-zend92config92writer92ini">Using Zend\Config\Writer\Ini</h3>
+<h3>Using Zend\Config\Writer\Ini</h3>
 <p>Consider the following code, which creates a configuration structure:</p>
-<pre class="codehilite"><code class="language-php">// Create the config object
+<p> <pre class=codehilite><code class=language-php>// Create the config object
 $config = new Zend\Config\Config([], true);
 $config-&gt;production = [];
 
@@ -359,16 +359,14 @@ $config-&gt;production-&gt;database-&gt;params-&gt;password = 'secret';
 $config-&gt;production-&gt;database-&gt;params-&gt;dbname = 'dbproduction';
 
 $writer = new Zend\Config\Writer\Ini();
-echo $writer-&gt;toString($config);</code></pre>
-
+echo $writer-&gt;toString($config);</code></pre></p>
 <p>The result of this code is the following INI string:</p>
-<pre class="codehilite"><code class="language-ini">[production]
-webhost = "www.example.com"
-database.params.host = "localhost"
-database.params.username = "production"
-database.params.password = "secret"
-database.params.dbname = "dbproduction"</code></pre>
-
+<p> <pre class=codehilite><code class=language-ini>[production]
+webhost = &quot;www.example.com&quot;
+database.params.host = &quot;localhost&quot;
+database.params.username = &quot;production&quot;
+database.params.password = &quot;secret&quot;
+database.params.dbname = &quot;dbproduction&quot;</code></pre></p>
 <p>You can use the method <code>toFile()</code> to store the INI data to a file instead.</p>
 <h2 id="zend92config92writer92javaproperties">Zend\Config\Writer\JavaProperties</h2>
 <ul>
@@ -380,9 +378,9 @@ key/value pairs); this is a limitation of the JavaProperties format.</p>
 parameter, <code>delimiter</code>, which defines with which character the key/value pairs
 are separated. The default is a single colon (<code>:</code>), such as is accepted by
 <code>Zend\Config\Reader\JavaProperties</code> by default.</p>
-<h3 id="using-zend92config92writer92javaproperties">Using Zend\Config\Writer\JavaProperties</h3>
+<h3>Using Zend\Config\Writer\JavaProperties</h3>
 <p>Consider the following code, creating configuration:</p>
-<pre class="codehilite"><code class="language-php">// Create the config object
+<p> <pre class=codehilite><code class=language-php>// Create the config object
 $config = new Zend\Config\Config([], true);
 
 $config-&gt;webhost             = 'www.example.com'; // use object notation
@@ -392,33 +390,29 @@ $config['database.password'] = 'secret';
 $config['database.dbname']   = 'dbproduction';
 
 $writer = new Zend\Config\Writer\JavaProperties();
-echo $writer-&gt;toString($config);</code></pre>
-
+echo $writer-&gt;toString($config);</code></pre></p>
 <p>The result of this code is the following JavaProperties string:</p>
-<pre class="codehilite"><code class="language-properties">webhost:www.example.com
+<p> <pre class=codehilite><code class=language-properties>webhost:www.example.com
 database.host:localhost
 database.username:production
 database.password:secret
-database.dbname:dbproduction</code></pre>
-
+database.dbname:dbproduction</code></pre></p>
 <p>You can use the method <code>toFile()</code> to store the JavaProperties data to a file instead.</p>
-<h3 id="using-an-alternate-delimiter">Using an alternate delimiter</h3>
+<h3>Using an alternate delimiter</h3>
 <p>If you want to use an alternate delimiter, such as <code>=</code>, pass it to the
 constructor:</p>
-<pre class="codehilite"><code class="language-php">$writer = new Zend\Config\Writer\JavaProperties('=');</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$writer = new Zend\Config\Writer\JavaProperties('=');</code></pre></p>
 <p>Using the above configuration, we would now receive:</p>
-<pre class="codehilite"><code class="language-properties">webhost=www.example.com
+<p> <pre class=codehilite><code class=language-properties>webhost=www.example.com
 database.host=localhost
 database.username=production
 database.password=secret
-database.dbname=dbproduction</code></pre>
-
+database.dbname=dbproduction</code></pre></p>
 <h2 id="zend92config92writer92xml">Zend\Config\Writer\Xml</h2>
 <p><code>Zend\Config\Writer\Xml</code> can be used to generate an XML string or file.</p>
-<h3 id="using-zend92config92writer92xml">Using Zend\Config\Writer\Xml</h3>
+<h3>Using Zend\Config\Writer\Xml</h3>
 <p>Consider the following code, which creates a configuration structure:</p>
-<pre class="codehilite"><code class="language-php">// Create the config object
+<p> <pre class=codehilite><code class=language-php>// Create the config object
 $config = new Zend\Config\Config([], true);
 $config-&gt;production = [];
 
@@ -431,10 +425,9 @@ $config-&gt;production-&gt;database-&gt;params-&gt;password = 'secret';
 $config-&gt;production-&gt;database-&gt;params-&gt;dbname = 'dbproduction';
 
 $writer = new Zend\Config\Writer\Xml();
-echo $writer-&gt;toString($config);</code></pre>
-
+echo $writer-&gt;toString($config);</code></pre></p>
 <p>The result of this code is the following XML string:</p>
-<pre class="codehilite"><code class="language-xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<p> <pre class=codehilite><code class=language-xml>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;zend-config&gt;
     &lt;production&gt;
         &lt;webhost&gt;www.example.com&lt;/webhost&gt;
@@ -447,15 +440,14 @@ echo $writer-&gt;toString($config);</code></pre>
             &lt;/params&gt;
         &lt;/database&gt;
     &lt;/production&gt;
-&lt;/zend-config&gt;</code></pre>
-
+&lt;/zend-config&gt;</code></pre></p>
 <p>You can use the method <code>toFile()</code> to store the XML data to a file.</p>
 <h2 id="zend92config92writer92phparray">Zend\Config\Writer\PhpArray</h2>
 <p><code>Zend\Config\Writer\PhpArray</code> can be used to generate a PHP script that
 represents and returns configuration.</p>
-<h3 id="using-zend92config92writer92phparray">Using Zend\Config\Writer\PhpArray</h3>
+<h3>Using Zend\Config\Writer\PhpArray</h3>
 <p>Consider the following code, which creates a configuration structure:</p>
-<pre class="codehilite"><code class="language-php">// Create the config object
+<p> <pre class=codehilite><code class=language-php>// Create the config object
 $config = new Zend\Config\Config([], true);
 $config-&gt;production = [];
 
@@ -468,10 +460,9 @@ $config-&gt;production-&gt;database-&gt;params-&gt;password = 'secret';
 $config-&gt;production-&gt;database-&gt;params-&gt;dbname = 'dbproduction';
 
 $writer = new Zend\Config\Writer\PhpArray();
-echo $writer-&gt;toString($config);</code></pre>
-
+echo $writer-&gt;toString($config);</code></pre></p>
 <p>The result of this code is the following PHP script:</p>
-<pre class="codehilite"><code class="language-php">&lt;?php
+<p> <pre class=codehilite><code class=language-php>&lt;?php
 return [
   'production' =&gt;
   [
@@ -487,15 +478,14 @@ return [
       ],
     ],
   ],
-];</code></pre>
-
+];</code></pre></p>
 <p>You can use the method <code>toFile()</code> to save the PHP script to a file.</p>
 <h2 id="zend92config92writer92json">Zend\Config\Writer\Json</h2>
 <p><code>Zend\Config\Writer\Json</code> can be used to generate a JSON representation of
 configuration.</p>
-<h3 id="using-zend92config92writer92json">Using Zend\Config\Writer\Json</h3>
+<h3>Using Zend\Config\Writer\Json</h3>
 <p>Consider the following code, which creates a configuration structure:</p>
-<pre class="codehilite"><code class="language-php">// Create the config object
+<p> <pre class=codehilite><code class=language-php>// Create the config object
 $config = new Zend\Config\Config([], true);
 $config-&gt;production = [];
 
@@ -508,21 +498,19 @@ $config-&gt;production-&gt;database-&gt;params-&gt;password = 'secret';
 $config-&gt;production-&gt;database-&gt;params-&gt;dbname = 'dbproduction';
 
 $writer = new Zend\Config\Writer\Json();
-echo $writer-&gt;toString($config);</code></pre>
-
+echo $writer-&gt;toString($config);</code></pre></p>
 <p>The result of this code is the following JSON string:</p>
-<pre class="codehilite"><code class="language-json">{
-  "webhost": "www.example.com",
-  "database": {
-    "params": {
-      "host": "localhost",
-      "username": "production",
-      "password": "secret",
-      "dbname": "dbproduction"
+<p> <pre class=codehilite><code class=language-json>{
+  &quot;webhost&quot;: &quot;www.example.com&quot;,
+  &quot;database&quot;: {
+    &quot;params&quot;: {
+      &quot;host&quot;: &quot;localhost&quot;,
+      &quot;username&quot;: &quot;production&quot;,
+      &quot;password&quot;: &quot;secret&quot;,
+      &quot;dbname&quot;: &quot;dbproduction&quot;
     }
   }
-}</code></pre>
-
+}</code></pre></p>
 <p>You can use the method <code>toFile()</code> to save the JSON data to a file.</p>
 <p><code>Zend\Config\Writer\Json</code> uses the zend-json component to convert the data to
 JSON.</p>
@@ -531,10 +519,10 @@ JSON.</p>
 representation of configuration. In order to use the YAML writer, we need to pass a
 callback to an external PHP library, or use the
 <a href="http://www.php.net/manual/en/book.yaml.php">YAML PECL extension</a>.</p>
-<h3 id="using-zend92config92writer92yaml">Using Zend\Config\Writer\Yaml</h3>
+<h3>Using Zend\Config\Writer\Yaml</h3>
 <p>Consider the following code, which creates a configuration structure using the
 YAML PECL extension:</p>
-<pre class="codehilite"><code class="language-php">// Create the config object
+<p> <pre class=codehilite><code class=language-php>// Create the config object
 $config = new Zend\Config\Config([], true);
 $config-&gt;production = [];
 
@@ -547,27 +535,25 @@ $config-&gt;production-&gt;database-&gt;params-&gt;password = 'secret';
 $config-&gt;production-&gt;database-&gt;params-&gt;dbname = 'dbproduction';
 
 $writer = new Zend\Config\Writer\Yaml();
-echo $writer-&gt;toString($config);</code></pre>
-
+echo $writer-&gt;toString($config);</code></pre></p>
 <p>The result of this code is the following YAML string contains the following value:</p>
-<pre class="codehilite"><code class="language-yaml">webhost: www.example.com
+<p> <pre class=codehilite><code class=language-yaml>webhost: www.example.com
 database:
     params:
       host:     localhost
       username: production
       password: secret
-      dbname:   dbproduction</code></pre>
-
+      dbname:   dbproduction</code></pre></p>
 <p>You can use the method <code>toFile()</code> to save the YAML data to a file.</p>
 <p>If you want to use an external YAML writer library, pass the callback function
 that will generate the YAML from the configuration when instantiating the
 writer.  For instance, to use the <a href="https://github.com/mustangostang/spyc/">Spyc</a>
 library:</p>
-<pre class="codehilite"><code class="language-php">// include the Spyc library
+<p> <pre class=codehilite><code class=language-php>// include the Spyc library
 require_once 'path/to/spyc.php';
 
 $writer = new Zend\Config\Writer\Yaml(['Spyc', 'YAMLDump']);
-echo $writer-&gt;toString($config);</code></pre>
+echo $writer-&gt;toString($config);</code></pre></p>
 
 
 
@@ -601,7 +587,7 @@ echo $writer-&gt;toString($config);</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-config/edit/master/docs/writer.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/writer.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

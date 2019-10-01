@@ -287,10 +287,6 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#differences-from-zf1" class="toc__link">Differences from ZF1</a>
-                    </li>
-                
-                    <li class="toc__entry">
                         <a href="#zend92config92reader92ini" class="toc__link">Zend\Config\Reader\Ini</a>
                     </li>
                 
@@ -331,7 +327,7 @@ concrete implementations of this interface are:</p>
 <p><code>fromFile()</code> and <code>fromString()</code> are expected to return a PHP array containing
 the data from the specified configuration.</p>
 <blockquote>
-<h3 id="differences-from-zf1">Differences from ZF1</h3>
+<h3>Differences from ZF1</h3>
 <p>The <code>Zend\Config\Reader</code> component no longer supports the following features:</p>
 <ul>
 <li>Inheritance of sections.</li>
@@ -347,64 +343,58 @@ function. Please review this documentation to be aware of its specific behaviors
 <code>Zend\Config\Reader\Ini</code>, such as how the special values of <code>TRUE</code>, <code>FALSE</code>, "yes", "no", and
 <code>NULL</code> are handled.</p>
 <blockquote>
-<h3 id="key-separator">Key Separator</h3>
+<h3>Key Separator</h3>
 <p>By default, the key separator character is the period character (<code>.</code>). This can be changed,
 however, using the <code>setNestSeparator()</code> method. For example:</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Ini();
-$reader-&gt;setNestSeparator('-');</code></pre>
-
-<h3 id="process-sections">Process Sections</h3>
+<p><code>php
+$reader = new Zend\Config\Reader\Ini();
+$reader-&gt;setNestSeparator('-');</code></p>
+<h3>Process Sections</h3>
 <p>By default, the INI reader executes <code>parse_ini_file()</code>  with the optional parameter <code>$process_sections</code> being <code>true</code>. The result is a multidimensional array, with the section names and settings included.</p>
 <p>To merge sections, set the parameter via <code>setProcessSections()</code> to <code>false</code> as follows.</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Ini();
-$reader-&gt;setProcessSections(false);</code></pre>
-
+<p><code>php
+$reader = new Zend\Config\Reader\Ini();
+$reader-&gt;setProcessSections(false);</code></p>
 </blockquote>
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\Ini</code> for
 loading configuration data from an INI file. In this example, configuration data
 for both a production system and for a staging system exists.</p>
-<pre class="codehilite"><code class="language-ini">webhost                  = 'www.example.com'
+<p> <pre class=codehilite><code class=language-ini>webhost                  = 'www.example.com'
 database.adapter         = 'pdo_mysql'
 database.params.host     = 'db.example.com'
 database.params.username = 'dbuser'
 database.params.password = 'secret'
-database.params.dbname   = 'dbproduction'</code></pre>
-
+database.params.dbname   = 'dbproduction'</code></pre></p>
 <p>We can use <code>Zend\Config\Reader\Ini</code> to read this INI file:</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Ini();
+<p> <pre class=codehilite><code class=language-php>$reader = new Zend\Config\Reader\Ini();
 $data   = $reader-&gt;fromFile('/path/to/config.ini');
 
-echo $data['webhost'];  // prints "www.example.com"
-echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
-
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre></p>
 <p><code>Zend\Config\Reader\Ini</code> supports a feature to include the content of a INI file
 in a specific section of another INI file. For instance, suppose we have an INI
 file with the database configuration:</p>
-<pre class="codehilite"><code class="language-ini">database.adapter         = 'pdo_mysql'
+<p> <pre class=codehilite><code class=language-ini>database.adapter         = 'pdo_mysql'
 database.params.host     = 'db.example.com'
 database.params.username = 'dbuser'
 database.params.password = 'secret'
-database.params.dbname   = 'dbproduction'</code></pre>
-
+database.params.dbname   = 'dbproduction'</code></pre></p>
 <p>We can include this configuration in another INI file by using the <code>@include</code>
 notation:</p>
-<pre class="codehilite"><code class="language-ini">webhost  = 'www.example.com'
-@include = 'database.ini'</code></pre>
-
+<p> <pre class=codehilite><code class=language-ini>webhost  = 'www.example.com'
+@include = 'database.ini'</code></pre></p>
 <p>If we read this file using the component <code>Zend\Config\Reader\Ini</code>, we will obtain the same
 configuration data structure as in the previous example.</p>
 <p>The <code>@include = 'file-to-include.ini'</code> notation can be used also in a subelement
 of a value. For instance we can have an INI file like the following:</p>
-<pre class="codehilite"><code class="language-ini">adapter         = 'pdo_mysql'
+<p> <pre class=codehilite><code class=language-ini>adapter         = 'pdo_mysql'
 params.host     = 'db.example.com'
 params.username = 'dbuser'
 params.password = 'secret'
-params.dbname   = 'dbproduction'</code></pre>
-
+params.dbname   = 'dbproduction'</code></pre></p>
 <p>And assign the <code>@include</code> as a subelement of the <code>database</code> value:</p>
-<pre class="codehilite"><code class="language-ini">webhost           = 'www.example.com'
-database.@include = 'database.ini'</code></pre>
-
+<p> <pre class=codehilite><code class=language-ini>webhost           = 'www.example.com'
+database.@include = 'database.ini'</code></pre></p>
 <h2 id="zend92config92reader92xml">Zend\Config\Reader\Xml</h2>
 <p><code>Zend\Config\Reader\Xml</code> enables developers to provide configuration data in a
 familiar XML format and consume it in the application using an array syntax.
@@ -412,27 +402,25 @@ The root element of the XML file or string is irrelevant and may be named
 arbitrarily.</p>
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\Xml</code> for loading configuration
 data from an XML file. First, our XML configuration in the file <code>config.xml</code>:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+<p> <pre class=codehilite><code class=language-markup>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;config&gt;
     &lt;webhost&gt;www.example.com&lt;/webhost&gt;
     &lt;database&gt;
-        &lt;adapter value="pdo_mysql"/&gt;
+        &lt;adapter value=&quot;pdo_mysql&quot;/&gt;
         &lt;params&gt;
-            &lt;host value="db.example.com"/&gt;
-            &lt;username value="dbuser"/&gt;
-            &lt;password value="secret"/&gt;
-            &lt;dbname value="dbproduction"/&gt;
+            &lt;host value=&quot;db.example.com&quot;/&gt;
+            &lt;username value=&quot;dbuser&quot;/&gt;
+            &lt;password value=&quot;secret&quot;/&gt;
+            &lt;dbname value=&quot;dbproduction&quot;/&gt;
         &lt;/params&gt;
     &lt;/database&gt;
-&lt;/config&gt;</code></pre>
-
+&lt;/config&gt;</code></pre></p>
 <p>We can use the <code>Zend\Config\Reader\Xml</code> to read the XML configuration:</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Xml();
+<p> <pre class=codehilite><code class=language-php>$reader = new Zend\Config\Reader\Xml();
 $data   = $reader-&gt;fromFile('/path/to/config.xml');
 
-echo $data['webhost'];  // prints "www.example.com"
-echo $data['database']['params']['dbname']['value'];  // prints "dbproduction"</code></pre>
-
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname']['value'];  // prints &quot;dbproduction&quot;</code></pre></p>
 <p><code>Zend\Config\Reader\Xml</code> utilizes PHP's <a href="http://php.net/xmlreader">XMLReader</a> class. Please
 review its documentation to be aware of its specific behaviors, which propagate to
 <code>Zend\Config\Reader\Xml</code>.</p>
@@ -442,7 +430,7 @@ specific XML element.  This is provided using the standard
 functionality, you must add the namespace
 <code>xmlns:xi="http://www.w3.org/2001/XInclude"</code> to the XML file.</p>
 <p>Suppose we have an XML file that contains only the database configuration:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+<p> <pre class=codehilite><code class=language-markup>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;config&gt;
     &lt;database&gt;
         &lt;adapter&gt;pdo_mysql&lt;/adapter&gt;
@@ -453,15 +441,13 @@ functionality, you must add the namespace
             &lt;dbname&gt;dbproduction&lt;/dbname&gt;
         &lt;/params&gt;
     &lt;/database&gt;
-&lt;/config&gt;</code></pre>
-
+&lt;/config&gt;</code></pre></p>
 <p>We can include this configuration in another XML file using an xinclude:</p>
-<pre class="codehilite"><code class="language-markup">&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;config xmlns:xi="http://www.w3.org/2001/XInclude"&gt;
+<p> <pre class=codehilite><code class=language-markup>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;config xmlns:xi=&quot;http://www.w3.org/2001/XInclude&quot;&gt;
     &lt;webhost&gt;www.example.com&lt;/webhost&gt;
-    &lt;xi:include href="database.xml"/&gt;
-&lt;/config&gt;</code></pre>
-
+    &lt;xi:include href=&quot;database.xml&quot;/&gt;
+&lt;/config&gt;</code></pre></p>
 <p>The syntax to include an XML file in a specific element is <code>&lt;xi:include
 href="file-to-include.xml"/&gt;</code></p>
 <h2 id="zend92config92reader92json">Zend\Config\Reader\Json</h2>
@@ -470,49 +456,45 @@ JSON, and read it in the application by using an array syntax.</p>
 <p>The following example illustrates a basic use of <code>Zend\Config\Reader\Json</code> for
 loading configuration data from a JSON file.</p>
 <p>Consider the following JSON configuration file:</p>
-<pre class="codehilite"><code class="language-json">{
-  "webhost"  : "www.example.com",
-  "database" : {
-    "adapter" : "pdo_mysql",
-    "params"  : {
-      "host"     : "db.example.com",
-      "username" : "dbuser",
-      "password" : "secret",
-      "dbname"   : "dbproduction"
+<p> <pre class=codehilite><code class=language-json>{
+  &quot;webhost&quot;  : &quot;www.example.com&quot;,
+  &quot;database&quot; : {
+    &quot;adapter&quot; : &quot;pdo_mysql&quot;,
+    &quot;params&quot;  : {
+      &quot;host&quot;     : &quot;db.example.com&quot;,
+      &quot;username&quot; : &quot;dbuser&quot;,
+      &quot;password&quot; : &quot;secret&quot;,
+      &quot;dbname&quot;   : &quot;dbproduction&quot;
     }
   }
-}</code></pre>
-
+}</code></pre></p>
 <p>We can use <code>Zend\Config\Reader\Json</code> to read the file:</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Json();
+<p> <pre class=codehilite><code class=language-php>$reader = new Zend\Config\Reader\Json();
 $data   = $reader-&gt;fromFile('/path/to/config.json');
 
-echo $data['webhost'];  // prints "www.example.com"
-echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
-
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre></p>
 <p><code>Zend\Config\Reader\Json</code> utilizes <a href="https://github.com/zendframework/zend-json">zend-json</a>.</p>
 <p>Using <code>Zend\Config\Reader\Json</code>, we can include the content of a JSON file in a
 specific JSON section or element. This is provided using the special syntax
 <code>@include</code>. Suppose we have a JSON file that contains only the database
 configuration:</p>
-<pre class="codehilite"><code class="language-json">{
-  "database" : {
-    "adapter" : "pdo_mysql",
-    "params"  : {
-      "host"     : "db.example.com",
-      "username" : "dbuser",
-      "password" : "secret",
-      "dbname"   : "dbproduction"
+<p> <pre class=codehilite><code class=language-json>{
+  &quot;database&quot; : {
+    &quot;adapter&quot; : &quot;pdo_mysql&quot;,
+    &quot;params&quot;  : {
+      &quot;host&quot;     : &quot;db.example.com&quot;,
+      &quot;username&quot; : &quot;dbuser&quot;,
+      &quot;password&quot; : &quot;secret&quot;,
+      &quot;dbname&quot;   : &quot;dbproduction&quot;
     }
   }
-}</code></pre>
-
+}</code></pre></p>
 <p>Now let's include it via another configuration file:</p>
-<pre class="codehilite"><code class="language-json">{
-    "webhost"  : "www.example.com",
-    "@include" : "database.json"
-}</code></pre>
-
+<p> <pre class=codehilite><code class=language-json>{
+    &quot;webhost&quot;  : &quot;www.example.com&quot;,
+    &quot;@include&quot; : &quot;database.json&quot;
+}</code></pre></p>
 <h2 id="zend92config92reader92yaml">Zend\Config\Reader\Yaml</h2>
 <p><code>Zend\Config\Reader\Yaml</code> enables developers to consume configuration data in a
 YAML format, and read them in the application by using an array syntax. In order
@@ -521,52 +503,47 @@ use the <a href="http://www.php.net/manual/en/book.yaml.php">YAML PECL extension
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\Yaml</code>,
 using the YAML PECL extension.</p>
 <p>Consider the following YAML file:</p>
-<pre class="codehilite"><code class="language-yaml">webhost: www.example.com
+<p> <pre class=codehilite><code class=language-yaml>webhost: www.example.com
 database:
     adapter: pdo_mysql
     params:
       host:     db.example.com
       username: dbuser
       password: secret
-      dbname:   dbproduction</code></pre>
-
+      dbname:   dbproduction</code></pre></p>
 <p>We can use <code>Zend\Config\Reader\Yaml</code> to read this YAML file:</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\Yaml();
+<p> <pre class=codehilite><code class=language-php>$reader = new Zend\Config\Reader\Yaml();
 $data   = $reader-&gt;fromFile('/path/to/config.yaml');
 
-echo $data['webhost'];  // prints "www.example.com"
-echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
-
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre></p>
 <p>If you want to use an external YAML reader, you must pass a callback function to
 the class constructor.  For instance, if you want to use the
 <a href="https://github.com/mustangostang/spyc/">Spyc</a> library:</p>
-<pre class="codehilite"><code class="language-php">// include the Spyc library
+<p> <pre class=codehilite><code class=language-php>// include the Spyc library
 require_once 'path/to/spyc.php';
 
 $reader = new Zend\Config\Reader\Yaml(['Spyc', 'YAMLLoadString']);
 $data   = $reader-&gt;fromFile('/path/to/config.yaml');
 
-echo $data['webhost'];  // prints "www.example.com"
-echo $data['database']['params']['dbname'];  // prints "dbproduction"</code></pre>
-
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database']['params']['dbname'];  // prints &quot;dbproduction&quot;</code></pre></p>
 <p>You can also instantiate <code>Zend\Config\Reader\Yaml</code> without any parameters, and
 specify the YAML reader using the <code>setYamlDecoder()</code> method.</p>
 <p>Using <code>Zend\Config\ReaderYaml</code>, we can include the content of another YAML file
 in a specific YAML section or element. This is provided using the special syntax
 <code>@include</code>.</p>
 <p>Consider the following YAML file containing only database configuration:</p>
-<pre class="codehilite"><code class="language-yaml">database:
+<p> <pre class=codehilite><code class=language-yaml>database:
     adapter: pdo_mysql
     params:
       host:     db.example.com
       username: dbuser
       password: secret
-      dbname:   dbproduction</code></pre>
-
+      dbname:   dbproduction</code></pre></p>
 <p>We can include this configuration in another YAML file:</p>
-<pre class="codehilite"><code class="language-yaml">webhost:  www.example.com
-@include: database.yaml</code></pre>
-
+<p> <pre class=codehilite><code class=language-yaml>webhost:  www.example.com
+@include: database.yaml</code></pre></p>
 <h2 id="zend92config92reader92javaproperties">Zend\Config\Reader\JavaProperties</h2>
 <p><code>Zend\Config\Reader\JavaProperties</code> enables developers to provide configuration
 data in the popular JavaProperties format, and read it in the application by
@@ -574,34 +551,31 @@ using array syntax.</p>
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\JavaProperties</code>
 for loading configuration data from a JavaProperties file.</p>
 <p>Suppose we have the following JavaProperties configuration file:</p>
-<pre class="codehilite"><code class="language-properties">#comment
+<p> <pre class=codehilite><code class=language-properties>#comment
 !comment
 webhost:www.example.com
 database.adapter:pdo_mysql
 database.params.host:db.example.com
 database.params.username:dbuser
 database.params.password:secret
-database.params.dbname:dbproduction</code></pre>
-
+database.params.dbname:dbproduction</code></pre></p>
 <p>We can use <code>Zend\Config\Reader\JavaProperties</code> to read it:</p>
-<pre class="codehilite"><code class="language-php">$reader = new Zend\Config\Reader\JavaProperties();
+<p> <pre class=codehilite><code class=language-php>$reader = new Zend\Config\Reader\JavaProperties();
 $data   = $reader-&gt;fromFile('/path/to/config.properties');
 
-echo $data['webhost'];  // prints "www.example.com"
-echo $data['database.params.dbname'];  // prints "dbproduction"</code></pre>
-
-<h3 id="alternate-delimiters">Alternate delimiters</h3>
+echo $data['webhost'];  // prints &quot;www.example.com&quot;
+echo $data['database.params.dbname'];  // prints &quot;dbproduction&quot;</code></pre></p>
+<h3>Alternate delimiters</h3>
 <ul>
 <li>Since 3.2.0</li>
 </ul>
 <p>By default, the <code>JavaProperties</code> reader will assume that the delimiter between
 key/value pairs is <code>:</code>. If you wish to use an alternate delimiter, pass it as
 the first argument to the constructor:</p>
-<pre class="codehilite"><code class="language-php">$reader = new JavaProperties('='); // Use = as the delimiter</code></pre>
-
+<p> <pre class=codehilite><code class=language-php>$reader = new JavaProperties('='); // Use = as the delimiter</code></pre></p>
 <p>When specifying the default delimiter, you can use either <code>:</code> or the constant
 <code>JavaProperties::DELIMITER_DEFAULT</code>.</p>
-<h3 id="trimming-whitespace">Trimming whitespace</h3>
+<h3>Trimming whitespace</h3>
 <ul>
 <li>Since 3.2.0</li>
 </ul>
@@ -609,18 +583,17 @@ the first argument to the constructor:</p>
 including trailing whitespace. If you wish to have keys and values trimmed
 during parsing, you can pass a boolean <code>true</code> value, or the constant
 <code>JavaProperties::WHITESPACE_TRIM</code>, as the second argument to the constructor:</p>
-<pre class="codehilite"><code class="language-php">$reader = new JavaProperties(
+<p> <pre class=codehilite><code class=language-php>$reader = new JavaProperties(
     JavaProperties::DELIMITER_DEFAULT, // use default delimiter
     JavaProperties::WHITESPACE_TRIM
-);</code></pre>
-
+);</code></pre></p>
 <p>This can be useful particularly when surrounding the delimiter with whitespace:</p>
-<pre class="codehilite"><code class="language-properties">webhost = www.example.com
+<p> <pre class=codehilite><code class=language-properties>webhost = www.example.com
 database.adapter = pdo_mysql
 database.params.host = db.example.com
 database.params.username = dbuser
 database.params.password = secret
-database.params.dbname = dbproduction</code></pre>
+database.params.dbname = dbproduction</code></pre></p>
 
 
 
@@ -654,7 +627,7 @@ database.params.dbname = dbproduction</code></pre>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-config/edit/master/docs/reader.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-config/edit/master/docs/book/reader.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
