@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://docs.zendframework.com/zend-config/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/intro/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/theory/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/reader/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/writer/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/processor/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/factory/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-config/migration/to-v3/</loc>
-     <lastmod>2019-10-01</lastmod>
+     <lastmod>2019-10-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

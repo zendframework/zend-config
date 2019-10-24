@@ -293,26 +293,29 @@ number of levels.</p>
 <h3>Extending <code>Zend\Config\Config</code> class</h3>
 <p>If you decide to extend <code>Zend\Config\Config</code> class, each property (subnode)
 becomes the same type as the parent class. For example:</p>
-<p>```php
+<p><pre class=codehilite><code class=language-php>
 class ExtendedConfig extends Zend\Config\Config
 {
-}</p>
-<p>$config = new ExtendedConfig(['node' =&gt; ['key' =&gt; 'value']]);</p>
-<p>echo get_class($config-&gt;node);
+}
+
+$config = new ExtendedConfig(['node' =&gt; ['key' =&gt; 'value']]);
+
+echo get_class($config-&gt;node);
 // the result of above is ExtendedConfig not Zend\Config\Config!
-```</p>
+</code></pre></p>
 <p>This casting occurs in the constructor, which uses the construct <code>new
 static()</code> for any array subvalues it encounters when traversing the provided
 array. As such, we DO NOT RECOMMEND extending the constructor; instead, create
 a <a href="http://verraes.net/2014/06/named-constructors-in-php/">named constructor</a>:</p>
-<p><code>php
+<p><pre class=codehilite><code class=language-php>
 class ExtendedConfig extends Zend\Config\Config
 {
     public static function createWithDefaults()
     {
         return new self([ /* ... */ ]);
     }
-}</code></p>
+}
+</code></pre></p>
 </blockquote>
 <p><code>Zend\Config\Config</code> implements the <a href="http://php.net/manual/en/class.countable.php">Countable</a>
 and <a href="http://php.net/manual/en/class.iterator.php">Iterator</a> interfaces in order

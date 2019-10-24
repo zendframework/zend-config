@@ -329,10 +329,11 @@ defining two methods: <code>process()</code> and <code>processValue()</code>.</p
 <p>Typically, you will process configuration <em>values</em>. However, there are use
 cases for supplying constant and/or token <em>keys</em>; one common one is for
 using class-based constants as keys to avoid using magic "strings":</p>
-<p><code>json
+<p><pre class=codehilite><code class=language-json>
 {
-    "Acme\\Compoment::CONFIG_KEY": {}
-}</code></p>
+    &quot;Acme\\Compoment::CONFIG_KEY&quot;: {}
+}
+</code></pre></p>
 <p>As such, as of version 3.1.0, the <code>Constant</code> and <code>Token</code> processors can
 optionally also process the keys of the <code>Config</code> instance provided to them, by
 calling <code>enableKeyProcessing()</code> on their instances, or passing a boolean

@@ -346,15 +346,17 @@ function. Please review this documentation to be aware of its specific behaviors
 <h3>Key Separator</h3>
 <p>By default, the key separator character is the period character (<code>.</code>). This can be changed,
 however, using the <code>setNestSeparator()</code> method. For example:</p>
-<p><code>php
+<p><pre class=codehilite><code class=language-php>
 $reader = new Zend\Config\Reader\Ini();
-$reader-&gt;setNestSeparator('-');</code></p>
+$reader-&gt;setNestSeparator('-');
+</code></pre></p>
 <h3>Process Sections</h3>
 <p>By default, the INI reader executes <code>parse_ini_file()</code>  with the optional parameter <code>$process_sections</code> being <code>true</code>. The result is a multidimensional array, with the section names and settings included.</p>
 <p>To merge sections, set the parameter via <code>setProcessSections()</code> to <code>false</code> as follows.</p>
-<p><code>php
+<p><pre class=codehilite><code class=language-php>
 $reader = new Zend\Config\Reader\Ini();
-$reader-&gt;setProcessSections(false);</code></p>
+$reader-&gt;setProcessSections(false);
+</code></pre></p>
 </blockquote>
 <p>The following example illustrates basic usage of <code>Zend\Config\Reader\Ini</code> for
 loading configuration data from an INI file. In this example, configuration data
