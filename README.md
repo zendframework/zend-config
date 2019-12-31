@@ -1,5 +1,9 @@
 # zend-config
 
+> ## Repository abandoned 2019-12-31
+>
+> This repository has moved to laminas/laminas-config.
+
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-config.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-config)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-config/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-config?branch=master)
 
