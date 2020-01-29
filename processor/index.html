@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Zend\Config">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-config/processor/">
+    <link rel="canonical" href="https://docs.zendframework.com/processor/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Zend\Config\Processor - zend-config - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -230,9 +230,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-config/">laminas/laminas-config.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -329,11 +329,11 @@ defining two methods: <code>process()</code> and <code>processValue()</code>.</p
 <p>Typically, you will process configuration <em>values</em>. However, there are use
 cases for supplying constant and/or token <em>keys</em>; one common one is for
 using class-based constants as keys to avoid using magic "strings":</p>
-<p><pre class=codehilite><code class=language-json>
+<pre class=codehilite><code class=language-json>
 {
     &quot;Acme\\Compoment::CONFIG_KEY&quot;: {}
 }
-</code></pre></p>
+</code></pre>
 <p>As such, as of version 3.1.0, the <code>Constant</code> and <code>Token</code> processors can
 optionally also process the keys of the <code>Config</code> instance provided to them, by
 calling <code>enableKeyProcessing()</code> on their instances, or passing a boolean
@@ -342,7 +342,7 @@ calling <code>enableKeyProcessing()</code> on their instances, or passing a bool
 <h2 id="zend92config92processor92constant">Zend\Config\Processor\Constant</h2>
 <h3>Using Zend\Config\Processor\Constant</h3>
 <p>This example illustrates the basic usage of <code>Zend\Config\Processor\Constant</code>:</p>
-<p> <pre class=codehilite><code class=language-php>define ('TEST_CONST', 'bar');
+<pre><code class="language-php">define ('TEST_CONST', 'bar');
 
 // Provide the second parameter as boolean true to allow modifications:
 $config = new Zend\Config\Config(['foo' =&gt; 'TEST_CONST'], true);
@@ -350,19 +350,23 @@ $processor = new Zend\Config\Processor\Constant();
 
 echo $config-&gt;foo . ',';
 $processor-&gt;process($config);
-echo $config-&gt;foo;</code></pre></p>
+echo $config-&gt;foo;
+</code></pre>
+
 <p>This example returns the output: <code>TEST_CONST,bar</code>.</p>
 <p>As of version 3.1.0, you can also tell the <code>Constant</code> processor to process keys:</p>
-<p> <pre class=codehilite><code class=language-php>// At instantiation:
+<pre><code class="language-php">// At instantiation:
 $processor = new Zend\Config\Processor\Constant(true, '', '', true);
 
 // Or later, via a method call:
-$processor-&gt;enableKeyProcessing();</code></pre></p>
+$processor-&gt;enableKeyProcessing();
+</code></pre>
+
 <p>When enabled, any constant values found in keys will also be replaced.</p>
 <h2 id="zend92config92processor92filter">Zend\Config\Processor\Filter</h2>
 <h3>Using Zend\Config\Processor\Filter</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Filter</code>:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Filter\StringToUpper;
+<pre><code class="language-php">use Zend\Filter\StringToUpper;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Config;
 
@@ -374,12 +378,14 @@ $upperProcessor = new FilterProcessor($upper);
 
 echo $config-&gt;foo . ',';
 $upperProcessor-&gt;process($config);
-echo $config-&gt;foo;</code></pre></p>
+echo $config-&gt;foo;
+</code></pre>
+
 <p>This example returns the output: <code>bar,BAR</code>.</p>
 <h2 id="zend92config92processor92queue">Zend\Config\Processor\Queue</h2>
 <h3>Using Zend\Config\Processor\Queue</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Queue</code>:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Filter\StringToLower;
+<pre><code class="language-php">use Zend\Filter\StringToLower;
 use Zend\Filter\StringToUpper;
 use Zend\Config\Processor\Filter as FilterProcessor;
 use Zend\Config\Processor\Queue;
@@ -398,13 +404,15 @@ $queue-&gt;insert($upperProcessor);
 $queue-&gt;insert($lowerProcessor);
 $queue-&gt;process($config);
 
-echo $config-&gt;foo;</code></pre></p>
+echo $config-&gt;foo;
+</code></pre>
+
 <p>This example returns the output: <code>bar</code>. The filters in the queue are applied in
 <em>FIFO</em> (First In, First Out) order .</p>
 <h2 id="zend92config92processor92token">Zend\Config\Processor\Token</h2>
 <h3>Using Zend\Config\Processor\Token</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Token</code>:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Config\Config;
+<pre><code class="language-php">use Zend\Config\Config;
 use Zend\Config\Processor\Token as TokenProcessor;
 
 // Provide the second parameter as boolean true to allow modifications:
@@ -414,20 +422,24 @@ $processor = new TokenProcessor();
 $processor-&gt;addToken('TOKEN', 'bar');
 echo $config-&gt;foo . ',';
 $processor-&gt;process($config);
-echo $config-&gt;foo;</code></pre></p>
+echo $config-&gt;foo;
+</code></pre>
+
 <p>This example returns the output: <code>Value is TOKEN,Value is bar</code>.</p>
 <p>As of version 3.1.0, you can also tell the <code>Token</code> processor to process keys:</p>
-<p> <pre class=codehilite><code class=language-php>// At instantiation:
+<pre><code class="language-php">// At instantiation:
 $processor = new Zend\Config\Processor\Token($tokens, '', '', true);
 
 // Or later, via a method call:
-$processor-&gt;enableKeyProcessing();</code></pre></p>
+$processor-&gt;enableKeyProcessing();
+</code></pre>
+
 <p>When enabled, any token values found in keys will also be replaced.</p>
 <h3>Using Token processor as a simple environment processor</h3>
 <p>Token processor can be utilized to populate config values using common
 format <code>%env(ENV_VAR)%</code> with values from environment by setting Token
 processor <code>$prefix</code> and <code>$suffix</code> parameters to <code>%env(</code> and <code>)%</code> respectively:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Config\Config;
+<pre><code class="language-php">use Zend\Config\Config;
 use Zend\Config\Processor\Token as TokenProcessor;
 
 putenv('AMQP_PASSWORD=guest');
@@ -453,13 +465,15 @@ print_r($config-&gt;toArray());
 //     [username] =&gt; %env(AMQP_USER)%
 //     [password] =&gt; guest
 //     [vhost] =&gt; /
-// )</code></pre></p>
+// )
+</code></pre>
+
 <p>Do note, however, that only values present in environment will be replaced.
 This allows multiple fallback processors to be provided as a queue.</p>
 <h2 id="zend92config92processor92translator">Zend\Config\Processor\Translator</h2>
 <h3>Using Zend\Config\Processor\Translator</h3>
 <p>This example illustrates basic usage of <code>Zend\Config\Processor\Translator</code>:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Config\Config;
+<pre><code class="language-php">use Zend\Config\Config;
 use Zend\Config\Processor\Translator as TranslatorProcessor;
 use Zend\I18n\Translator\Translator;
 
@@ -481,7 +495,9 @@ $processor = new TranslatorProcessor($translator);
 
 echo &quot;English: {$config-&gt;animal}, &quot;;
 $processor-&gt;process($config);
-echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre></p>
+echo &quot;Italian: {$config-&gt;animal}&quot;;
+</code></pre>
+
 <p>This example returns the output: <code>English: dog,Italian: cane</code>.</p>
 
 
@@ -679,7 +695,7 @@ echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre></p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -687,10 +703,10 @@ echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre></p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -698,27 +714,28 @@ echo &quot;Italian: {$config-&gt;animal}&quot;;</code></pre></p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-config';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

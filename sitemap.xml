@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://docs.zendframework.com/zend-config/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/intro/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/intro/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/theory/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/theory/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/reader/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/reader/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/writer/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/writer/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/processor/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/processor/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/factory/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/factory/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://docs.zendframework.com/zend-config/migration/to-v3/</loc>
-     <lastmod>2019-11-04</lastmod>
+     <loc>https://docs.zendframework.com/migration/to-v3/</loc>
+     <lastmod>2020-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
