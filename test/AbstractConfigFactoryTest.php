@@ -52,7 +52,7 @@ class AbstractConfigFactoryTest extends TestCase
                 AbstractConfigFactory::class,
             ],
             'services' => [
-                'Config' => $this->config,
+                'config' => $this->config,
             ],
         ]);
         $smConfig->configureServiceManager($this->serviceManager);
